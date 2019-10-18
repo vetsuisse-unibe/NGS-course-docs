@@ -18,4 +18,10 @@ Commands in bold are to be typed in the Unix command window.
 Words in italics need to be replaced by the proper parameters (for example, your file name).
 
 ### Try some basic unix commands
-`pwd`
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```
