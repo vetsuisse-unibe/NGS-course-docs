@@ -1,2 +1,2 @@
 # NGS-course-docs
-Materials for DNA Sequencing and Variant Analysis: Basics of Sanger and Next Generation Sequencing
+This repository majorly contains notes, slides and exercises used for the NGS course 2019
