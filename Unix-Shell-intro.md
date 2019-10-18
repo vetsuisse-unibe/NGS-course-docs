@@ -14,16 +14,247 @@ I also provides give additional resources where you can learn more about it and 
 In this Practical we will login into the Bioinformatics server and do all the exercises on the server. 
 Check this spread sheet for log in information
 Please ask for assistance any time, you do not understand the exercises. 
-Commands in bold are to be typed in the Unix command window.  
+Commands in grey blocks are to be typed in the Unix command shell.  
 Words in italics need to be replaced by the proper parameters (for example, your file name).
 
 ### Try some basic unix commands
 Display user name
 ```
-whoami
+whoami 
 ```
-pwd shows where you are 
+Show the current working directory
+```
+pwd 
+```
+List the files in the directory	
+```
+ls 
+```
+Creates a empty file	
+```
+touch <filename> 
+```
+Prints a string
+```
+echo "Hello world" 
+```
+Print the current date
+```
+date
+```
+Shows the last commands you typed 
+```
+history 
+```
+Show the help page of a command 
+```
+man ls
+```
+Run the following commands one after another 
+```
+touch <exampleFile>
+ls
+```
+Print the contents of the file 
+```
+cat <exampleFile>
+```
+Rename the file 
+```
+mv <exampleFile> <exampleFile2>
+```
+Deletes the file 
+```
+rm <exampleFile2>
+```
+Create a new folder 
+```
+mkdir <exampleDirectory> 
+```
+Create a file under the new directory 
+```
+touch exampleDirectory/exampleFile
+```
+Delete the directory  
+```
+rmdir exampleDirectory
+```
+worked ? 
+No 
 
+Delete the file first 
+```
+rm exampleDirectory/exampleFile
+```
+Delete the directory now 
+```
+rmdir exampleDirectory
+```
+Directories 
+create a directory Documents 
+```
+mkdir Documents 
+cd Documents 
+```
+Going up one directory 
+```
+cd..
+```
+and then type to see what has happened
 ```
 pwd
 ```
+Go up by two directories 
+```
+cd ../.. 
+```
+then of course type “pwd” to locate yourself
+
+# Command arguments
+
+Most programs in UNIX accept arguments that modify the program’s behavior. For example 
+List the files in longer format 
+```
+ls -l 
+touch exampleFile1
+touch exampleFile2
+
+ls
+ls -l 
+```
+Different example parameters used with ls 
+```
+ls -a List all files, including hidden ones.
+ls -h List all files, with human-readable sizes (Mb, Gb).
+ls -l List all files, long format.
+ls -S List all files, order by size.
+ls -t List all files, order by modification time.
+ls -1 List all files, one file per line.
+```
+
+Parameters for remove command 
+```
+rm exampleFile1
+rm -i exampleFile2
+```
+Aliases are short forms used for commands. 
+```
+alias rm=”rm -I”
+touch <exampleFile>
+rm <exampleFile>
+```
+So better to alias rm as rm -i to be on the safer side ?.
+
+
+# Redirection.
+
+All the above commands sent the output if any to the screen. Instead of outputting on the screen redirection helps you to put into a file 
+```
+echo "My first line" >testFile.txt
+cat testFile.txt 
+echo "My second line" >>testFile.txt
+cat testFile.txt
+ls / >> ListRootDir.txt
+cat ListRootDir.txt
+```
+
+# Wildcards
+
+wildcard is a symbol that is used to represent one or more characters. Example wildcards are as follows 
+* Zero or more characters
+? Any single character. 
+
+In the following examples you can test some of these wildcard characters 
+
+Create a new folder 
+mkdir wildCardTesting
+
+Change directory 
+```
+cd wildCardTesting
+touch test1.txt 
+touch test2.txt 
+```
+Create several files with a single command 
+```
+touch test3.txt test4.txt test1.csv test2.csv test3.csv test4.csv
+```
+Count the number of files using the pipes ( | symbol) 
+wc –l counts the number of lines in the input  
+```
+ls -l | wc -l 
+```
+
+Try using the following wild cards 
+```
+ls * 
+ls test*
+ls *.txt 
+ls *.csv
+ls test[1-2].txt 
+ls test[!3].*
+```
+
+# subset a file with grep and awk
+```
+mkdir GenomeStats 
+cd GenomeStats
+```
+Download the text file showing the submitted Genomes for different Eukaryote species at NCBI https://www.ncbi.nlm.nih.gov/genome/browse/
+```
+wget "ftp://ftp.ncbi.nlm.nih.gov/genomes/GENOME_REPORTS/eukaryotes.txt"
+```
+Use less to have a quick view of the file 
+```
+less eukaryotes.txt
+```
+It is a tab delimited text file with several columns. 
+The first line shows the different column headers
+```
+head -n 1 eukaryotes.txt
+```
+We want to see how many cow assemblies have been submitted 
+```
+grep "Bos taurus" eukaryotes.txt
+```
+More easier ^ stands for beginning of  a line 
+```
+grep "^Bos taurus" eukaryotes.txt | wc -l 
+grep -c "^Bos taurus" eukaryotes.txt
+```
+Want to keep the header line ? 
+```
+grep -E '^#|^Bos taurus' eukaryotes.txt
+```
+Lets do some statistics on available Genomes 
+How many Animal and plant genomes are available 
+cut command in unix can be used to select columns from tab de-limited files 
+Only the column Group can selected using cut 
+```
+cut -f5 eukaryotes.txt | less 
+```
+Now the pipes can be used to see the number of animal plant genomes available at NCBI 
+```
+cut -f 5 eukaryotes.txt |sort | uniq -c
+```
+So how many animal and plant genomes 
+Now use cut and pipe symbol to find the number of mammalian genomes available at NCBI. (Hint: check column 6) 
+cut can be used to select more columns 
+```
+cut -f 1,6,8 eukaryotes.txt |less
+```
+which Mammalian genome has the highest GC content 
+```
+cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 |less
+cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 | head –n 1
+```
+which Mammalian genome has the least GC content 
+
+# Question of the day
+Is the statement "a genome-wide GC content of ≈30% is one of the lowest observed in any animal genome"  True ? 
+
+If the find the answer for this you just proved or disproved an accepted hypothesis!
+
+# Welcome to the exciting world of Data Analysis.
+
+
