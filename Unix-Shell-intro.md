@@ -26,6 +26,8 @@ Show the current working directory
 ```
 pwd 
 ```
+It should show something like /home/student01. Which is 'home' directory for user student01
+
 List the files in the directory	
 ```
 ls 
