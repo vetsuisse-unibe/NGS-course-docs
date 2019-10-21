@@ -18,99 +18,105 @@ Commands in grey blocks are to be typed in the Unix command shell.
 Words in italics need to be replaced by the proper parameters (for example, your file name).
 
 ### Try some basic unix commands
-Display user name
+*Display user name*
 ```
 whoami 
 ```
-Show the current working directory
+*Show the current working directory*
 ```
 pwd 
 ```
 It should show something like /home/student01. Which is 'home' directory for user student01
 
-List the files in the directory	
+*List the files in the directory*	
 ```
 ls 
 ```
-Creates a empty file	
+*Create a empty file*	
 ```
 touch <filename> 
 ```
-Prints a string
+*Print a string to the screen*
 ```
 echo "Hello world" 
 ```
-Print the current date
+*Print the current date*
 ```
 date
 ```
-Shows the last commands you typed 
+*See a history of all the last commands you tried* 
 ```
 history 
 ```
-Show the help page of a command 
+*Get local help page of a command* 
 ```
 man ls
 ```
-Run the following commands one after another 
+*Run the following commands one after another*
 ```
 touch <exampleFile>
 ls
 ```
-Print the contents of the file 
+*Print the contents of the file* 
 ```
 cat <exampleFile>
 ```
-Rename the file 
+It should show no lines as it is an empty file. 
+
+*Rename a file* 
 ```
 mv <exampleFile> <exampleFile2>
 ```
-Deletes the file 
+*Delete a file* 
 ```
 rm <exampleFile2>
 ```
-Create a new folder 
+*Create a new folder/directory* 
 ```
 mkdir <exampleDirectory> 
 ```
-Create a file under the new directory 
+*Create a file under the new folder/directory*
 ```
 touch exampleDirectory/exampleFile
 ```
-Delete the directory  
+*Delete the folder/directory* 
 ```
 rmdir exampleDirectory
 ```
-worked ? 
-No 
+worked ? No ! 
 
-Delete the file first 
+*Delete the file first* 
 ```
 rm exampleDirectory/exampleFile
 ```
-Delete the directory now 
+*Delete the directory now* 
 ```
 rmdir exampleDirectory
 ```
-Directories 
-create a directory Documents 
+# creating and moving around Directories 
+*Create a directory called 'Documents' and change current directory to Documents* 
 ```
 mkdir Documents 
 cd Documents 
+pwd
 ```
-Going up one directory 
+*Going up one directory* 
 ```
 cd..
 ```
-and then type to see what has happened
+*and then type to see what has happened*
 ```
 pwd
 ```
-Go up by two directories 
+*Go up by two directories* 
 ```
 cd ../.. 
 ```
-then of course type “pwd” to locate yourself
+*Go to home directory* 
+```
+cd
+```
+Always type “pwd” to locate yourself
 
 # Command arguments
 
