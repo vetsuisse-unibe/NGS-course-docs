@@ -4,10 +4,10 @@ I also provides give additional resources where you can learn more about it and 
 
 ###Objectives:
 1. Why Unix and Linux
-2. The Philosphy of Unix
-3. flavours of Unix 
-4. Shell 
-5. Command line 
+2. flavours of Unix 
+3. Shell 
+4. Command line 
+5. The Philosphy of Unix
 6. Exercises with Command Line
 
 ##Exercises 
