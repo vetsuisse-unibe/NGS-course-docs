@@ -3,7 +3,7 @@ This lesson provides a very **brief** introduction to the Unix OS shell for new 
 I also provides give additional resources where you can learn more about it and also practice. 
 
 ###Objectives:
-1. Why Unix 
+1. Why Unix and Linux
 2. The Philosphy of Unix
 3. flavours of Unix 
 4. Shell 
