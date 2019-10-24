@@ -10,6 +10,13 @@ I also provides give additional resources where you can learn more about it and 
 5. The Philosphy of Unix
 6. Exercises with Command Line
 
+## Unix 
+Unix is an operating system 
+Operating System: 
+
+![Image of OS]
+(OS.png)
+
 ##Exercises 
 In this Practical we will login into the Bioinformatics server and do all the exercises on the server. 
 Check this spread sheet for log in information
