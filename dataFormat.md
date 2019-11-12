@@ -91,7 +91,7 @@ G:\IGEH\_PhD_Sequencing_2018\<student>\fastqc_html
 Now Launch the windows terminal called the command prompt  by typing cmd in the windows search and double click the command prompt app. At the prompt H:>\  type the following command 
 
 ```
-pscp student51@binfservms01.unibe.ch:/home/student27/RNA-seq/*zip G:\IGEH\_PhD_Sequencing_2018\<student51>\fastqc_html
+pscp student51@binfservms01.unibe.ch:/home/student27/RNA-seq/*zip G:\IGEH\_PhD_Sequencing_2019\<student51>\fastqc_html
 ```
 replace the student27 with your ID. 
 
