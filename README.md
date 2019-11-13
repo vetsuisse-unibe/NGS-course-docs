@@ -3,7 +3,7 @@ This repository  contains notes, slides and exercises used for the NGS course 20
 
 **Day 1** :
 - [Unix Exercises](unixExs) - [Unix Intro notes](Unix-Shell-intro)
-- [HPC cluster Exercises](hp-exs) 
+- [HPC cluster Exercises](hpc-exs) 
 
 **Day 2**
 - [NGS data format exercise](dataFormat)
