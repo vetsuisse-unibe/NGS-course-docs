@@ -11,7 +11,6 @@ This repository  contains notes, slides and exercises used for the NGS course 20
 
 **Day 3** 
 - [Variant calling](variantCalling)
-- [Variant](variantCalling)
 - [RStudio](R-exs) : [R Intro notes](R-intro)
 - [RNA Seq](RNA-seq)
 
