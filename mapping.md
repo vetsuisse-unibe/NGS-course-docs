@@ -5,7 +5,7 @@ Create a folder calling variantCalling and coping the reference file
 mkdir variantCalling
 mkdir refIdx
 cd variantCalling/refIdx
-cp /data/courses/course32/variant_Calling/chr11.fasta .
+cp /data/courses/course32/variant_Calling/chr14.fa .
 ```
 We will use only chr11 of the dog genome as the reference just for short computing run times,that way you finish the exercises faster 
 
@@ -20,6 +20,7 @@ bwa
 Indexing aids the aligner to find potential alignment sites on the reference faster , which saves time during alignment. Indexing the reference can be run once and stored. The indexes can be reused for all bwa alignments. A new index  has be built if you are working with a different reference genomes. 
 
 create a bash script for indexing the genome 
+
 ```
 #!/bin/bash
 # Slurm options
@@ -53,6 +54,7 @@ cp /data/courses/course32/variant_Calling/*.gz .
 ```
 
 Mapping involves three steps: 
+**Do not execute the following steps**
 1. Map the reads to the indexed reference genome 
 ```
 bwa mem -t 8 -M -R '@RG\tID:2019111402\tPL:illumina\tPU:HHV75DSXX.4\tCN:UBern\tLB:BT134-LIB\tSM:BT134'  chr14.fa  BT134_R1.fastq.gz BT134_R2.fastq.gz >BT134.sam
@@ -67,7 +69,7 @@ samtools view -@8 -h -Sb -o BT134.bam BT134.sam
 samtools sort -@8 BT134.bam BT134.sorted.bam 
 ```
 
-This involves a lot of reading and writing to the hard disk which is highly time consuming hence using the _piping_ power of unix we will  reduce these steps to single command 
+This involves a lot of reading and writing to the hard disk which is highly time consuming hence using the _piping_ power of unix we will reduce these steps to single command in the following fashion
 
 ```
 #!/bin/bash
@@ -87,7 +89,7 @@ module add UHTS/Analysis/samtools/1.8;
 bwa mem -t 8 -M -R '@RG\tID:2019111402\tPL:illumina\tPU:HHV75DSXX.4\tCN:UBern\tLB:BT134-LIB\tSM:BT134'  ../refIdx/chr14.fa  BT134_R1.fastq.gz BT134_R2.fastq.gz | samtools sort -@8 -m 5G  -o BT134.sorted.bam -
 samtools index BT134.sorted.bam
 ```
-Notice the command ends with - which means that the input to the command _samtools view_ from _\<STDIN>_ and not from a file. 
+Notice the command ends with - which means that the input to the command _samtools sort_ from _\<STDIN>_ and not from a file. 
 The indexing of a bam file is done using _samtool index_. This is required for further visualing and variant calling steps. 
 
 #### Task 
