@@ -1,6 +1,6 @@
 ### Variant Calling 
 
-For Variant Calling we continue with the same Bull terrier dogs. 
+For Variant calling we continue with the same Bull terrier dogs. 
 One of the Bull Terrier dog suffers from Lethal acrodermatitis. 
 Lethal acrodermatitis is a autosomal recessive hereditary disease in dogs. It is characterized by poor growth, immune deficiency and characteristic skin lesions of the paws and of the face.
 
@@ -37,7 +37,7 @@ The next step in variant calling base quality recalibration. Many studies showed
 
 As this step takes too long to finish we will skip this step for this exercises and move to variant calling with haplotypeCaller. 
 
-##### HaplotypeCaller 
+#### HaplotypeCaller 
 [_GATK HaplotypeCaller_](https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.8.0/org_broadinstitute_hellbender_tools_walkers_haplotypecaller_HaplotypeCaller.php) calls both SNP and indel variants simultaneously via local de-novo assembly of haplotypes. Essentially, when this variant caller finds a region with signs of variation, it tosses out the old alignment information (from BWA MEM) and performs a local realignment of reads in that region. 
 
 We will first creare variants directory and create job script in the variant directory 
@@ -178,4 +178,4 @@ The output VCF file has an extra field "ANN"
  awk '{if($2 == 5731405) print $_}'  BT.ann.vcf 
 ```
 ##### Question 
-Which genome is the variant found and what is the effect prediction for the variant. 
+In which genome is the variant found and what is the effect prediction for the variant. 
