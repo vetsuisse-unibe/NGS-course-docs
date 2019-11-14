@@ -4,7 +4,7 @@ For Variant Calling we continue with the same Bull terrier dogs.
 One of the Bull Terrier dog suffers from Lethal acrodermatitis. 
 Lethal acrodermatitis is a autosomal recessive hereditary disease in dogs. It is characterized by poor growth, immune deficiency and characteristic skin lesions of the paws and of the face.
 
-The causative mutation findings have been published in PLOS Genetics 
+The causative mutation findings have been published in [PLOS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007264)
 ![Bull Terrier Paper](BT.png)
 
 We will use the mapped bam files of two Bull terrier dogs to repeat the same findings of this paper. 
@@ -14,11 +14,10 @@ Commonly seen issue with resequencing genomes is sequence duplication i.e. over 
 
 In the following exercise we will use the [_picard tools_](https://broadinstitute.github.io/picard/) to mark the duplicates, rather than remove them. Once they are marked the downstream  tools downweight them while looking for variants. 
  
- Change to directory mapping directory and create the following script 
+ Change to directory mapping directory (_cd mapping_) and create the following script 
  ```
  #!/bin/bash
 # Slurm options
-#SBATCH --mail-user=vidhya.jagannathan@vetsuisse.unibe.ch
 #SBATCH --mail-type=fail,end
 #SBATCH --job-name="markDuplicates"
 #SBATCH --chdir=.
@@ -27,7 +26,7 @@ In the following exercise we will use the [_picard tools_](https://broadinstitut
 
 module add vital-it;
 module add UHTS/Analysis/picard-tools/2.9.0;
-picard-tools MarkDuplicates INPUT=tigmint/contigs.barcoded.sortbx.bam OUTPUT=x.bam REMOVE_DUPLICAT=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
+picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICAT=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
 ```
 #### Task 
 Repeat the same duplication marking with the BT012 genome bam file. 
@@ -36,14 +35,18 @@ Repeat the same duplication marking with the BT012 genome bam file.
 
 The next step in variant calling base quality recalibration. Many studies showed that the raw Phred-scaled quality scores were frequently inaccurate and hece the [_BQSR_ tool](https://software.broadinstitute.org/gatk/documentation/article?id=11081)  from  GATK recalibrates the base quality score to make them more accurately refelect the true error rate. 
 
-As this step takes too long to finish we will skip this step for this exercises and move to variant Calling with haplotypeCaller. 
+As this step takes too long to finish we will skip this step for this exercises and move to variant calling with haplotypeCaller. 
 
 ##### HaplotypeCaller 
 [_GATK HaplotypeCaller_](https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.8.0/org_broadinstitute_hellbender_tools_walkers_haplotypecaller_HaplotypeCaller.php) calls both SNP and indel variants simultaneously via local de-novo assembly of haplotypes. Essentially, when this variant caller finds a region with signs of variation, it tosses out the old alignment information (from BWA MEM) and performs a local realignment of reads in that region. 
 
-In order to run the haplotypeCaller we need to index and a dictionary for the the reference using _samtools faidx_ and _picard-tools CreateSequenceDictionary_ respectively 
-
-
+We will first creare variants directory and create job script in the variant directory 
+```
+cd ../
+mkdir variants
+cd variants
+```
+In order to run the haplotypeCaller we need to create a index and dictionary file for the the reference using _samtools faidx_ and _picard-tools CreateSequenceDictionary_ respectively 
 
 ```
  #!/bin/bash
@@ -62,9 +65,8 @@ module add UHTS/Analysis/samtools/1.8;
 
 samtools faidx ../refIdx/chr14.fa 
 picard-tools CreateSequenceDictionary R=../refIdx/chr14.fa O=../refIds/chr14.dict
-GenomeAnalysisTK HaplotypeCaller -R  refIdx/chr14.fa -I BT012.sorted.bam -I BT134.sorted.bam  -O BT.vcf
+GenomeAnalysisTK HaplotypeCaller -R  refIdx/chr14.fa -I ../mapping/BT012.sorted.bam -I ../mapping/BT134.sorted.bam  -O BT.vcf
 ```
-
 The output is _variant call format_ or VCF file which is a tab delimited text file containing informations for the all the variants the tool found. 
 
 #### Hard Filtering Variants 
@@ -80,7 +82,7 @@ More information can be obtained on the [GATK hard filtering tutorial page](http
 
 ##### SelectVariants
 Hard filtering is done for SNPs and Indels separately. So from the haplotypeCaller output VCF file first we will subset the SNPs and Indels using GATK's _SelectVariants_ tool. 
-First create a directory called variants. 
+
 In the variants folder create the following script. 
 
 ```
@@ -143,6 +145,10 @@ module add UHTS/Analysis/picard-tools/2.9.0;
 module add UHTS/Analysis/samtools/1.8;
 GenomeAnalysisTK MergeVcfs -I BT.flt.snps.vcf -I BT.flt.indels.vcf -O BT.flt.var.vcf
 ```
+##### Task 
+Use a Unix command to check: 
+- total number of variants in the vcf file.
+- total number "PASS" variants in the vcf file. 
 
 #### Variant annotation and effect prediction 
  We will be using a software called [‘snpeff’](http://snpeff.sourceforge.net/) to annotate and predict the effect of the variants. 
