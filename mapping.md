@@ -112,7 +112,7 @@ _samtools tview_ takes as input the bam file and reference file
 
 ```
 module add UHTS/Analysis/samtools/1.8;
-samtools tview BT134.sorted.bam chr14.fa
+samtools tview BT134.sorted.bam ../refIdx/chr14.fa
 ```
 tview commands:
 1. left and right arrows scroll
