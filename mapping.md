@@ -76,7 +76,6 @@ This involves a lot of reading and writing to the hard disk which is highly time
 ```
 #!/bin/bash
 # Slurm options
-#SBATCH --mail-user=vidhya.jagannathan@vetsuisse.unibe.ch
 #SBATCH --mail-type=fail,end
 #SBATCH --job-name="mapping"
 #SBATCH --chdir=.
