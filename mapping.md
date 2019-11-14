@@ -111,6 +111,7 @@ Samtools implements a very simple text alignment viewer called tview. It uses di
 _samtools tview_ takes as input the bam file and reference file 
 
 ```
+module add UHTS/Analysis/samtools/1.8;
 samtools tview BT134.sorted.bam chr14.fa
 ```
 tview commands:
