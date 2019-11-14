@@ -17,12 +17,11 @@ We have a better interface developed now
      
 
 <p float="left">
-  <img src="cloudR.png" width="250" />
-  <img src="cloudRconsole.png" width="250" />
+  <img src="cloudR.png" width="300" />
+  <img src="cloudRconsole.png" width="300" />
 </p>
 
 **Desktop version of RStudio** that could be downloaded as standalone software.
-
 
 Rstudio panels consist of :  
 1. A console panel where functions can be executed

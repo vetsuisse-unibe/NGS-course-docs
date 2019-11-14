@@ -1,6 +1,8 @@
 #### Differential expression using RNA-seq 
 For this exercise we will use the datasets from the study [GSE52194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194)
+
 The results of the analysis of this dataset had been published in the following paper https://www.nature.com/articles/srep01689
+
 We will use a subset only for the analysis. 
 
 1. Fastq files can be downloaded through Gene Expression Omnibus (GEO): GSE52194 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194)
@@ -57,9 +59,12 @@ The output from hisat2 is a sam file which needs to be converted to a bam file a
 
 #### Task 
 Write a job script to convert the sam to bam file using _samtools view_ and _samtools sort_ 
+
 It is very important to check every step of your analysis. Does the output make sense? Is the quality of the results good enough to continue with the analysis? To check the mapping, have a look at the summary statistics Hisat2 wrote to the error file. 
 
-The mapping stats for all files are available here /data/courses/course32/RNA_seq/mappingstats. Use those files and unix command line tools to answer the following questions 
+The mapping stats for all files are available here /data/courses/course32/RNA_seq/mappingstats. 
+
+Use those files and unix command line tools to answer the following questions 
 - What is the highest/lowest overall alignment rate?
 - What is the minimum/maximum number of reads that aligned concordantly and to a unique location of the genome? 
 
@@ -102,9 +107,9 @@ Check the output of featureCounts to address the following questions:
 
 We will use the count file to study differential expression of genes in the three breast cancer sub-types with R package called [DeSeq2](http://bioconductor.org/packages/release/bioc/html/DESeq2.html) 
 
-For convience we have produced the full feature count file for all chromosomes, for all the samples ready to use for differential expression with R. 
+For convience we have produced the full feature count file for all chromosomes, for all the samples,  ready to use for differential expression with R. 
 
-create a local directory on G: as _diffExp_ and transfer the files to the directory using _pscp_
+Create a local directory on G: as _diffExp_ and transfer the files to the directory using _pscp_
 
 ```
 pscp student51@binfservms01.unibe.ch:/data/courses/course32/RNA-seq/counts/breastCancer.counts.forDESeq.txt G:\IGEH\_PhD_Sequencing_2019\<student51>\diffExp
