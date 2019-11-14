@@ -3,6 +3,7 @@ Create a folder calling variantCalling and coping the reference file
 
 ```
 mkdir variantCalling
+cd variantCalling
 mkdir refIdx
 cd variantCalling/refIdx
 cp /data/courses/course32/variant_Calling/chr14.fa .
