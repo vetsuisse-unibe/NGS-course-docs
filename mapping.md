@@ -30,6 +30,7 @@ create a bash script for indexing the genome
 #SBATCH --time=1:00:00
 #SBATCH --mem=5G
 #SBATCH --cpus-per-task=1
+#SBATCH -p pcourse32
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
@@ -82,6 +83,7 @@ This involves a lot of reading and writing to the hard disk which is highly time
 #SBATCH --time=3:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=8
+#SBATCH -p pcourse32
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
@@ -98,6 +100,9 @@ The indexing of a bam file is done using _samtool index_. This is required for f
 Repeat the mapping step with the second Bull Terrier sample BT012. 
 
 #### Visualizing the mapping 
+
+Task : 
+- Login into binfservas23 using srun 
 
 Mapping can be visualized using several tools. We will use samtools tview and IGV browser in the exercise. 
 
