@@ -12,7 +12,7 @@ The following codes should be typed in the console.
 
 #### Creating objects in R 
 #You can get output from R simply by typing math in the console 
-```{r, eval = FALSE}
+```
 16 + 16 
 14/7
 (2^3 - 6) / 2

@@ -170,6 +170,8 @@ hmcol <- colorRampPalette(brewer.pal(9, "GnBu"))(100)
 heatmap.2(assay(rld)[select,], col = hmcol, trace="none", margin=c(10,6),labCol=colnames(dds), cexRow = 1/log10(length(select)))
 ```
 ![heatmap](heatmap.png)
+
+
 **Optional task: Try to recreate the VOLCANO PLOT looking at the [manual](http://bioconductor.org/packages/release/bioc/html/DESeq2.html).**
 
 #### Pairwise contrasts 
