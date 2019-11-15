@@ -31,6 +31,23 @@ picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE
 #### Task 
 Repeat the same duplication marking with the BT012 genome bam file. 
 
+##### indexing the dedup file 
+
+```
+#!/bin/bash
+# Slurm options
+#SBATCH --mail-type=fail,end
+#SBATCH --job-name="markDuplicates"
+#SBATCH --chdir=.
+#SBATCH --time=1:00:00
+#SBATCH --mem=2G
+
+module add vital-it;
+module add UHTS/Analysis/samtools/1.8;
+samtools index BT134.dedup.bam
+samtools index BT012.dedup.bam
+```
+
 #### Recalibration 
 
 The next step in variant calling base quality recalibration. Many studies showed that the raw Phred-scaled quality scores were frequently inaccurate and hece the [_BQSR_ tool](https://software.broadinstitute.org/gatk/documentation/article?id=11081)  from  GATK recalibrates the base quality score to make them more accurately refelect the true error rate. 
