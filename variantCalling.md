@@ -182,8 +182,8 @@ The following script downloads the Effect database which we will use for for ann
 #SBATCH --mem=2G
 module add vital-it;
 module add UHTS/Analysis/snpEff/4.3t;
-snpEff  download -dataDir /home/<student>/variantCalling CanFam3.1.86
-snpEff eff -dataDir /home/<student>/variantCalling CanFam3.1.86 BT.vcf >BT.ann.vcf
+snpEff  download -dataDir /home/<student>/variantCalling/variant CanFam3.1.86
+snpEff eff -dataDir /home/<student>/variantCalling/variant CanFam3.1.86 BT.flt.var.vcf >BT.ann.vcf
 ```
 The output VCF file has an extra field "ANN"
 
