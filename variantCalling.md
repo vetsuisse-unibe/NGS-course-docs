@@ -51,7 +51,6 @@ In order to run the haplotypeCaller we need to create a index and dictionary fil
 ```
  #!/bin/bash
 # Slurm options
-#SBATCH --mail-user=<email_id>
 #SBATCH --mail-type=fail,end
 #SBATCH --job-name="varCalls"
 #SBATCH --chdir=.
