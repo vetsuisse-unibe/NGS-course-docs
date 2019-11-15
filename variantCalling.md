@@ -65,7 +65,7 @@ module add UHTS/Analysis/samtools/1.8;
 
 samtools faidx ../refIdx/chr14.fa 
 picard-tools CreateSequenceDictionary R=../refIdx/chr14.fa O=../refIds/chr14.dict
-GenomeAnalysisTK HaplotypeCaller -R  refIdx/chr14.fa -I ../mapping/BT012.sorted.bam -I ../mapping/BT134.sorted.bam  -O BT.vcf
+GenomeAnalysisTK HaplotypeCaller -R  refIdx/chr14.fa -I ../mapping/BT012.dedup.bam -I ../mapping/BT134.dedup.bam  -O BT.vcf
 ```
 The output is _variant call format_ or VCF file which is a tab delimited text file containing informations for the all the variants the tool found. 
 
