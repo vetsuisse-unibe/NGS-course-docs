@@ -63,7 +63,7 @@ For example the function round, rounds of a number
 ##### Objects/Variables 
 * We can store the data in named data structures which are called as Objects or Variables in R 
 for example 
-```{r, eval = FALSE}
+```
 > width<-5
 > length<-5
 > area <- width * length
@@ -76,12 +76,12 @@ There are several different types of data structures or objects in R
 * Vector is a collection of values. The values can be number or charcters. 
 * Vectors can hold values of only the same type.
 * Vectors are created using the function c()
-```{r, eval = FALSE}
+```
 >genome_coOrdinates<-c(10000,17000,20000)
 >genes<-c("FGF4","MFSD1","ASIP","TYRP1"," MLPH","MC1R","DEFB103")
 ```
 * Vectors are also indexed 
-```{r, eval = FALSE}
+```
 >genes[1]
 [1] "FGF4"
 >genes[7]
@@ -89,14 +89,14 @@ There are several different types of data structures or objects in R
 ```
 * Vectors can also be easily subsetted
 
-```{r, eval = FALSE}
+```
 > coatColorGenes<-genes[3:7]
 > coatColorGenes
 [1] "ASIP"    "TYRP1"   " MLPH"   "MC1R"    "DEFB103"
 ```
 ##### data frames
 We usually do not have just one column of data to analyse, we have generally several columns of data in a csv or tab delimited text files. Such tabular data can be held in *data frames* in R 
-```{r, eval = FALSE}
+```
 >data <-read.table("stats.96.txt",header=T,sep="\t")
 >head(data)
   Sample Transitions Transversions Ts.Tv Reference     Het     Hom Missing
@@ -111,11 +111,11 @@ We usually do not have just one column of data to analyse, we have generally sev
 * The tabular data can be numeric or characters.
 * Like tabular data every data frame has rows and columns. This can be determined using the function *dim* short for dimensions
 
-```{r, eval = FALSE}
+```
 >dim(data)
 [1] 97  8
 ```
-```{r, eval = FALSE}
+```
 > summary(data)
      Sample    Transitions      Transversions         Ts.Tv         Reference             Het         
  13TB06 : 1   Min.   :3829568   Min.   :2048858   Min.   :1.869   Min.   :19531688   Min.   :3343926  
@@ -135,7 +135,7 @@ We usually do not have just one column of data to analyse, we have generally sev
  ```
  * data frames can also be subset like vectors.  
 
- ```{r, eval = FALSE}
+ ```
 >data <-data[,c(2:8)]
 > summary(data)
 Transitions      Transversions         Ts.Tv         Reference             Het               Hom         
@@ -156,7 +156,7 @@ Transitions      Transversions         Ts.Tv         Reference             Het  
  #### factors 
 * The third data structure in R is called as factors. 
 * factors are vectors containing categorical data 
-```{r, eval = FALSE}
+```
 >horses<-data.frame(samples=c("13TB06","13TB13","14TB04","1801","AKT001","AKT003"),breed=factor(c("FM","FM","FM","FM","PH","PH"))
 >levels(horses$breed)
 >plot(horses$breed)
@@ -197,13 +197,13 @@ Transitions      Transversions         Ts.Tv         Reference             Het  
 _Bioconductor_ packages are installed differently from install.packages() function
 The first step is to install the *BiocManager* package
 
-```{r, eval = FALSE}
+```
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager", repos="https://cran.r-project.org")
 ```
 The next step is to install the desired _Bioconductor_ packages. The syntax to install SRAdb packages which allows you to search and download the public NGS datasets.
 
-```{r, eval = FALSE}
+```
 BiocManager::install("SRAdb")
 ```
 
@@ -212,7 +212,7 @@ BiocManager::install("SRAdb")
 
 * _Bioconductor_ packages vignettes are availble from package web page, and can also viewd within _R_ using
 
-```{r, eval = FALSE}
+```
 browseVignettes("GenomicRanges")
 ```
 
