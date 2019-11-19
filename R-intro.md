@@ -34,7 +34,7 @@ Rstudio panels consist of :
 
 ### Working with R 
 1. Open RStudio and in the console panel type 2+3 and you see calculate the result for you 
-```{r, eval = FALSE}
+```
 >2+3
 [1] 5
 > 2+3*5
@@ -43,7 +43,7 @@ Rstudio panels consist of :
 
 2. R like unix has several functions to do data analysis 
 For example the function round, rounds of a number 
-```{r, eval = FALSE}
+```
 >round(3.14)
 [1] 3
 ```
@@ -51,7 +51,7 @@ For example the function round, rounds of a number
 >sqrt(25)
 [1] 5
 ```
-```{r, eval = FALSE}
+```
 > log10(10)
 [1] 1
 > log2(10)
