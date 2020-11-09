@@ -5,8 +5,20 @@ Check this Login info word document for login information
 Locate your Terminal.app and type the following ssh command
 *ssh login@binfmserv01.unibe.ch*
 When it prompts for password please enter the corresponding password also from the LoginInfo document.
+### Windows 10 Users 
+Locate Ubuntu and type the following ssh command
+*ssh login@binfmserv01.unibe.ch*
+When it prompts for password please enter the corresponding password also from the LoginInfo document.
+
+### Older Windows Users 
+Locate Mobaxterm and type the following ssh command 
+*ssh login@binfmserv01.unibe.ch*
+When it prompts for password please enter the corresponding password also from the LoginInfo document.
+
 Please ask for assistance any time, you do not understand the exercises. 
+
 Commands in grey blocks are to be typed in the Unix command shell.  
+
 Words in italics need to be replaced by the proper parameters (for example, your file name).
 
 ### Try some basic unix commands
