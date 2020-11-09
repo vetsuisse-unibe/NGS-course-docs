@@ -1,6 +1,10 @@
 ## Exercises 
 In this Practical we will login into the Bioinformatics server and do all the exercises on the server. 
-Check this spread sheet for log in information
+Check this Login info word document for login information
+### Mac OS X users 
+Locate your Terminal.app and type the following ssh command
+*ssh login@binfmserv01.unibe.ch*
+When it prompts for password please enter the corresponding password also from the LoginInfo document.
 Please ask for assistance any time, you do not understand the exercises. 
 Commands in grey blocks are to be typed in the Unix command shell.  
 Words in italics need to be replaced by the proper parameters (for example, your file name).
