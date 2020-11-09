@@ -1,6 +1,15 @@
 ## Exercises 
 In this Practical we will login into the Bioinformatics server (binfmserv01.unibe.ch) and do all the exercises on the server.  
 
+In order to login into the Bioinformatics cluser you need to be connected to unibe network via VPN or eduroam. 
+### VPN 
+If you are working from home then please login into the unibe VPN server using cisco Anyconnect or FortiConnect. 
+(https://tinyurl.com/yxj8ovpd)
+
+### eduroam
+If you are connected to the eduroam network then you don't need to connect to VPN server.  
+
+### SSH into bionformatics server 
 Check the Login info word document for login and password details.  
 
 ### Mac OS X users 
@@ -23,9 +32,9 @@ ssh login@binfmserv01.unibe.ch
 ```
 When it prompts for password please enter the corresponding password also from the LoginInfo document.
 
-Please ask for assistance any time, you do not understand the exercises. 
+#### Please ask for assistance any time, you do not understand the exercises. 
 
-Commands in grey blocks are to be typed in the Unix command shell.  
+Commands in grey blocks are to be typed in the Unix command shell or command line prompt.  
 
 Words in italics need to be replaced by the proper parameters (for example, your file name).
 
@@ -38,7 +47,7 @@ whoami
 ```
 pwd 
 ```
-It should show something like /home/student01. Which is 'home' directory for user student01
+It should show something like /home/student41. Which is 'home' directory for user student01
 
 *List the files in the directory*	
 ```
