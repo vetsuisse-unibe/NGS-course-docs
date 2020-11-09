@@ -1,6 +1,8 @@
 ## Exercises 
-In this Practical we will login into the Bioinformatics server and do all the exercises on the server. 
-Check this Login info word document for login information
+In this Practical we will login into the Bioinformatics server (binfmserv01.unibe.ch) and do all the exercises on the server.  
+
+Check this Login info word document for login information.  
+
 ### Mac OS X users 
 Locate your Terminal.app and type the following ssh command
 *ssh login@binfmserv01.unibe.ch*
