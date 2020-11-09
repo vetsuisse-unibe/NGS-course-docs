@@ -10,6 +10,7 @@ If you are working from home then please login into the unibe VPN server using c
 If you are connected to the eduroam network then you don't need to connect to VPN server.  
 
 ### SSH into bionformatics server 
+One you are connected to the VPN server or eduroam network, ssh into server in the follow manner according to your OS.  
 Check the Login info word document for login and password details.  
 
 ### Mac OS X users 
