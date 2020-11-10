@@ -1,5 +1,5 @@
 ## Exercises 
-In this Practical we will login into the Bioinformatics server (binfmserv01.unibe.ch) and do all the exercises on the server.  
+In this Practical we will login into the Bioinformatics server (binfservms01.unibe.ch) and do all the exercises on the server.  
 
 In order to login into the Bioinformatics cluser you need to be connected to unibe network via VPN or eduroam. 
 ### VPN 
