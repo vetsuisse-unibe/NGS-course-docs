@@ -55,7 +55,7 @@ A better approach is defining resource allocation inside the shell script. This 
 ```
 cat >test3.sh
 #!/bin/bash
-#SBATCH -p pcourse32 # partition (queue)
+#SBATCH -p pcourse80 # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH -n 1 # number of cores
 #SBATCH --mem 100 # memory pool for all cores
