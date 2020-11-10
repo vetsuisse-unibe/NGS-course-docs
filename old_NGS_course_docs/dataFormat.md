@@ -63,7 +63,7 @@ cat >run_fastqc.sh
 #SBATCH --error=fastqc.err
 #SBATCH --job-name=test
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourse32
 
 module add UHTS/Quality_control/fastqc/0.11.5;
 fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4 
@@ -83,18 +83,17 @@ It should take ~5 mins for the job to finish.
 Let’s transfer the zip files to our local computers so we can open and view them in our browsers. We’ll use the command scp to do this.
 scp (secure copy protocol) is a means of securely transferring computer files between a local host and a remote host. We can use this command to transfer files between two computers. We need to run this command on our local computers (i.e. from the windows machine).
 
-First tells create a new directory to store the zip files we will be transferring. Create a new folder called fastqc_html in your home directory on windows/mac. 
+First tells create a new directory to store the zip files we will be transferring. Create a new folder called fastqc_html under your students directory in G. 
 
 ```
-mkdir fastqc_html 
-cd fastqc_html 
+G:\IGEH\_PhD_Sequencing_2018\<student>\fastqc_html 
 ```
-In the command line prompt of windows/mac OS transfer the zip files using the scp command 
+Now Launch the windows terminal called the command prompt  by typing cmd in the windows search and double click the command prompt app. At the prompt H:>\  type the following command 
 
 ```
-scp student41@binfservms01.unibe.ch:/home/student41/dataPreprocess/*zip .
+pscp student51@binfservms01.unibe.ch:/home/student27/RNA-seq/*zip G:\IGEH\_PhD_Sequencing_2019\<student51>\fastqc_html
 ```
-replace the student41 with your ID. 
+replace the student27 with your ID. 
 
 Now from the fastqc_html directory:
 1. Unzip the zip files by double clicking on the files in the file explorer
@@ -111,7 +110,7 @@ Answer the following Questions:
 Several tools exist that can remove the adapters and filter low quality base. Examples include trimmomatic,fastx cutadapt, sickle etc. Here we will use fastp to remove the adapters and low quality bases. The fastp manual is available here 
 https://github.com/OpenGene/fastp
 
-Create the bash script in dataPreprocess dir to run fastp with the fastq files in the following manner 
+Create the bash script to run fastp with the fastq files in the following manner 
 
 ```
 cat >run_fastp.sh 
@@ -122,7 +121,7 @@ cat >run_fastp.sh
 #SBATCH --error=qual.err
 #SBATCH --job-name=fastp
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourse32
 module add UHTS/Quality_control/fastp/0.12.5;
 
 fastp -w 4 -q 15 -z 5 -l 50  -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
