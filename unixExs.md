@@ -16,20 +16,20 @@ Check the Login info word document for login and password details.
 ### Mac OS X users 
 Locate your Terminal.app and type the following *ssh command*
 ```
-ssh login@binfmserv01.unibe.ch
+ssh login@binfservm01.unibe.ch
 ```
 When it prompts for password please enter the corresponding password also from the LoginInfo document.
 ### Windows 10 Users 
 Locate Ubuntu and type the following *ssh command*
 ```
-ssh login@binfmserv01.unibe.ch
+ssh login@binfservm01.unibe.ch
 ```
 When it prompts for password please enter the corresponding password also from the LoginInfo document.
 
 ### Older Windows Users 
 Locate Mobaxterm and type the following *ssh command* 
 ```
-ssh login@binfmserv01.unibe.ch
+ssh login@binfservm01.unibe.ch
 ```
 When it prompts for password please enter the corresponding password also from the LoginInfo document.
 
