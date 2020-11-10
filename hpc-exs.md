@@ -21,7 +21,7 @@ ls -l test.sh
 # to Slurm to run on computing nodes. 
 ./test.sh 
 
-sbatch test.sh 
+sbatch -p pcourse80 test.sh 
 squeue | grep test 
 
 ```
@@ -42,7 +42,7 @@ sort -n randomNumbers.txt
 Submit the job using _sbatch_
 
 ```
-sbatch -p pcourse32 -N 1 -n 1 --mem 100 -t 2:00:00 -o test2.out -e test2.err
+sbatch -p pcourse80 -N 1 -n 1 --mem 100 -t 2:00:00 -o test2.out -e test2.err
 ```
 Questions: 
 1. How many files has the job submission created ? 
