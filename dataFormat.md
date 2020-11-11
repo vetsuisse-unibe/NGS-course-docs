@@ -20,7 +20,7 @@ Questions:
 1. What is the name and size of the files you downloaded ?
 2. Use unix head command to see how the header line of fastq looks like. Does it look like the example you saw in the lecture ?
 ```
-head SRR1027171_1.fastq.gz
+less SRR1027171_1.fastq.gz | head
 ```
 
 #### Fastqc 
