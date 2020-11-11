@@ -6,7 +6,7 @@ mkdir variantCalling
 cd variantCalling
 mkdir refIdx
 cd refIdx
-cp /data/courses/course32/variant_Calling/chr14.fa .
+cp /data/courses/course32/variantCalling/chr14.fa .
 ```
 We will use only chr11 of the dog genome as the reference just for short computing run times,that way you finish the exercises faster 
 
@@ -30,7 +30,7 @@ create a bash script for indexing the genome
 #SBATCH --time=1:00:00
 #SBATCH --mem=5G
 #SBATCH --cpus-per-task=1
-#SBATCH -p pcourse32
+#SBATCH -p pcourse80
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
@@ -44,7 +44,7 @@ We will use bwa mem algorithm for mapping. This is an algorithm that is most pop
 
 ##### genome reads 
 Create and directory called mapping 
-Copy the sample genome reads for two  Bull Terriers dogs to the mapping directory. The Bull Terriers samples are named as: 
+Copy the sample genome illumina reads for two  Bull Terriers dogs to the mapping directory. The Bull Terriers samples are named as: 
 1. BT012 
 2. BT134
 
@@ -52,7 +52,7 @@ Copy the sample genome reads for two  Bull Terriers dogs to the mapping director
 cd ../
 mkdir mapping 
 cd mapping 
-cp /data/courses/course32/variant_Calling/*.gz .
+cp /data/courses/course32/variantCalling/*.gz .
 ```
 
 Mapping involves three steps: 
@@ -82,7 +82,7 @@ This involves a lot of reading and writing to the hard disk which is highly time
 #SBATCH --time=3:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=8
-#SBATCH -p pcourse32
+#SBATCH -p pcourse80
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
@@ -130,10 +130,10 @@ tview commands:
 IGV browser is another light visualizing tool for mapping. 
 In order to see the mapping in an IGV browser we need to transfer the bam and its index file to your local windows file. 
 
-Create a directory called _bamFiles_ the G:
+Create a directory called _bamFiles_ and scp the files to this directory: 
 
 ```
-pscp student51@binfservms01.unibe.ch:/home/student27/RNA-seq/*bam* G:\IGEH\_PhD_Sequencing_2018\<student51>\bamFiles
+scp student51@binfservms01.unibe.ch:/home/student51/variant_Calling/*bam* 
 ```
 
 Type IGV on the windows search tool and open the IGV browser. 
