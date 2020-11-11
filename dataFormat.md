@@ -8,6 +8,11 @@
 wget  ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR102/001/SRR1027171/SRR1027171_1.fastq.gz
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR102/001/SRR1027171/SRR1027171_2.fastq.gz
 ```
+If wget didn't work please copy it from here 
+```
+cp /data/projects/p525_dog_wgs/course/SRR1027171_1.fastq.gz .
+cp /data/projects/p525_dog_wgs/course/SRR1027171_2.fastq.gz .
+```
 -	The above files belong to the study- [GSE52194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194) 
 -	 Click the above link to take you to SRA (Sequence Read Archive) where you can find more information about these two sets.
 
