@@ -86,14 +86,14 @@ It should take ~5 mins for the job to finish.
 
 #### zip files 
 
-First tells create a new directory to store the zip files we will be transferring. Create a new folder called fastqc_html in your home directory on windows/mac. 
+First lets create a new directory to store the zip files we will be downloading. Create a new folder called fastqc_html in your home directory on mac. 
 
 ```
 mkdir fastqc_html 
 cd fastqc_html 
 ```
-
-Windows users please downlooad the zip files from the following links 
+Windows users create a folder on your local PC using the same names.
+Please downlooad the zip files from the following links to fastqc_html folder. 
 ```
 https://cloud.bioinformatics.unibe.ch/index.php/s/rPs8AE8JRMKAMBC
 https://cloud.bioinformatics.unibe.ch/index.php/s/GmbmitEwfnSzaxd
