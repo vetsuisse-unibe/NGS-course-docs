@@ -8,7 +8,7 @@ mkdir refIdx
 cd refIdx
 cp /data/courses/course32/variantCalling/chr14.fa .
 ```
-We will use only chr11 of the dog genome as the reference just for short computing run times,that way you finish the exercises faster 
+We will use only chr14 of the dog genome as the reference just for short computing run times,that way you finish the exercises faster 
 
 #### Index the reference 
 We will use bwa mem for mapping the reads to the reference genome. For this we index the reference genome first. 
