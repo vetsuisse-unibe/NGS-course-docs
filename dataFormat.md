@@ -85,8 +85,6 @@ It should take ~5 mins for the job to finish.
 2. How many output files have been produced by fastqc ? what are the types ?
 
 #### zip files 
-Let’s transfer the zip files to our local computers so we can open and view them in our browsers. We’ll use the command scp to do this.
-scp (secure copy protocol) is a means of securely transferring computer files between a local host and a remote host. We can use this command to transfer files between two computers. We need to run this command on our local computers (i.e. from the windows machine).
 
 First tells create a new directory to store the zip files we will be transferring. Create a new folder called fastqc_html in your home directory on windows/mac. 
 
@@ -94,12 +92,12 @@ First tells create a new directory to store the zip files we will be transferrin
 mkdir fastqc_html 
 cd fastqc_html 
 ```
-In the command line prompt of windows/mac OS transfer the zip files using the scp command 
 
+Windows users please downlooad the zip files from the following links 
 ```
-scp student41@binfservms01.unibe.ch:/home/student41/dataPreprocess/*zip .
+https://cloud.bioinformatics.unibe.ch/index.php/s/rPs8AE8JRMKAMBC
+https://cloud.bioinformatics.unibe.ch/index.php/s/GmbmitEwfnSzaxd
 ```
-replace the student41 with your ID. 
 
 Now from the fastqc_html directory:
 1. Unzip the zip files by double clicking on the files in the file explorer
