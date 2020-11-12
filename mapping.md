@@ -127,13 +127,16 @@ tview commands:
 
 ##### IGV browser 
 
-IGV browser is another light visualizing tool for mapping. 
-In order to see the mapping in an IGV browser we need to transfer the bam and its index file to your local windows file. 
+IGV browser is another light visualizing tool for mapping. You must have installed the IGV browser in your system as we requested.
+In order to see the mapping in an IGV browser we need  the bam file  and its index file you created on your local windows/mac system. 
 
-Create a directory called _bamFiles_ and scp the files to this directory: 
+Create a directory called _bamFiles_ and download the bam files and index files to this directory from the below links: 
 
 ```
-scp student51@binfservms01.unibe.ch:/home/student51/variant_Calling/*bam* 
+https://cloud.bioinformatics.unibe.ch/index.php/s/ijMcSoy6rRrHp3G
+https://cloud.bioinformatics.unibe.ch/index.php/s/4ReRL8eKwd3DNCf
+https://cloud.bioinformatics.unibe.ch/index.php/s/yEacKPzebaBiWb7
+https://cloud.bioinformatics.unibe.ch/index.php/s/ig2ioxaorc3qFa2
 ```
 
 Type IGV on the windows search tool and open the IGV browser. 
@@ -141,6 +144,8 @@ Type IGV on the windows search tool and open the IGV browser.
 ###### Load the reference genome 
 By default, IGV loads Human hg19 or the last genome used on the browser. If the genome is not dog or canFam3, we  load the reference genome  canFam3:
 ![IGVimage](igv.1.png)
+
+if you cannot see the canFam3, click on more and search for canFam3.  
 
 ##### Visualizing read alignments
  IGV choose File > Load from File..., select the Bull Terrier bam file, and click OK. Note that the bam and index files must be in the same directory for IGV to load these properly.
