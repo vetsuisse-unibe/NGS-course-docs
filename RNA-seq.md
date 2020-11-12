@@ -109,12 +109,17 @@ We will use the count file to study differential expression of genes in the thre
 
 For convience we have produced the full feature count file for all chromosomes, for all the samples,  ready to use for differential expression with R. 
 
-Create a local directory on G: as _diffExp_ and transfer the files to the directory using _pscp_
+Create a local directory as _diffExp_ and transfer the files to the directory using _scp_
 
 ```
-pscp student51@binfservms01.unibe.ch:/data/courses/course32/RNA-seq/counts/breastCancer.counts.forDESeq.txt G:\IGEH\_PhD_Sequencing_2019\<student51>\diffExp
+scp student51@binfservms01.unibe.ch:/data/courses/course32/RNA-seq/counts/breastCancer.counts.forDESeq.txt .
 ```
 
+If you are not able to use scp. Create a local directory as _diffExp_ and  can download the count file from the following link to the _diffExp_ directory. 
+
+```
+https://campuscloud.unibe.ch:443/ssf/s/readFile/share/40219/-283556994276692082/publicLink/breastCancer.counts.forDESeq.txt
+```
 
 Open R studio and in the text editor panel add the following R commands and run the commands in the console window.
 
@@ -128,8 +133,10 @@ library(DESeq2)
 
 3. Create the DESeqDataSet object
 
+Note: the first command in R is setwd should be given the full path to your diffExp folder.  
+
 ```
-setwd("G:\IGEH\_PhD_Sequencing_2019\<student51>\diffExp")
+setwd("diffExp")
 countData<-read.table('breastCancer.counts.forDESeq.txt', header=TRUE)
 rownames(countData)<-countData$Geneid
 countData<-countData[, -1]
