@@ -71,6 +71,8 @@ Use those files and unix command line tools to answer the following questions
 #### Count reads 
 To count the number of reads overlapping annotated genes we will use the featureCounts algorithm. http://bioinf.wehi.edu.au/featureCounts/
 
+For this feature count exercise we have made the sorted bam files already available for all the samples. You can use this as input to feature count. 
+
 ```
 #!/bin/bash
 #SBATCH --time=10:00:00
