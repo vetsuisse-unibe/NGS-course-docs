@@ -133,7 +133,7 @@ library(DESeq2)
 
 3. Create the DESeqDataSet object
 
-Note: the first command in R is setwd should be given the full path to your diffExp folder.  
+Note: the first command in R **setwd** should be given the full path to your _diffExp_ folder.  
 
 ```
 setwd("diffExp")
