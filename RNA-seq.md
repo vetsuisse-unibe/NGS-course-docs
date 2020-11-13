@@ -60,6 +60,22 @@ The output from hisat2 is a sam file which needs to be converted to a bam file a
 #### Task 
 Write a job script to convert the sam to bam file using _samtools view_ and _samtools sort_ 
 
+```
+#!/bin/bash
+#SBATCH --time=3:00:00
+#SBATCH --mem=16G
+#SBATCH --output=bam.out
+#SBATCH --error=bam.err
+#SBATCH --job-name=view2bam
+#SBATCH --cpus-per-task=8
+#SBATCH --partition=pcourse80
+
+samtools view -@8 -h -Sb -o HER21.bam HER21.sam 
+samtools sort -@8 HER21.bam HER21.sorted.bam
+
+```
+
+
 It is very important to check every step of your analysis. Does the output make sense? Is the quality of the results good enough to continue with the analysis? To check the mapping, have a look at the summary statistics Hisat2 wrote to the error file. 
 
 The mapping stats for all files are available here /data/courses/course32/RNA_seq/mappingstats. 
