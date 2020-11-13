@@ -205,6 +205,11 @@ snpEff eff -dataDir /home/<student>/variantCalling/variant CanFam3.1.86 BT.flt.v
 ```
 The output VCF file has an extra field "ANN"
 
+Unfortunately the snpEff database seems to be down too load the CanFam3.1.86 database. So please copy the file from course32 dir to do the below task. 
+
+```
+cp /data/courses/course32/variantCalling/BT.ann.vcf .
+```
 ##### Task 
 1. use a unix command to check for ANN field in the VCF file. 
 2. Use the following command to see if the variant implicated for the LAD in Bull terriers is found in the VCF file. 
