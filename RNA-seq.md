@@ -50,7 +50,7 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 #SBATCH --error=hisat2.err
 #SBATCH --job-name=hisat2
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourse32
+#SBATCH --partition=pcourse80
 
 module add UHTS/Aligner/hisat/2.1.0;
 hisat2 -x /data/courses/course32/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/course32/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/course32/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
@@ -81,7 +81,7 @@ For this feature count exercise we have made the sorted bam files already availa
 #SBATCH --error=featureCounts.err
 #SBATCH --job-name=featureCounts
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=pcourse32
+#SBATCH --partition=pcourse80
 
 
 module add UHTS/Analysis/subread/1.6.0;
