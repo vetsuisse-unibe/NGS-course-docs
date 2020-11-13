@@ -29,6 +29,16 @@ module add vital-it;
 module add UHTS/Analysis/picard-tools/2.9.0;
 picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICAT=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
 ```
+#### deduplication file 
+If the deduplication step is taking two long, you can copy the dedup bam and index files from the course32 dir to your dir and you can go on to the  _HaplotypeCaller_ step. 
+
+```
+cp /data/courses/course32/variantCalling/BT012.dedup.bam .
+cp /data/courses/course32/variantCalling/BT012.dedup.bam.bai .
+cp /data/courses/course32/variantCalling/BT134.dedup.bam .
+cp /data/courses/course32/variantCalling/BT134.dedup.bam.bai .
+```
+
 #### Task 
 Repeat the same duplication marking with the BT012 genome bam file. 
 
@@ -190,7 +200,7 @@ The following script downloads the Effect database which we will use for for ann
 
 module add vital-it;
 module add UHTS/Analysis/snpEff/4.3t;
-snpEff  download -dataDir /home/<student>/variantCalling/variant CanFam3.1.86
+snpEff  download -dataDir /home/<student>/variantCalling/variant -v CanFam3.1.86
 snpEff eff -dataDir /home/<student>/variantCalling/variant CanFam3.1.86 BT.flt.var.vcf >BT.ann.vcf
 ```
 The output VCF file has an extra field "ANN"
