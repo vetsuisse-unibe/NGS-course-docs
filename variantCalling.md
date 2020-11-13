@@ -23,6 +23,7 @@ In the following exercise we will use the [_picard tools_](https://broadinstitut
 #SBATCH --chdir=.
 #SBATCH --time=3:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
 
 module add vital-it;
 module add UHTS/Analysis/picard-tools/2.9.0;
@@ -41,6 +42,7 @@ Repeat the same duplication marking with the BT012 genome bam file.
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
 
 module add vital-it;
 module add UHTS/Analysis/samtools/1.8;
@@ -73,6 +75,7 @@ In order to run the haplotypeCaller we need to create a index and dictionary fil
 #SBATCH --chdir=.
 #SBATCH --time=3:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
 
 module add vital-it;
 module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
@@ -110,6 +113,7 @@ In the variants folder create the following script.
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
 
 module add vital-it;
 module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
@@ -133,6 +137,7 @@ Create the following script for filtering of Variants
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
 
 module add vital-it;
 module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
@@ -154,6 +159,7 @@ Once the variants have been filtered we merge them to one single file for annota
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
 
 module add vital-it;
 module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
@@ -180,6 +186,8 @@ The following script downloads the Effect database which we will use for for ann
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
+#SBATCH --partition=pcourse80
+
 module add vital-it;
 module add UHTS/Analysis/snpEff/4.3t;
 snpEff  download -dataDir /home/<student>/variantCalling/variant CanFam3.1.86
