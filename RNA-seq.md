@@ -124,8 +124,14 @@ https://campuscloud.unibe.ch:443/ssf/s/readFile/share/40219/-283556994276692082/
 ```
 
 Open R studio and in the text editor panel add the following R commands and run the commands in the console window.
+The first two lines below are to install the DeSeq2 package. If don't have it already.
 
 ```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("DESeq2")
+
 library(DESeq2)
 ```
 ##### Prepare the data for analysis. 
