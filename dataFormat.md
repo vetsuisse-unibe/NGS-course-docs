@@ -95,8 +95,8 @@ cd fastqc_html
 Windows users create a folder on your local PC using the same names.
 Please downlooad the zip files from the following links to fastqc_html folder. 
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/rPs8AE8JRMKAMBC
-https://cloud.bioinformatics.unibe.ch/index.php/s/GmbmitEwfnSzaxd
+https://cloud.bioinformatics.unibe.ch/index.php/s/y2p95e9JLGorBdJ
+https://cloud.bioinformatics.unibe.ch/index.php/s/mydfZWndnP3Rqp9
 ```
 
 Now from the fastqc_html directory:
@@ -144,8 +144,8 @@ The best is to run the fastp algorithm using a job script. This way you are reco
 - Now run fastqc on the cleaned fastq files. 
 - Similar to the previous done exercise download the *zip files from the links below to a local directory, unzip and view the fastqc_report.html file for the results
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/BdgdoSXKNLTkaBF
-https://cloud.bioinformatics.unibe.ch/index.php/s/sL99KYjCp29RCr5
+https://cloud.bioinformatics.unibe.ch/index.php/s/dsZ3gRETTznmqZr
+https://cloud.bioinformatics.unibe.ch/index.php/s/K2WYkrK8Q6CH8jL
 ```
 - Record the changes you see in the cleaned and trimmed reads
 
