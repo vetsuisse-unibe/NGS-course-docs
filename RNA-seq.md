@@ -81,7 +81,7 @@ samtools sort -@8 HER21.bam HER21.sorted.bam
 
 It is very important to check every step of your analysis. Does the output make sense? Is the quality of the results good enough to continue with the analysis? To check the mapping, have a look at the summary statistics Hisat2 wrote to the error file. 
 
-The mapping stats for all files are available here /data/courses/course32/RNA_seq/mappingstats. 
+The mapping stats for all files are available here /data/courses/course32/RNA-seq/mappingstats. 
 
 Use those files and unix command line tools to answer the following questions 
 - What is the highest/lowest overall alignment rate?
