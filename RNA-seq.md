@@ -102,7 +102,7 @@ For this feature count exercise we have made the sorted bam files already availa
 #SBATCH --cpus-per-task=8
 #SBATCH --partition=pcourse80
 
-
+module add vital-it;
 module add UHTS/Analysis/subread/1.6.0;
 
 featureCounts -p -C -s 0 -T 8 -Q 10 --tmpDir .  -a  /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/reference/Homo_sapiens.GRCh38.98.gtf -t exon -g gene_id  -o output.txt  /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/HER21.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/HER22.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/HER23.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/NonTNBC1.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/NonTNBC2.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC3.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/Normal1.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/Normal2.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/Normal3.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC1.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC2.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC3.coordSorted.bam
