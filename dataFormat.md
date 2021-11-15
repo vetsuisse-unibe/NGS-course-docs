@@ -51,7 +51,7 @@ Once you are logged into one of the servers, load the software module in the fol
  Launch fastqc with the two fastq files in the following manner 
 
  ```
-  fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz –threads  4
+  fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4
   ```
 
 #### Job Script 
@@ -66,7 +66,7 @@ cat >run_fastqc.sh
 #SBATCH --mem=2G
 #SBATCH --output=fastqc.out
 #SBATCH --error=fastqc.err
-#SBATCH --job-name=test
+#SBATCH --job-name=fastqc
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=pcourseb
 
@@ -95,8 +95,8 @@ cd fastqc_html
 Windows users create a folder on your local PC using the same names.
 Please downlooad the zip files from the following links to fastqc_html folder. 
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/y2p95e9JLGorBdJ
-https://cloud.bioinformatics.unibe.ch/index.php/s/mydfZWndnP3Rqp9
+https://cloud.bioinformatics.unibe.ch/index.php/s/AEWDWjFP4KXXw68
+https://cloud.bioinformatics.unibe.ch/index.php/s/EWttnZDeFwpaNG3
 ```
 
 Now from the fastqc_html directory:
