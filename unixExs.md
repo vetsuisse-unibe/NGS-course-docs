@@ -313,7 +313,7 @@ less chr22.fa.gz | grep -v ">" | grep --color "GAATTC"
 ```
 Now can you count the number of EcoR1 site in the sequence ? 
 
-For the brave. Calculate the %GC content in the entire chromosome.
+**For the brave.** Calculate the %GC content in the entire chromosome.
 
 ```
 less chr22.fa.gz | awk '!/^>/{gc+=gsub(/[gGcC]/,""); at+=gsub(/[aAtT]/,"");} END{ printf "%.2f%%\n", (gc*100)/(gc+at) }'
