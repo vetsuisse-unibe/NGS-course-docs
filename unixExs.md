@@ -251,7 +251,7 @@ We want to see how many cow assemblies have been submitted
 ```
 grep "Bos taurus" eukaryotes.txt
 ```
-More easier ^ stands for beginning of  a line 
+You see the occurence of the string in several colums. We want to the string only in the Organism column. To do this we can the caret symbol ^ which stands for beginning of  a line 
 ```
 grep "^Bos taurus" eukaryotes.txt | wc -l 
 grep -c "^Bos taurus" eukaryotes.txt
@@ -280,7 +280,7 @@ cut -f 1,6,8 eukaryotes.txt |less
 which Mammalian genome has the highest GC content 
 ```
 cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 |less
-cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 | head –n 1
+cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 | head -n 1
 ```
 which Mammalian genome has the least GC content 
 
@@ -288,5 +288,36 @@ which Mammalian genome has the least GC content
 Is the statement "a genome-wide GC content of ≈30% is one of the lowest observed in any animal genome"  True ? 
 
 If the find the answer for this you just proved or disproved an accepted hypothesis!
+
+# Sequence Content 
+Create a new directory and copy the chromosome  human chromosome 22 from here: /data/courses/courseB/UnixEx
+```
+mkdir <directoryname>
+cd <directoryname>
+cp /data/courses/courseB/UnixEx/cchr22.fa.gz  .
+```
+How many nucleotides are found in the entire chromosome? 
+```
+less chr22.fa.gz | grep -v ">" | wc | awk '{print $3-$1}'
+```
+Do you understand the above command. If not try man wc for help.
+
+How many As, Cs, Gs, Ts and Ns are found in the entire chromosome?
+```
+less chr22.fa.gz |grep -v ">" | grep -o [actgnACTGN] | sort | uniq -c
+```
+
+Search for  EcoR1 (GAATTC) site in the chr22 file
+```
+less chr22.fa.gz | grep -v ">" | grep --color "GAATTC"
+```
+Now can you count the number of EcoR1 site in the sequence ? 
+
+For the brave. Calculate the %GC content in the entire chromosome.
+
+```
+less chr22.fa.gz | awk '!/^>/{gc+=gsub(/[gGcC]/,""); at+=gsub(/[aAtT]/,"");} END{ printf "%.2f%%\n", (gc*100)/(gc+at) }'
+```
+
 
 # Welcome to the exciting world of Data Analysis.
