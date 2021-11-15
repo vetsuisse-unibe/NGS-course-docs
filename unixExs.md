@@ -48,7 +48,7 @@ whoami
 ```
 pwd 
 ```
-It should show something like /home/student41. Which is 'home' directory for user student01
+It should show something like /home/student36. Which is 'home' directory for user student01
 
 *List the files in the directory*	
 ```
