@@ -50,7 +50,7 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 #SBATCH --error=hisat2.err
 #SBATCH --job-name=hisat2
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourseb
 
 module add UHTS/Aligner/hisat/2.1.0;
 hisat2 -x /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
@@ -68,7 +68,7 @@ Write a job script to convert the sam to bam file using _samtools view_ and _sam
 #SBATCH --error=bam.err
 #SBATCH --job-name=view2bam
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourseb
 
 module add vital-it;
 module add UHTS/Analysis/samtools/1.8;
