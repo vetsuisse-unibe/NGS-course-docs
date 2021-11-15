@@ -144,8 +144,8 @@ The best is to run the fastp algorithm using a job script. This way you are reco
 - Now run fastqc on the cleaned fastq files. 
 - Similar to the previous done exercise download the *zip files from the links below to a local directory, unzip and view the fastqc_report.html file for the results
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/dsZ3gRETTznmqZr
-https://cloud.bioinformatics.unibe.ch/index.php/s/K2WYkrK8Q6CH8jL
+https://cloud.bioinformatics.unibe.ch/index.php/s/Ji6HedpQH7jmrQp
+https://cloud.bioinformatics.unibe.ch/index.php/s/wGtR2kbkexH7LMF
 ```
 - Record the changes you see in the cleaned and trimmed reads
 
