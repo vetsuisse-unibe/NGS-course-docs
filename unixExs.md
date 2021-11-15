@@ -37,7 +37,7 @@ When it prompts for password please enter the corresponding password also from t
 
 Commands in grey blocks are to be typed in the Unix command shell or command line prompt.  
 
-Words in italics need to be replaced by the proper parameters (for example, your file name).
+Words in italics need to be replaced by the proper parameters (for example, your file name). Or any word between two angle brackets like <filename> should be replaced with strings or words of your choice.
 
 ### Try some basic unix commands
 *Display user name*
@@ -124,7 +124,7 @@ pwd
 ```
 *Going up one directory* 
 ```
-cd..
+cd ..
 ```
 *and then type to see what has happened*
 ```
@@ -242,6 +242,10 @@ It is a tab delimited text file with several columns.
 The first line shows the different column headers
 ```
 head -n 1 eukaryotes.txt
+```
+For further ease of reading the column headers. (Do you understand what we are doing here ?)
+```
+head -n 1 eukaryotes.txt | tr '\t' '\n' |less
 ```
 We want to see how many cow assemblies have been submitted 
 ```
