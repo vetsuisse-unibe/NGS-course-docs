@@ -10,8 +10,8 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR102/001/SRR1027171/SRR1027171_2.fastq
 ```
 If wget didn't work please copy it from here 
 ```
-cp /data/courses/course32/fastq/SRR1027171_1.fastq.gz .
-cp /data/courses/course32/fastq/SRR1027171_2.fastq.gz .
+cp /data/courses/courseB/fastq/SRR1027171_1.fastq.gz .
+cp /data/courses/courseB/fastq/SRR1027171_2.fastq.gz .
 ```
 -	The above files belong to the study- [GSE52194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194) 
 -	 Click the above link to take you to SRA (Sequence Read Archive) where you can find more information about these two sets.
@@ -36,7 +36,7 @@ We use the slurm cluster managment program to run the fastqc job.
 
 First use the _srun_ command to request for resources like CPU and RAM to run the program 
 ```
-srun --partition=pcourse80 --cpus-per-task 4 --time=1:00:00 --mem=1G --pty /bin/bash
+srun --partition=pcourseb --cpus-per-task 4 --time=1:00:00 --mem=1G --pty /bin/bash
 ```
 Questions: 
 Do you understand all the arguments passed to _srun_ ? 
@@ -68,7 +68,7 @@ cat >run_fastqc.sh
 #SBATCH --error=fastqc.err
 #SBATCH --job-name=test
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourseb
 
 module add UHTS/Quality_control/fastqc/0.11.5;
 fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4 
@@ -125,7 +125,7 @@ cat >run_fastp.sh
 #SBATCH --error=qual.err
 #SBATCH --job-name=fastp
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourseb
 module add UHTS/Quality_control/fastp/0.12.5;
 
 fastp -w 4 -q 15 -z 5 -l 50  -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
