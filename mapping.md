@@ -6,7 +6,7 @@ mkdir variantCalling
 cd variantCalling
 mkdir refIdx
 cd refIdx
-cp /data/courses/course32/variantCalling/chr14.fa .
+cp /data/courses/courseB/variantCalling/chr14.fa .
 ```
 We will use only chr14 of the dog genome as the reference just for short computing run times,that way you finish the exercises faster 
 
@@ -30,7 +30,7 @@ create a bash script for indexing the genome
 #SBATCH --time=1:00:00
 #SBATCH --mem=5G
 #SBATCH --cpus-per-task=1
-#SBATCH -p pcourse80
+#SBATCH -p pcourseb
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
@@ -52,7 +52,7 @@ Copy the sample genome illumina reads for two  Bull Terriers dogs to the mapping
 cd ../
 mkdir mapping 
 cd mapping 
-cp /data/courses/course32/variantCalling/*.gz .
+cp /data/courses/courseB/variantCalling/*.gz .
 ```
 
 Mapping involves three steps: 
@@ -82,7 +82,7 @@ This involves a lot of reading and writing to the hard disk which is highly time
 #SBATCH --time=3:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=8
-#SBATCH -p pcourse80
+#SBATCH -p pcourseb
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
