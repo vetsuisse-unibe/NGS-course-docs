@@ -3,7 +3,7 @@ In this Practical we will login into the Bioinformatics server (binfservms01.uni
 
 In order to login into the Bioinformatics cluser you need to be connected to unibe network via VPN or eduroam. 
 ### VPN 
-If you are working from home then please login into the unibe VPN server using cisco Anyconnect or FortiConnect. 
+Please login into the unibe VPN server using FortiConnect. 
 (https://tinyurl.com/yxj8ovpd)
 
 ### eduroam
