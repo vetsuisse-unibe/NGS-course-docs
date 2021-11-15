@@ -100,12 +100,12 @@ For this feature count exercise we have made the sorted bam files already availa
 #SBATCH --error=featureCounts.err
 #SBATCH --job-name=featureCounts
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=pcourse80
+#SBATCH --partition=pcourseb
 
 module add vital-it;
 module add UHTS/Analysis/subread/1.6.0;
 
-featureCounts -p -C -s 0 -T 8 -Q 10 --tmpDir .  -a  /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/reference/Homo_sapiens.GRCh38.98.gtf -t exon -g gene_id  -o output.txt  /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/HER21.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/HER22.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/HER23.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/NonTNBC1.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/NonTNBC2.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC3.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/Normal1.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/Normal2.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/Normal3.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC1.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC2.coordSorted.bam /data/courses/cancergenomics/RNAseq_CancerGenomics_2019/chr22/mapped/TNBC3.coordSorted.bam
+featureCounts -p -C -s 0 -T 8 -Q 10 --tmpDir .  -a  /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.98.gtf -t exon -g gene_id  -o output.txt  //data/courses/courseB/RNA-seq/mapping/HER21.sorted.bam /data/courses/courseB/RNA-seq/mapping/HER22.sorted.bam /data/courses/courseB/RNA-seq/mapping/HER23.sorted.bam /data/courses/courseB/RNA-seq/mapping/NonTNBC1.sorted.bam /data/courses/courseB/RNA-seq/mapping/NonTNBC2.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC3.sorted.bam /data/courses/courseB/RNA-seq/mapping/Normal1.sorted.bam /data/courses/courseB/RNA-seq/mapping/Normal2.sorted.bam /data/courses/courseB/RNA-seq/mapping/Normal3.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC1.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC2.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC3.sorted.bam
 ```
 The parameters used for featureCount is as follows:  
 - -p the read sequence is paired-end data.
