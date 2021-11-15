@@ -139,7 +139,7 @@ scp student51@binfservms01.unibe.ch:/data/courses/courseB/RNA-seq/counts/breastC
 If you are not able to use scp. Create a local directory as _diffExp_ and  can download the count file from the following link to the _diffExp_ directory. 
 
 ```
-https://campuscloud.unibe.ch:443/ssf/s/readFile/share/40219/-283556994276692082/publicLink/breastCancer.counts.forDESeq.txt
+https://campuscloud.unibe.ch/filr/public-link/file-download/02dc8052759dcb3e0175be7dd6c33bfb/40219/-283556994276692082/breastCancer.counts.forDESeq.txt
 ```
 
 Open R studio and in the text editor panel add the following R commands and run the commands in the console window.
