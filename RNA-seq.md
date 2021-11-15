@@ -74,7 +74,7 @@ module add vital-it;
 module add UHTS/Analysis/samtools/1.8;
 
 samtools view -@8 -h -Sb -o HER21.bam HER21.sam 
-samtools sort -@8 HER21.bam HER21.sorted.bam
+samtools sort -@8 HER21.bam -o HER21.sorted.bam
 
 ```
 
