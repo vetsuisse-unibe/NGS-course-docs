@@ -24,7 +24,7 @@ Background:
 4. Test for differential gene expression between tumor subtypes 
 5. Login to binfservms01 using putty
 
-In order reduce run times again we have subset of clean reads only for chr22 at _/data/courses/course32/RNA-seq/reads_
+In order reduce run times again we have subset of clean reads only for chr22 at _/data/courses/courseB/RNA-seq/reads_
 
 #### Mapping 
 Create a directory called RNA_seq and mapping under it 
@@ -33,10 +33,10 @@ Create a directory called RNA_seq and mapping under it
 mkdir -p RNA_seq/mapping 
 cd RNA_seq/mapping 
 ```
-Copy any of the two paired-end reads samples from original folder/data/courses/course32/RNA-seq/reads to your mapping folder in the following manner.
+Copy any of the two paired-end reads samples from original folder/data/courses/courseB/RNA-seq/reads to your mapping folder in the following manner.
 
 ```
-cp /data/courses/course32/RNA-seq/reads/*_R*.fastq.gz  . 
+cp /data/courses/courseB/RNA-seq/reads/*_R*.fastq.gz  . 
 ```
 These RNA-seq reads are human breast cancer samples so we will need to map them to human reference genome (GRCh38). Using the [HiSat2 algorithm](https://ccb.jhu.edu/software/hisat2/manual.shtml). HiSat2 is the next development of TopHat2. HiSat2 is BWT based algorithm, the difference being that it uses 2 different types of indexing system instead of one. The two different indexes are global and local indexes which are used for exon mapping reads and reads spanning one or more junctions respectively. 
 
@@ -53,7 +53,7 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 #SBATCH --partition=pcourse80
 
 module add UHTS/Aligner/hisat/2.1.0;
-hisat2 -x /data/courses/course32/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/course32/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/course32/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
+hisat2 -x /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
 ```
 The output from hisat2 is a sam file which needs to be converted to a bam file and sorted by chromosome co-ordinates for all downstream analysis
 
@@ -81,7 +81,7 @@ samtools sort -@8 HER21.bam HER21.sorted.bam
 
 It is very important to check every step of your analysis. Does the output make sense? Is the quality of the results good enough to continue with the analysis? To check the mapping, have a look at the summary statistics Hisat2 wrote to the error file. 
 
-The mapping stats for all files are available here /data/courses/course32/RNA-seq/mappingstats. 
+The mapping stats for all files are available here /data/courses/courseB/RNA-seq/mappingstats. 
 
 Use those files and unix command line tools to answer the following questions 
 - What is the highest/lowest overall alignment rate?
@@ -133,7 +133,7 @@ For convience we have produced the full feature count file for all chromosomes, 
 Create a local directory as _diffExp_ and transfer the files to the directory using _scp_
 
 ```
-scp student51@binfservms01.unibe.ch:/data/courses/course32/RNA-seq/counts/breastCancer.counts.forDESeq.txt .
+scp student51@binfservms01.unibe.ch:/data/courses/courseB/RNA-seq/counts/breastCancer.counts.forDESeq.txt .
 ```
 
 If you are not able to use scp. Create a local directory as _diffExp_ and  can download the count file from the following link to the _diffExp_ directory. 
