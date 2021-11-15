@@ -2,6 +2,8 @@
 
 ##### Exercise 1 
 In this exercises we will create a small bash script, run it locally, then submit it as a job to Slurm using sbatch, and compare the results.
+We are going to create a file and add contents to it using the cat command. To close the file please press CTRL and D key together. 
+If you are familiar with text file editors like vi or emacs you can use that. 
 
 ```
 mkdir testDir 
