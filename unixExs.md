@@ -294,7 +294,7 @@ Create a new directory and copy the chromosome  human chromosome 22 from here: /
 ```
 mkdir <directoryname>
 cd <directoryname>
-cp /data/courses/courseB/UnixEx/cchr22.fa.gz  .
+cp /data/courses/courseB/UnixEx/chr22.fa.gz  .
 ```
 How many nucleotides are found in the entire chromosome? 
 ```
