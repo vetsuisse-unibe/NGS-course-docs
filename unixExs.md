@@ -169,7 +169,7 @@ rm -i exampleFile2
 ```
 Aliases are short forms used for commands. 
 ```
-alias rm=”rm -I”
+alias rm=”rm -i”
 touch <exampleFile>
 rm <exampleFile>
 ```
