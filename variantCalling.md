@@ -30,13 +30,13 @@ module add UHTS/Analysis/picard-tools/2.9.0;
 picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICATES=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
 ```
 #### deduplication file 
-If the deduplication step is taking two long, you can copy the dedup bam and index files from the course32 dir to your dir and you can go on to the  _HaplotypeCaller_ step. 
+If the deduplication step is taking two long, you can copy the dedup bam and index files from the courseB dir to your dir and you can go on to the  _HaplotypeCaller_ step. 
 
 ```
-cp /data/courses/course32/variantCalling/BT012.dedup.bam .
-cp /data/courses/course32/variantCalling/BT012.dedup.bam.bai .
-cp /data/courses/course32/variantCalling/BT134.dedup.bam .
-cp /data/courses/course32/variantCalling/BT134.dedup.bam.bai .
+cp /data/courses/courseB/variantCalling/BT012.dedup.bam .
+cp /data/courses/courseB/variantCalling/BT012.dedup.bam.bai .
+cp /data/courses/courseB/variantCalling/BT134.dedup.bam .
+cp /data/courses/courseB/variantCalling/BT134.dedup.bam.bai .
 ```
 
 #### Task 
@@ -205,10 +205,10 @@ snpEff eff -dataDir /home/<student>/variantCalling/variant CanFam3.1.86 BT.flt.v
 ```
 The output VCF file has an extra field "ANN"
 
-Unfortunately the snpEff database seems to be down too load the CanFam3.1.86 database. So please copy the file from course32 dir to do the below task. 
+Unfortunately the snpEff database seems to be down too load the CanFam3.1.86 database. So please copy the file from courseB dir to do the below task. 
 
 ```
-cp /data/courses/course32/variantCalling/BT.ann.vcf .
+cp /data/courses/courseB/variantCalling/BT.ann.vcf .
 ```
 ##### Task 
 1. use a unix command to check for ANN field in the VCF file. 
