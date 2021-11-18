@@ -27,7 +27,7 @@ In the following exercise we will use the [_picard tools_](https://broadinstitut
 
 module add vital-it;
 module add UHTS/Analysis/picard-tools/2.9.0;
-picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICATE=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
+picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICATES=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
 ```
 #### deduplication file 
 If the deduplication step is taking two long, you can copy the dedup bam and index files from the course32 dir to your dir and you can go on to the  _HaplotypeCaller_ step. 
