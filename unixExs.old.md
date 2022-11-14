@@ -10,8 +10,8 @@ Please login into the unibe VPN server using FortiConnect.
 If you are connected to the eduroam network then you don't need to connect to VPN server.  
 
 ### SSH into bionformatics server 
-One you are connected to the VPN server or eduroam network, ssh into server in the follow manner using Visual studio code remote ssh extension.  
-Check the login and password details on studs-courseB-2 text file on the Ilias respository. 
+One you are connected to the VPN server or eduroam network, ssh into server in the follow manner according to your OS.  
+Check the Login info word document for login and password details.  
 
 ### Mac OS X users 
 Locate your Terminal.app and type the following *ssh command*
