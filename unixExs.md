@@ -22,6 +22,8 @@ Check the login and password details on studs-courseB-2 text file on the Ilias r
 ![Image of VSC](vsc-3.png)
 #### Fill in the login details as shown below (replace your choosen student ID)
 ![Image of VSC](vsc-4.png)
+#### Click connect and  fill in the password on the password prompt
+![Image of VSC](vsc-5.png)
 
 #### Please ask for assistance any time, you do not understand the exercises. 
 
