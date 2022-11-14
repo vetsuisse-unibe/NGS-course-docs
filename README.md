@@ -1,5 +1,5 @@
 # NGS-course-docs
-This repository  contains notes, slides and exercises used for the NGS course 2019
+This repository  contains notes, slides and exercises used for the NGS course 2022
 
 **Day 1** :
 - [Unix Exercises](unixExs) - [Unix Intro notes](Unix-Shell-intro)
