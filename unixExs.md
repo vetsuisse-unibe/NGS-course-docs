@@ -13,25 +13,13 @@ If you are connected to the eduroam network then you don't need to connect to VP
 One you are connected to the VPN server or eduroam network, ssh into server in the follow manner using Visual studio code remote ssh extension.  
 Check the login and password details on studs-courseB-2 text file on the Ilias respository. 
 
-### Mac OS X users 
-Locate your Terminal.app and type the following *ssh command*
-```
-ssh login@binfservms01.unibe.ch
-```
-When it prompts for password please enter the corresponding password also from the LoginInfo document.
-### Windows 10 Users 
-Locate Ubuntu and type the following *ssh command*
-```
-ssh login@binfservms01.unibe.ch
-```
-When it prompts for password please enter the corresponding password also from the LoginInfo document.
-
-### Older Windows Users 
-Locate Mobaxterm and type the following *ssh command* 
-```
-ssh login@binfservms01.unibe.ch
-```
-When it prompts for password please enter the corresponding password also from the LoginInfo document.
+1. Start your visual studio code application
+2. Click on the icon (shown below) at the left corner of the window
+![Image of VSC](vsc-1.png)
+3. It opens a sub-window as shown below. Click the *Connect to Host* 
+![Image of VSC](vsc-2.png)
+4. Now its shows a sub-window as below 
+![Image of VSC](vsc-3.png)
 
 #### Please ask for assistance any time, you do not understand the exercises. 
 
