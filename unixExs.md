@@ -28,9 +28,9 @@ Check the login and password details on studs-courseB-2 text file on the Ilias r
 ![Image of VSC-6](vsc-6.png)
 
 
-#### Please ask for assistance any time, you do not understand the exercises. 
+#### Please ask for assistance any time, you do not understand the exercises.
 
-Commands in grey blocks are to be typed in the Unix command shell or command line prompt.  
+Commands in grey blocks are to be typed in the Unix command shell or command line prompt.(see the window above) 
 
 Words in italics need to be replaced by the proper parameters (for example, your file name). Or any word between two angle brackets like <filename> should be replaced with strings or words of your choice.
 
