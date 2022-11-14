@@ -24,6 +24,8 @@ Check the login and password details on studs-courseB-2 text file on the Ilias r
 ![Image of VSC-4](vsc-4.png)
 6. Click connect and  fill in the password on the password prompt
 ![Image of VSC-5](vsc-5.png)
+7. Click on the Terminal menu for a new terminal and you should see a window like below.
+![Image of VSC-6](vsc-6.png)
 
 
 #### Please ask for assistance any time, you do not understand the exercises. 
