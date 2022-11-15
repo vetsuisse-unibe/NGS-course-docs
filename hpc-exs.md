@@ -32,6 +32,20 @@ Questions:
 1. What is the job ID of the submitted script.
 2. Where is the output of the job ? 
 
+###### Now repeat the exercise with visual studio code. 
+1. open a New text file with visual studio code
+2. add the following lines in the text file 
+```
+#!/bin/bash
+hostname
+date
+sleep 20
+date
+```
+3. save and replace the test.sh file in testDir as shown below (replace the student61 with your login)
+![Image of VSC-6](vsc-6.png)
+
+
 ##### Exercise 2
 
 ```
