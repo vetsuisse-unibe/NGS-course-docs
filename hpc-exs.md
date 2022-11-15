@@ -32,8 +32,8 @@ Questions:
 1. What is the job ID of the submitted script.
 2. Where is the output of the job ? 
 
-###### Now repeat the exercise with visual studio code. 
-1. open a New text file with visual studio code
+###### Now repeat the exercise with visual studio code (VSC). 
+1. open a New text file with VSC
 2. add the following lines in the text file 
 ```
 #!/bin/bash
@@ -44,16 +44,20 @@ date
 ```
 3. save and replace the test.sh file in testDir as shown below (replace the student61 with your login)
 ![Image of VSC-6](vsc-6.png)
-
+4. Type the following commands in the terminal. 
+```
+sbatch -p courseb test.sh 
+squeue | grep test
+```
 
 ##### Exercise 2
 
-```
-cat >test2.sh 
+open a text file in VSC, add the below lines and save the file test2.sh
+``` 
 #!/bin/bash
 for i in {1..1000}; do echo $RANDOM >>randomNumbers.txt; done
 sort -n randomNumbers.txt
-<CTRL-D>
+
 ```
 Submit the job using _sbatch_
 
