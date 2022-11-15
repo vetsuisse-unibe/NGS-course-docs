@@ -12,7 +12,7 @@ cat >test.sh
 #!/bin/bash
 hostname
 date
-sleep 20
+sleep 30
 date
 <CTRL-D>
 
