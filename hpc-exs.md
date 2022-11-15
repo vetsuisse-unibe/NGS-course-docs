@@ -71,9 +71,8 @@ Questions:
 ##### Exercise 3 
 
 A better approach is defining resource allocation inside the shell script. This way you will not need to remember for the next time and simply re-run the analysis if required.
-
+open a text file in VSC, add the below lines and save as test3.sh
 ```
-cat >test3.sh
 #!/bin/bash
 #SBATCH -p courseb # partition (queue)
 #SBATCH -N 1 # number of nodes
@@ -86,7 +85,7 @@ cat >test3.sh
 
 for i in {1..100}; do echo $RANDOM >> randomIntegers.txt; done
 sort -n randomIntegers.txt
-<CTRL-D>
+
 ```
 submit the job using _sbatch_
 
