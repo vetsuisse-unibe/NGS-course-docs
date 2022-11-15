@@ -23,7 +23,7 @@ ls -l test.sh
 # to Slurm to run on computing nodes. 
 ./test.sh 
 
-sbatch -p pcourseb test.sh 
+sbatch -p courseb test.sh 
 squeue | grep test 
 
 ```
@@ -44,7 +44,7 @@ sort -n randomNumbers.txt
 Submit the job using _sbatch_
 
 ```
-sbatch -p pcourseb -N 1 -n 1 --mem 100 -t 2:00:00 -o test2.out -e test2.err test2.sh
+sbatch -p courseb -N 1 -n 1 --mem 100 -t 2:00:00 -o test2.out -e test2.err test2.sh
 ```
 Questions: 
 1. How many files has the job submission created ? 
@@ -57,7 +57,7 @@ A better approach is defining resource allocation inside the shell script. This 
 ```
 cat >test3.sh
 #!/bin/bash
-#SBATCH -p pcourseb # partition (queue)
+#SBATCH -p courseb # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH -n 1 # number of cores
 #SBATCH --mem 100 # memory pool for all cores
