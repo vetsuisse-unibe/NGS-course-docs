@@ -1,5 +1,5 @@
 ###  Map Data 
-Create a folder calling variantCalling and coping the reference file 
+Create a folder calling variantCalling on the binformatics server and coping the reference file 
 
 ```
 mkdir variantCalling
@@ -8,11 +8,11 @@ mkdir refIdx
 cd refIdx
 cp /data/courses/courseB/variantCalling/chr14.fa .
 ```
-We will use only chr14 of the dog genome as the reference just for short computing run times,that way you finish the exercises faster 
+We will use only chr14 of the dog genome as the reference just for short computing run times,so you can finish the exercises faster 
 
 #### Index the reference 
 We will use bwa mem for mapping the reads to the reference genome. For this we index the reference genome first. 
-if load the bwa module is loaded by typing bwa on the commmand line if you get the help for bwa. The options for bwa are also available at http://bio-bwa.sourceforge.net/bwa.shtml
+Load the bwa module first and by typing bwa on the commmand line you get the help for bwa. The options for bwa are also available at http://bio-bwa.sourceforge.net/bwa.shtml
 
 ```
 module add UHTS/Aligner/bwa/0.7.17;
