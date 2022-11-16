@@ -61,7 +61,7 @@ Please exit the interactive session before launching the job. Meaning type exit 
 ```
 exit
 ```
-```
+
 ##### Now create the following script with VSC and save as 'run_fastqc.sh'cat 
 ``` 
 #!/bin/bash
