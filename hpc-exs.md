@@ -43,7 +43,7 @@ sleep 20
 date
 ```
 3. save and replace the test.sh file in testDir as shown below (replace the student61 with your login)
-![Image of VSC-6](vsc-6.png)
+![Image of VSC-6](vsc-7.png)
 4. Type the following commands in the terminal. 
 ```
 sbatch -p courseb test.sh 
