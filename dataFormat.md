@@ -36,7 +36,7 @@ We use the slurm cluster managment program to run the fastqc job.
 
 First use the _srun_ command to request for resources like CPU and RAM to run the program 
 ```
-srun --partition=pcourseb --cpus-per-task 4 --time=1:00:00 --mem=1G --pty /bin/bash
+srun --partition=courseb --cpus-per-task 4 --time=1:00:00 --mem=1G --pty /bin/bash
 ```
 Questions: 
 Do you understand all the arguments passed to _srun_ ? 
@@ -56,11 +56,14 @@ Once you are logged into one of the servers, load the software module in the fol
 
 #### Job Script 
 The above job can also be launched using bash script on the head node. In this case _SLURM_ looks for node with required resources and launches it on the cluster. 
-Please exit the interactive session before launching the job
+Please exit the interactive session before launching the job. Meaning type exit on the node your are in and get back to the master node.
 
 ```
 exit
-cat >run_fastqc.sh 
+```
+```
+##### Now create the following script with VSC and save as 'run_fastqc.sh'cat 
+``` 
 #!/bin/bash
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
@@ -68,11 +71,11 @@ cat >run_fastqc.sh
 #SBATCH --error=fastqc.err
 #SBATCH --job-name=fastqc
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourseb
+#SBATCH --partition=courseb
 
 module add UHTS/Quality_control/fastqc/0.11.5;
 fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4 
-<CTRL-D>
+
 ```
 Sumbit the job to the cluster 
 
@@ -86,7 +89,7 @@ It should take ~5 mins for the job to finish.
 
 #### zip files 
 
-First lets create a new directory to store the zip files we will be downloading. Create a new folder called fastqc_html in your home directory on mac. 
+First lets create a new directory to store the zip files we will be downloading from the Bioinformatics server. Create a new folder called fastqc_html in your home directory on mac. 
 
 ```
 mkdir fastqc_html 
@@ -95,8 +98,8 @@ cd fastqc_html
 Windows users create a folder on your local PC using the same names.
 Please downlooad the zip files from the following links to fastqc_html folder. 
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/AEWDWjFP4KXXw68
-https://cloud.bioinformatics.unibe.ch/index.php/s/EWttnZDeFwpaNG3
+https://cloud.bioinformatics.unibe.ch/index.php/s/WCdrD7iqfosSS2X
+https://cloud.bioinformatics.unibe.ch/index.php/s/9AEi6BjS8p9xkJq
 ```
 
 Now from the fastqc_html directory:
@@ -114,10 +117,9 @@ Answer the following Questions:
 Several tools exist that can remove the adapters and filter low quality base. Examples include trimmomatic,fastx cutadapt, sickle etc. Here we will use fastp to remove the adapters and low quality bases. The fastp manual is available here 
 https://github.com/OpenGene/fastp
 
-Create the bash script in dataPreprocess dir to run fastp with the fastq files in the following manner 
+Create the bash script in VSC and save it in the dataPreprocess dir to run fastp with the fastq files in the following manner 
 
-```
-cat >run_fastp.sh 
+``` 
 #!/bin/bash
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
@@ -125,7 +127,7 @@ cat >run_fastp.sh
 #SBATCH --error=qual.err
 #SBATCH --job-name=fastp
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourseb
+#SBATCH --partition=courseb
 module add UHTS/Quality_control/fastp/0.12.5;
 
 fastp -w 4 -q 15 -z 5 -l 50  -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
@@ -144,8 +146,8 @@ The best is to run the fastp algorithm using a job script. This way you are reco
 - Now run fastqc on the cleaned fastq files. 
 - Similar to the previous done exercise download the *zip files from the links below to a local directory, unzip and view the fastqc_report.html file for the results
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/Ji6HedpQH7jmrQp
-https://cloud.bioinformatics.unibe.ch/index.php/s/wGtR2kbkexH7LMF
+https://cloud.bioinformatics.unibe.ch/index.php/s/9AEi6BjS8p9xkJq
+https://cloud.bioinformatics.unibe.ch/index.php/s/9AEi6BjS8p9xkJq
 ```
 - Record the changes you see in the cleaned and trimmed reads
 
