@@ -133,10 +133,10 @@ In order to see the mapping in an IGV browser we need  the bam file  and its ind
 Create a directory called _bamFiles_ and download the bam files and index files to this directory from the below links: 
 
 ```
-https://campuscloud.unibe.ch/filr/public-link/file-download/02dc80547592895a0175bc8297af5841/40212/7031014743684138968/BT012.aln1.sorted.bam
-https://campuscloud.unibe.ch/filr/public-link/file-download/02dc80547592895a0175bc82fafd5845/40213/1292048940422597137/BT012.aln1.sorted.bam.bai
-https://campuscloud.unibe.ch/filr/public-link/file-download/02dc80547592895a0175bc636ad457fa/40214/-4399397938588252939/BT134.aln1.sorted.bam
-https://campuscloud.unibe.ch/filr/public-link/file-download/02dc80547592895a0175bc64be1957ff/40215/-4936983610062738599/BT134.aln1.sorted.bam.bai
+https://cloud.bioinformatics.unibe.ch/index.php/s/3dywn3MEConn39n
+https://cloud.bioinformatics.unibe.ch/index.php/s/GiL2RPw5xpnZJkS
+https://cloud.bioinformatics.unibe.ch/index.php/s/toAfKKEDfR2jw4Y
+https://cloud.bioinformatics.unibe.ch/index.php/s/Zsog9Xtbi9DxFyD
 ```
 
 
