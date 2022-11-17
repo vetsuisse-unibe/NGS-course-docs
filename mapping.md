@@ -30,7 +30,7 @@ create a bash script for indexing the genome
 #SBATCH --time=1:00:00
 #SBATCH --mem=5G
 #SBATCH --cpus-per-task=1
-#SBATCH -p pcourseb
+#SBATCH -p courseb
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
@@ -101,7 +101,7 @@ Repeat the mapping step with the second Bull Terrier sample BT012.
 #### Visualizing the mapping 
 
 Task : 
-- Login into binfservas35 using srun 
+- Login into binfservas19 using srun 
 
 Mapping can be visualized using several tools. We will use samtools tview and IGV browser in the exercise. 
 
