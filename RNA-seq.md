@@ -50,7 +50,7 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 #SBATCH --error=hisat2.err
 #SBATCH --job-name=hisat2
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=pcourseb
+#SBATCH --partition=courseb
 
 module add UHTS/Aligner/hisat/2.1.0;
 hisat2 -x /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
@@ -68,7 +68,7 @@ Write a job script to convert the sam to bam file using _samtools view_ and _sam
 #SBATCH --error=bam.err
 #SBATCH --job-name=view2bam
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=pcourseb
+#SBATCH --partition=courseb
 
 module add vital-it;
 module add UHTS/Analysis/samtools/1.8;
@@ -100,7 +100,7 @@ For this feature count exercise we have made the sorted bam files already availa
 #SBATCH --error=featureCounts.err
 #SBATCH --job-name=featureCounts
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=pcourseb
+#SBATCH --partition=courseb
 
 module add vital-it;
 module add UHTS/Analysis/subread/1.6.0;
@@ -130,17 +130,6 @@ We will use the count file to study differential expression of genes in the thre
 
 For convience we have produced the full feature count file for all chromosomes, for all the samples,  ready to use for differential expression with R. 
 
-Create a local directory as _diffExp_ and transfer the files to the directory using _scp_
-
-```
-scp student51@binfservms01.unibe.ch:/data/courses/courseB/RNA-seq/counts/breastCancer.counts.forDESeq.txt .
-```
-
-If you are not able to use scp. Create a local directory as _diffExp_ and  can download the count file from the following link to the _diffExp_ directory. 
-
-```
-https://campuscloud.unibe.ch/filr/public-link/file-download/02dc8052759dcb3e0175be7dd6c33bfb/40219/-283556994276692082/breastCancer.counts.forDESeq.txt
-```
 
 Open R studio and in the text editor panel add the following R commands and run the commands in the console window.
 The first two lines below are to install the DeSeq2 package. If don't have it already.
@@ -164,7 +153,7 @@ Note: the first command in R **setwd** should be given the full path to your _di
 
 ```
 setwd("diffExp")
-countData<-read.table('breastCancer.counts.forDESeq.txt', header=TRUE)
+countData<-read.table('https://campuscloud.unibe.ch/filr/public-link/file-download/02dc8052759dcb3e0175be7dd6c33bfb/40219/-283556994276692082/breastCancer.counts.forDESeq.txt', header=TRUE)
 rownames(countData)<-countData$Geneid
 countData<-countData[, -1]
 colnames(countData)<-sub(".*\\.bamfiles\\.([A-Za-z1-3]*)\\.coordSorted\\.bam", "\\1", colnames(countData))
