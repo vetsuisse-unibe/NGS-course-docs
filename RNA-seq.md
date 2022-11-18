@@ -22,7 +22,7 @@ Background:
 2. Map the reads to the human reference genome GRCh38 
 3. Count the number of reads overlapping annotated genes 
 4. Test for differential gene expression between tumor subtypes 
-5. Login to binfservms01 using putty
+
 
 In order reduce run times again we have subset of clean reads only for chr22 at _/data/courses/courseB/RNA-seq/reads_
 
