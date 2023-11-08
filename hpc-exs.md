@@ -114,4 +114,13 @@ date
 ```
 scancel <job_id> or scancel -u <studentid>
 ```
+##### Exercise 5
+The sacct command can tell you information about both running jobs and finished jobs. It communicates with SLURM’s database of job information and can tell you lots of useful statistics about your jobs, such as how much memory and CPU they used. When you run sacct without any arguments, it will display a summary of all completed jobs in the system. This summary may include information such as job IDs, user names, job status, start and end times, and other job-related details.
+One can use the -j/--jobs flag, where it takes the job ID as the input.
+Trying running sacct without parameters or with -j flag and answer the following questions:  
+1. How many Jobs completed 
+2. How much of memory did you request and how much was used ? Can we use this to reduce the amount of memory requested next time ? 
+
+
+
 We will continue with more SLURM jobs in the rest of our exercises. 
