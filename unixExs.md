@@ -11,7 +11,7 @@ If you are connected to the eduroam network then you don't need to connect to VP
 
 ### SSH into bionformatics server 
 One you are connected to the VPN server or eduroam network, ssh into server in the follow manner using Visual studio code remote ssh extension.  
-Check the login and password details on studs-courseB-2 text file on the Ilias respository. 
+Check the login and password details on studs-courseB text file on the Ilias respository. 
 
 1. Start your visual studio code application
 2.  Click on the icon (shown below) at the left corner of the window
