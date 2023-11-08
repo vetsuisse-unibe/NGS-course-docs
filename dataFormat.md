@@ -45,6 +45,7 @@ Do you understand all the arguments passed to _srun_ ?
 Once you are logged into one of the servers, load the software module in the following manner 
 
 ```
+ module add vital-it
  module add UHTS/Quality_control/fastqc/0.11.5;
  ```
 
@@ -73,6 +74,7 @@ exit
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=courseb
 
+module add vital-it
 module add UHTS/Quality_control/fastqc/0.11.5;
 fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4 
 
