@@ -77,7 +77,7 @@ open a text file in VSC, add the below lines and save as test3.sh
 #SBATCH -p courseb # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH -n 1 # number of cores
-#SBATCH --mem 100 # memory pool for all cores
+#SBATCH --mem 8G # memory pool for all cores
 #SBATCH -t 0-2:00 # time (D-HH:MM)
 #SBATCH -o test3.out # STDOUT
 #SBATCH -e test3.err # STDERR
@@ -92,5 +92,26 @@ submit the job using _sbatch_
 ```
 sbatch test3.sh 
 ```
+##### Exercise 4
+The scancel command can be used to cancel a job after its submitted. Lets go ahead and resubmit the following job. Wait for the  job to start running (status R), then cancel it prematurely using the scancel command.
 
+```
+#!/bin/bash
+#SBATCH -p courseb # partition (queue)
+#SBATCH -N 1 # number of nodes
+#SBATCH -n 1 # number of cores
+#SBATCH --mem 10G # memory pool for all cores
+#SBATCH -t 0-2:00 # time (D-HH:MM)
+#SBATCH -o test4.out # STDOUT
+#SBATCH -e test5.err # STDERR
+
+hostname
+date
+sleep 600
+date
+```
+
+```
+scancel <job_id> or scancel -u <studentid>
+```
 We will continue with more SLURM jobs in the rest of our exercises. 
