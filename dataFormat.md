@@ -132,7 +132,7 @@ Create the bash script in VSC and save it in the dataPreprocess dir to run fastp
 #SBATCH --partition=courseb
 module add UHTS/Quality_control/fastp/0.12.5;
 
-fastp -w 4 -q 15 -z 5 -l 50  -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
+fastp -w 4 -q 15 -z 5 -l 50  --detect_adapter_for_pe -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
 ```
 
 
@@ -141,6 +141,7 @@ The arguments passed to cut-adapt were based on the following:
 - Discard trimmed reads that are shorter than 50 bases after trimming (-l 50)
 - compression level for gzip output (-z 5)
 - set number of threads to 4 (-w 4) 
+--detect_adapter_for_pe For PE data, the adapter sequence auto-detection is disabled by default since the adapters can be trimmed by overlap analysis. However, you can specify --detect_adapter_for_pe to enable it.
 
 The best is to run the fastp algorithm using a job script. This way you are recording all the parameters and can be easily added to your methods in manuscripts for the cause reproducibility research. 
 
