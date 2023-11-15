@@ -100,8 +100,8 @@ cd fastqc_html
 Windows users create a folder on your local PC using the same names.
 Please downlooad the zip files from the following links to fastqc_html folder. 
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/WCdrD7iqfosSS2X
-https://cloud.bioinformatics.unibe.ch/index.php/s/9AEi6BjS8p9xkJq
+https://cloud.bioinformatics.unibe.ch/index.php/s/BoCK5wnig9Zq7aT
+https://cloud.bioinformatics.unibe.ch/index.php/s/BiqsiJRZWXAYMy8
 ```
 
 Now from the fastqc_html directory:
