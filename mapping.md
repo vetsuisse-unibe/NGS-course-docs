@@ -82,7 +82,7 @@ This involves a lot of reading and writing to the hard disk which is highly time
 #SBATCH --time=3:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=8
-#SBATCH -p pcourseb
+#SBATCH -p courseb
 
 module add vital-it;
 module add UHTS/Aligner/bwa/0.7.17;
