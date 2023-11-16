@@ -101,8 +101,10 @@ Repeat the mapping step with the second Bull Terrier sample BT012.
 #### Visualizing the mapping 
 
 Task : 
-- Login into binfservas19 using srun 
-
+-  using srun login into the computing node. Will log you into binfservas30 or binfservas31 as the partion courseb runs only on those nodes
+```
+srun --partition=courseb  --time=1:00:00 --mem=10G --pty /bin/bash
+```
 Mapping can be visualized using several tools. We will use samtools tview and IGV browser in the exercise. 
 
 ##### tview 
