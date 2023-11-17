@@ -135,7 +135,7 @@ Open R studio and in the text editor panel add the following R commands and run 
 The first two lines below are to install the DeSeq2 package. If don't have it already.
 
 ```
-if (!requireNamespace("BiocManager", quietly = TRUE))
+if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install("DESeq2")
