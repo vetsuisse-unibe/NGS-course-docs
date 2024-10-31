@@ -1,5 +1,5 @@
 ## Exercises 
-In this Practical we will login into the Bioinformatics server (binfservms01.unibe.ch) and do all the exercises on the server.  
+In this Practical we will login into the Bioinformatics server (login8.hpc.binf.unibe.ch) and do all the exercises on the server.  
 
 In order to login into the Bioinformatics cluser you need to be connected to unibe network via VPN or eduroam. 
 ### VPN 
@@ -10,15 +10,16 @@ Please login into the unibe VPN server using FortiConnect.
 If you are connected to the eduroam network then you don't need to connect to VPN server.  
 
 ### SSH into bionformatics server 
-One you are connected to the VPN server or eduroam network, ssh into server in the follow manner using Visual studio code remote ssh extension.  
-Check the login and password details on studs-courseB text file on the Ilias respository. 
+After connecting to either the VPN server or eduroam network, use Visual Studio Code's Remote SSH extension to access the server.
+
+Check the login and password details on students-passwords text file on the Ilias respository (https://ilias.unibe.ch/goto_ilias3_unibe_file_3222705_download.html). 
 
 1. Start your visual studio code application
 2.  Click on the icon (shown below) at the left corner of the window
 ![Image of VSC](vsc-1.png)
 3. It opens a sub-window as shown below. Click the Connect to Host 
 ![Image of VSC-2](vsc-2.png)
-4. Now its shows a sub-window as below 
+4. Now its shows a sub-window as below. Click "Add New SSH Host"
 ![Image of VSC-3](vsc-3.png)
 5. Fill in the login details as shown below (replace your choosen student ID)
 ![Image of VSC-4](vsc-4.png)
@@ -32,7 +33,7 @@ Check the login and password details on studs-courseB text file on the Ilias res
 
 Commands in grey blocks are to be typed in the Unix command shell or command line prompt.(see the window above) 
 
-Words in italics need to be replaced by the proper parameters (for example, your file name). Or any word between two angle brackets like <filename> should be replaced with strings or words of your choice.
+Words in italics need to be replaced by the proper parameters (for example, your file name). *Or any word between two angle brackets like \<filename\> should be replaced with strings or words of your choice.*
 
 ### Try some basic unix commands
 *Display user name*
