@@ -38,6 +38,7 @@ mkdir scripts
 cd scripts
 ```
 Create the test script
+```
 cat >test.sh <<EOL
 #!/bin/bash
 hostname
@@ -47,17 +48,20 @@ date
 EOL
 ```
 Make the script executable
+
 ```
 ls -l test.sh 
 chmod +x test.sh 
 ls -l test.sh 
 ```
 Add and commit the script
+
 ```
 git add test.sh
 git commit -m "Add initial test script"
 ```
 Run locally (for demo purposes only. Real work should be submitted to Slurm to run on computing nodes.)
+
 ``` 
 ./test.sh 
 ```
@@ -196,10 +200,11 @@ Trying running sacct without parameters or with -j flag and answer the following
 1. How many Jobs completed 
 2. How much of memory did you request and how much was used ? Can we use this to reduce the amount of memory requested next time ? 
 3. Review the Git log - how many commits have you made ? 
+
 ```
 git log --oneline
 ```
-####Best Practices
+#####Best Practices
 
 1. Always commit your scripts before running them
 2. Use meaningful commit messages
