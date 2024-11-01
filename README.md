@@ -4,7 +4,7 @@ This repository  contains notes, slides and exercises used for the NGS course 20
 **Day 1** :
 - [Unix Exercises](unixExs) - [Unix Intro notes](Unix-Shell-intro)
 - [HPC cluster Exercises](hpc-exs)
-- [Publishing Your HPC Exercises to GitHub] (publish.md)
+- [Publishing Your HPC Exercises to GitHub](publish.md)
 
 **Day 2**
 - [NGS data format exercise](dataFormat)
