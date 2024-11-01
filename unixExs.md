@@ -280,10 +280,10 @@ tail -n +3 assembly_summary_refseq.txt | cut -f25 | sort | uniq -c
 - uniq -c: Counts occurrences of each unique value in the 25th column
 
 *So how many mammalian genomes are available ?*
-Now use cut and pipe symbol to find the number of mammalian genomes available at NCBI. (Hint: check column 6) 
+Now use cut and pipe symbol to find the number of mammalian genomes available at NCBI. (Hint: check column 25 for vertebrate_mammalian) 
 cut can be used to select more columns 
 ```
-cut -f 1,6,8 eukaryotes.txt |less
+cut -f 8,25,28 assembly_summary_refseq.txt |less
 ```
 which Mammalian genome has the highest GC content 
 ```
