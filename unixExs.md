@@ -256,7 +256,7 @@ awk -F'\t' 'NR == 2 || ($1 == "Canis lupus familiaris" && $6 == "9615")' assembl
 
 ```
 - NR == 2: NR is the current line number. NR == 2 allows the header line (second line) to be printed.
-- ||: Logical OR, so it matches either the header line or lines that meet the specified condition.
+- '||': Logical OR, so it matches either the header line or lines that meet the specified condition.
 
 Lets do some statistics on available Genomes 
 How many Animal and plant genomes are available 
