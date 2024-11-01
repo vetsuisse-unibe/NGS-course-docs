@@ -38,6 +38,7 @@ mkdir scripts
 cd scripts
 ```
 Create the test script
+
 ```
 cat >test.sh <<EOL
 #!/bin/bash
@@ -204,7 +205,7 @@ Trying running sacct without parameters or with -j flag and answer the following
 ```
 git log --oneline
 ```
-#####Best Practices
+##### Best Practices
 
 1. Always commit your scripts before running them
 2. Use meaningful commit messages
