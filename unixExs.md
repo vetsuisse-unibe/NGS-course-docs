@@ -226,48 +226,60 @@ ls test[!3].*
 mkdir GenomeStats 
 cd GenomeStats
 ```
-Download the text file showing the submitted Genomes for different Eukaryote species at NCBI https://www.ncbi.nlm.nih.gov/genome/browse/
+Download the text file showing the available refseq genomes for different species at NCBI https://www.ncbi.nlm.nih.gov/genome/browse/
+RefSeq Genomes on NCBI are high-quality reference genome sequences that serve as standard representations for the genetics of specific organisms
 ```
-wget "ftp://ftp.ncbi.nlm.nih.gov/genomes/GENOME_REPORTS/eukaryotes.txt"
+wget https://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt
 ```
 Use less to have a quick view of the file 
 ```
-less eukaryotes.txt
+less assembly_summary_refseq.txt
 ```
 It is a tab delimited text file with several columns. 
-The first line shows the different column headers
+The second line shows the different column headers
 ```
-head -n 1 eukaryotes.txt
+head -n 2 assembly_summary_refseq.txt | tail -n 1
 ```
 For further ease of reading the column headers. (Do you understand what we are doing here ?)
 ```
-head -n 1 eukaryotes.txt | tr '\t' '\n' |less
+head -n 2 assembly_summary_refseq.txt | tail -n 1 | tr '\t' '\n' |less
+head -n 2 assembly_summary_refseq.txt | tail -n 1 | tr '\t' '\n' |nl |less
 ```
-We want to see how many cow assemblies have been submitted 
+We want to see how many dog assemblies have been submitted 
 ```
-grep "Bos taurus" eukaryotes.txt
+awk -F'\t' '$8 == "Canis lupus familiaris" && $6 == "9615"' assembly_summary_refseq.txt
 ```
-You see the occurence of the string in several colums. We want to the string only in the Organism column. To do this we can the caret symbol ^ which stands for beginning of  a line 
-```
-grep "^Bos taurus" eukaryotes.txt | wc -l 
-grep -c "^Bos taurus" eukaryotes.txt
-```
+
 Want to keep the header line ? 
 ```
-grep -E '^#|^Bos taurus' eukaryotes.txt
+awk -F'\t' 'NR == 2 || ($1 == "Canis lupus familiaris" && $6 == "9615")' assembly_summary_refseq.txt
+
 ```
+- NR == 2: NR is the current line number. NR == 2 allows the header line (second line) to be printed.
+- ||: Logical OR, so it matches either the header line or lines that meet the specified condition.
+
 Lets do some statistics on available Genomes 
 How many Animal and plant genomes are available 
 cut command in unix can be used to select columns from tab de-limited files 
 Only the column Group can selected using cut 
 ```
-cut -f5 eukaryotes.txt | less 
+cut -f25 assembly_summary_refseq.txt | less
 ```
-Now the pipes can be used to see the number of animal plant genomes available at NCBI 
+Now the pipes can be used to see the number of different refseq genomes available at NCBI 
 ```
-cut -f 5 eukaryotes.txt |sort | uniq -c
+cut -f25 assembly_summary_refseq.txt | sort | uniq -c
+
 ```
-So how many animal and plant genomes 
+We can skip the header line and before counting the genome groups in the column 25
+```
+tail -n +3 assembly_summary_refseq.txt | cut -f25 | sort | uniq -c
+```
+- tail -n +3 assembly_summary_refseq.txt: Outputs the file starting from the third line, effectively skipping the first two lines.
+- cut -f25: Extracts the 25th column from the remaining lines.
+- sort: Sorts the output to prepare for counting unique values.
+- uniq -c: Counts occurrences of each unique value in the 25th column
+
+*So how many mammalian genomes are available ?*
 Now use cut and pipe symbol to find the number of mammalian genomes available at NCBI. (Hint: check column 6) 
 cut can be used to select more columns 
 ```
@@ -275,15 +287,27 @@ cut -f 1,6,8 eukaryotes.txt |less
 ```
 which Mammalian genome has the highest GC content 
 ```
-cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 |less
-cut -f 1,6,8 eukaryotes.txt | grep "Mammals" | sort -t$'\t' -nrk3 | head -n 1
+cut -f 8,25,28 assembly_summary_refseq.txt | grep vertebrate_mammalian |sort -t$'\t' -nrk3 | less 
+cut -f 8,25,28 assembly_summary_refseq.txt | grep vertebrate_mammalian |sort -t$'\t' -nrk3 | head -n 1
 ```
-which Mammalian genome has the least GC content 
+- sort: Sorts the filtered results.
+- -t$'\t': Sets the field delimiter as a tab ($'\t' is a literal tab in Unix shell).
+- -nrk3: Specifies sorting by the 3rd column in numerical order (-n), in reverse order (-r), based on column 3 (-k3).
+- Result: Sorts entries in descending order based on GC% values.
+
+* Which Mammalian genome has the least GC content ? * 
 
 # Question of the day
-Is the statement "a genome-wide GC content of ≈30% is one of the lowest observed in any animal genome"  True ? 
-
-If the find the answer for this you just proved or disproved an accepted hypothesis!
+Invertebrates generally have lower GC content compared to vertebrates.
+You can check if this is true in your dataset
+```
+awk -F'\t' '$25 ~ /vertebrate_/ { total++; if ($28+0 < 40) count++ } END { print (count/total)*100, count, total }' assembly_summary_refseq.txt
+awk -F'\t' '$25 ~ /invertebrate/ { total++; if ($28+0 < 40) count++ } END { print (count/total)*100, count, total }' assembly_summary_refseq.txt
+```
+- total++ If column 25 contains "vertebrate_" count total vertebrate genomes
+- $28+0 converts column 28 (GC%) to a number. 
+- count++ if GC content (column 28) is < 40% Count these low-GC genomes
+- Output shows three numbers:Percentage of vertebrate genomes with GC<40%, Count of low-GC genomes, Total vertebrate genomes
 
 # Sequence Content 
 Create a new directory and copy the chromosome  human chromosome 22 from here: /data/courses/courseB/UnixEx
