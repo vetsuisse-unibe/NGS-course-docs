@@ -79,7 +79,7 @@ Questions:
 2. Where is the output of the job ? 
 3. Check the Git status - are any new files created that aren't tracked?
 
-###### Create/modify test.sh in VSCode. 
+##### Create/modify test.sh in VSCode. 
 1. open a New text file with VSC
 2. add the following lines in the text file 
 ```
@@ -194,7 +194,7 @@ scancel <job_id>  # or scancel -u $USER
 
 ##### Exercise 5: Job Monitoring
 *Use sacct to analyze job performance*
-The sacct command can tell you information about both running jobs and finished jobs. It communicates with SLURM’s database of job information and can tell you lots of useful statistics about your jobs, such as how much memory and CPU they used. When you run sacct without any arguments, it will display a summary of all completed jobs in the system. This summary may include information such as job IDs, user names, job status, start and end times, and other job-related details.
+The sacct command can tell you information about both running jobs and finished jobs. It communicates with SLURM's database of job information and can tell you lots of useful statistics about your jobs, such as how much memory and CPU they used. When you run sacct without any arguments, it will display a summary of all completed jobs in the system. This summary may include information such as job IDs, user names, job status, start and end times, and other job-related details.
 One can use the -j/--jobs flag, where it takes the job ID as the input.
 
 Trying running sacct without parameters or with -j flag and answer the following questions:  
@@ -214,4 +214,4 @@ git log --oneline
 5. Document significant changes in commit messages
 
 
-We will continue with more SLURM jobs and track them with git in the rest of our exercises. 
+We will continue with more SLURM jobs and track them with git in the rest of our exercises.
