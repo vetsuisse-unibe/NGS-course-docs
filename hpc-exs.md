@@ -71,7 +71,7 @@ Run locally (for demo purposes only. Real work should be submitted to Slurm to r
 Submit to Slurm
 ```
 sbatch -p pcourseb test.sh 
-squeue | grep test 
+squeue -u $USER
 ```
 - sbatch is the SLURM command to submit jobs
 - -u $USER  is an environment variable in Unix/Linux systems that automatically contains the username of the currently logged-in user
