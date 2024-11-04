@@ -1,13 +1,11 @@
 # Publishing Bioinformatics Exercises to GitHub
 
 ## Overview
-This guide will help you publish your bioinformatics exercises to GitHub, starting with your HPC exercises and preparing for future work including mapping next-generation sequences and variant calling.
+This goal of the exercise is to publish your course exercises to GitHub, starting with your HPC exercises and preparing for future work including mapping next-generation sequences and variant calling.
 
 ## Prerequisites
 * Completed HPC cluster exercises with local Git repository
 * GitHub account (create one at github.com if needed)
-* SSH access to the HPC cluster
-* Visual Studio Code with Remote SSH extension
 
 ## Exercise 1: GitHub Setup
 
@@ -20,7 +18,8 @@ This guide will help you publish your bioinformatics exercises to GitHub, starti
 6. Don't initialize with README
 7. Copy the repository URL (HTTPS or SSH)
 
-### Configure Git on HPC Cluster
+### Configure Git on HPC Cluster (Bioinformatics server)
+Use remote SSH login and connect to the IBU cluster.
 ```bash
 # Set your GitHub username and email
 git config --global user.name "Your GitHub Username"
@@ -35,7 +34,7 @@ git config --global user.email "your.email@example.com"
 cd hpc-exercises
 
 # Add remote repository (replace with your URL)
-git remote add origin https://github.com/username/bioinformatics-exercises.git
+git remote add origin https://github.com/<username>/bioinformatics-exercises.git
 
 # Verify remote was added
 git remote -v
@@ -52,6 +51,7 @@ Create a new file called `README.md` in your repository root using Visual Studio
 This repository contains my work for the Bioinformatics course, including:
 
 - HPC cluster exercises
+- Quality control
 - Mapping next-generation sequences
 - Variant calling
 - [Additional topics to be added]
