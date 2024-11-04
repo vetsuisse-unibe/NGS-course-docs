@@ -79,7 +79,8 @@ squeue -u $USER
 Questions: 
 1. What is the job ID of the submitted script.
 2. Where is the output of the job ? 
-3. Check the Git status - are any new files created that aren't tracked?
+3. Check the Git status - are any new files created that aren't tracked? (use git status)
+4. What does the command git log --oneline do ? 
 
 ##### Create/modify test.sh in VSCode. 
 1. open a New text file with VSC
