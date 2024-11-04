@@ -13,10 +13,13 @@ Create and initialize the repository
 git init hpc-exercises
 cd hpc-exercises
 ```
-Create a .gitignore file for HPC-specific files
+Create a .gitignore file for HPC-specific files. Create the file in the following manner
 
 ```
 code .gitignore
+```
+This opens an empty file called .gitignore in the editor window of VSC. Now add the following lines and save the file.
+```
 *.out
 *.err
 *.txt
