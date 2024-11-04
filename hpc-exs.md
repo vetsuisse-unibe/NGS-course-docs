@@ -109,7 +109,8 @@ squeue  -u $USER
 
 #### Exercise 2: Random Number Generation
 
-Create a new script test2.sh with VSCode and track it with Git:
+Create a new script test2.sh with VSCode  with the following code and track it with git.
+
 ```bash
  #!/bin/bash
 for i in {1..1000}; do echo $RANDOM >>randomNumbers.txt; done
@@ -117,7 +118,7 @@ sort -n randomNumbers.txt
 ```
 *Track the new script*
 ```bash
-git add scripts/test2.sh
+git add test2.sh
 git commit -m "Add random number generation script"
 ```
 
@@ -129,12 +130,14 @@ sbatch -p pcourseb -N 1 -n 1 --mem 100 -t 2:00:00 -o test2.out -e test2.err test
 Questions: 
 1. How many files has the job submission created ? 
 2. What are the contents ? 
-3. Check git status - which files are untracked? Why?
+3. Check git ls-files to see files tracked - which files are untracked? Why?
 
 #### Exercise 3: Resource Allocation in Script
 
 A better approach is defining resource allocation inside the shell script. This way you will not need to remember for the next time and simply re-run the analysis if required.
+
 *Create a script with embedded SLURM parameters:*
+
 open a text file in VSC, add the below lines and save as test3.sh
 
 ```bash
@@ -152,7 +155,8 @@ for i in {1..100}; do echo $RANDOM >> randomIntegers.txt; done
 sort -n randomIntegers.txt
 
 ```
-Track the new script
+*Track the new script*
+
 ```bash
 git add scripts/test3.sh
 git commit -m "Add script with embedded SLURM parameters"
@@ -204,7 +208,7 @@ Trying running sacct without parameters or with -j flag and answer the following
 2. How much of memory did you request and how much was used ? Can we use this to reduce the amount of memory requested next time ? 
 3. Review the Git log - how many commits have you made ? 
 
-```bash
+```shell
 git log --oneline
 ```
 ##### Best Practices
