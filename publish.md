@@ -1,174 +1,183 @@
-# Publishing Your HPC Exercises on GitHub
+# Publishing Bioinformatics Exercises to GitHub
 
-## Lets first Create a GitHub Account (if you don't have one already)
+## Overview
+This guide will help you publish your bioinformatics exercises to GitHub, starting with your HPC exercises and preparing for future work including mapping next-generation sequences and variant calling.
 
-1. Visit [github.com](https://github.com)
-2. Click "Sign up" in the top right corner
-3. Fill in your details:
-   - Enter your email address
-   - Create a password
-   - Choose a username (this will be your GitHub identity)
-4. Verify your email address when prompted
-5. Choose the free plan (GitHub Free)
+## Prerequisites
+* Completed HPC cluster exercises with local Git repository
+* GitHub account (create one at github.com if needed)
+* SSH access to the HPC cluster
+* Visual Studio Code with Remote SSH extension
 
-## Setting Up Git Locally
+## Exercise 1: GitHub Setup
 
-1. Install Git if you haven't already:
-   ```bash
-   # For Ubuntu/Debian
-   sudo apt-get install git
+### Create a New GitHub Repository
+1. Visit github.com and log in
+2. Click the '+' icon in the top right
+3. Select 'New repository'
+4. Name it 'bioinformatics-exercises'
+5. Leave it public
+6. Don't initialize with README
+7. Copy the repository URL (HTTPS or SSH)
 
-   # For CentOS/RHEL
-   sudo yum install git
-   ```
-
-2. Configure Git with your identity:
-   ```bash
-   git config --global user.name "Your Name"
-   git config --global user.email "your_email@example.com"
-   ```
-
-## Setting Up Authentication
-
-Choose either SSH or HTTPS authentication:
-
-### Option 1: SSH Authentication (Recommended)
-
-1. Generate an SSH key:
-   ```bash
-   ssh-keygen -t ed25519 -C "your_email@example.com"
-   # Press Enter to accept default location
-   # Enter a secure passphrase (optional)
-   ```
-
-2. Add the SSH key to your GitHub account:
-   ```bash
-   # Display your public key
-   cat ~/.ssh/id_ed25519.pub
-   ```
-
-3. Copy the displayed key and add it to GitHub:
-   - Go to GitHub → Settings → SSH and GPG keys
-   - Click "New SSH key"
-   - Paste your key and give it a title
-   - Click "Add SSH key"
-
-### Option 2: Personal Access Token (for HTTPS)
-
-1. Generate a token on GitHub:
-   - Go to GitHub → Settings → Developer Settings → Personal Access Tokens
-   - Click "Generate new token (classic)"
-   - Select needed permissions (at minimum: 'repo' access)
-   - Copy the generated token (you won't see it again!)
-
-2. Store the token securely for future use
-
-## Creating a New Repository on GitHub
-
-1. Click the "+" in the top right corner of GitHub
-2. Select "New repository"
-3. Fill in repository details:
-   - Name: "hpc-exercises" (or your preferred name)
-   - Description: "HPC exercises using SLURM"
-   - Keep it Public
-   - **Do not** initialize with README, .gitignore, or license
-4. Click "Create repository"
-
-## Pushing Your Local Repository
-
-1. Make sure you're in your exercise directory:
-   ```bash
-   cd hpc-exercises
-   ```
-
-2. If you haven't initialized Git yet:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   ```
-
-3. Connect to GitHub:
-
-   For SSH:
-   ```bash
-   git remote add origin git@github.com:YOUR-USERNAME/hpc-exercises.git
-   ```
-
-   For HTTPS:
-   ```bash
-   git remote add origin https://github.com/YOUR-USERNAME/hpc-exercises.git
-   ```
-
-4. Push your code:
-   ```bash
-   git push -u origin main  # or 'master' if that's your branch name
-   ```
-
-## Verifying Your Repository
-
-1. Visit `https://github.com/YOUR-USERNAME/hpc-exercises`
-2. Check that you see:
-   - All your exercise files
-   - Your commit history
-   - The .gitignore file
-   - All tracked scripts
-
-## Troubleshooting Common Issues
-
-### Problem: "Remote origin already exists"
+### Configure Git on HPC Cluster
 ```bash
-# Remove existing remote
-git remote remove origin
-# Add new remote
-git remote add origin git@github.com:YOUR-USERNAME/hpc-exercises.git
+# Set your GitHub username and email
+git config --global user.name "Your GitHub Username"
+git config --global user.email "your.email@example.com"
 ```
 
-### Problem: "Failed to push some refs"
+## Exercise 2: Connect Local to Remote
+
+### Link Your HPC Repository
 ```bash
-# Pull first
-git pull --allow-unrelated-histories origin main
-# Resolve any conflicts
+# Navigate to your existing repository
+cd hpc-exercises
+
+# Add remote repository (replace with your URL)
+git remote add origin https://github.com/username/bioinformatics-exercises.git
+
+# Verify remote was added
+git remote -v
+```
+
+## Exercise 3: Document Your Repository
+
+### Create README.md
+Create a new file called `README.md` in your repository root using Visual Studio Code with the following content:
+
+```markdown
+# Bioinformatics Exercises
+
+This repository contains my work for the Bioinformatics course, including:
+
+- HPC cluster exercises
+- Mapping next-generation sequences
+- Variant calling
+- [Additional topics to be added]
+
+## Repository Structure
+
+- `hpc-exercises/`: Contains HPC cluster practice exercises
+  - `scripts/`: Shell scripts for various HPC tasks
+- [Additional directories will be added as we progress]
+
+## Environment
+- All exercises are performed on the Bioinformatics server (login8.hpc.binf.unibe.ch)
+- Scripts are developed and tested using SLURM job scheduler
+```
+
+### Add Documentation to Repository
+```bash
+git add README.md
+git commit -m "Add repository documentation"
+```
+
+## Exercise 4: Publishing Your Work
+
+### Push to GitHub
+```bash
+# For main branch
 git push -u origin main
+
+# If your branch is named 'master'
+git push -u origin master
 ```
 
-### Problem: Authentication Failed
-- Verify your SSH key is added to GitHub (for SSH)
-- Check your personal access token is correct (for HTTPS)
-- Ensure you're using the correct remote URL format
+### Verify Publication
+1. Visit your repository URL on GitHub
+2. Verify all files are present
+3. Check that .gitignore is working (no output files visible)
+4. Review README formatting
+
+## Exercise 5: Ongoing Workflow
+
+### Before Starting New Work
+```bash
+# Get latest changes
+git pull origin main
+```
+
+### While Working on New Exercises
+```bash
+# Create directory for next exercise set
+mkdir mapping-exercises
+cd mapping-exercises
+
+# After creating/editing files
+git add .
+git commit -m "Add mapping exercise solutions"
+git push origin main
+```
 
 ## Best Practices
 
-1. Keep repository clean:
-   - Use .gitignore for output files
-   - Don't commit sensitive data
-   - Don't commit large files
+### Commit Messages
+* Start with a verb (Add, Update, Fix, etc.)
+* Keep first line under 50 characters
+* Examples:
+  * "Add variant calling scripts"
+  * "Update mapping parameters for better accuracy"
+  * "Fix memory allocation in SLURM script"
 
-2. Good commit habits:
-   - Write clear commit messages
-   - Commit related changes together
-   - Commit regularly
+### Repository Organization
+* Maintain separate directories for different exercise types
+* Use consistent naming conventions
+* Keep README.md updated
+* Example structure:
+  ```
+  bioinformatics-exercises/
+  ├── README.md
+  ├── hpc-exercises/
+  │   ├── scripts/
+  │   └── .gitignore
+  ├── mapping-exercises/
+  └── variant-calling/
+  ```
 
-3. Documentation:
-   - Consider adding a README.md
-   - Document special requirements
-   - Include setup instructions
+### Privacy and Security
+* Never commit sensitive data or credentials
+* Review files before committing
+* Maintain an appropriate .gitignore file
 
-## Maintaining Your Repository
+## Troubleshooting Guide
 
-After initial setup, use these commands for regular updates:
+### Push Rejected
+If your push is rejected due to remote changes:
 ```bash
-# Add new or modified files
-git add .
-
-# Commit changes
-git commit -m "Description of changes"
-
-# Push to GitHub
-git push
+git pull origin main
+git push origin main
 ```
 
----
-**Note:** Always replace `YOUR-USERNAME` with your actual GitHub username in commands.
+### Authentication Issues
+Generate and use SSH keys:
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -C "your.email@example.com"
 
-**Important:** Never commit sensitive information like passwords, private keys, or personal data to your repository.
+# Display public key to copy to GitHub
+cat ~/.ssh/id_ed25519.pub
+```
+
+### Common Issues
+1. **Untracked Files Appearing in Git Status**
+   * Check .gitignore file
+   * Use `git status` to verify
+   
+2. **Permission Denied**
+   * Verify GitHub credentials
+   * Check repository permissions
+
+## Assessment Questions
+
+1. What command shows configured remote repositories?
+2. Why should you pull before starting new work?
+3. How do you verify .gitignore is working?
+4. What steps should you take if sensitive information is committed?
+5. What is the recommended frequency for pushing changes?
+
+## Additional Resources
+
+* [GitHub Documentation](https://docs.github.com)
+* [Pro Git Book](https://git-scm.com/book/en/v2)
+* [GitHub Guides](https://guides.github.com)
