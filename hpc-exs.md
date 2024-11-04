@@ -9,13 +9,13 @@ Open the Terminal and start the exercises.
 
 Before starting the exercises, we'll set up a Git repository to track our work:
 *Create and initialize the repository*
-```bash
+```shell
 git init hpc-exercises
 cd hpc-exercises
 ```
 Create a .gitignore file for HPC-specific files. Type the following at the prompt
 
-```bash
+```shell
 code .gitignore
 ```
 This opens an empty file called .gitignore in the editor window of VSC. Now add the following lines and save the file.
@@ -26,7 +26,7 @@ This opens an empty file called .gitignore in the editor window of VSC. Now add 
 slurm-*.out
 ```
 Add and commit .gitignore
-```bash
+```shell
 git add .gitignore
 git commit -m "Initial commit: Add .gitignore for HPC output files"
 ```
