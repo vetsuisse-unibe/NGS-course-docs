@@ -1,6 +1,6 @@
 # Publishing Your HPC Exercises on GitHub
 
-## Creating a GitHub Account
+## Lets first Create a GitHub Account (if you don't have one already)
 
 1. Visit [github.com](https://github.com)
 2. Click "Sign up" in the top right corner
