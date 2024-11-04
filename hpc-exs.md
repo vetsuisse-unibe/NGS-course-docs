@@ -1,4 +1,4 @@
-### HPC cluster exercises 
+# HPC cluster exercises 
 
 #### Login into the Bioinformatics server (login8.hpc.binf.unibe.ch)
 Like yesterday use the remote login extension on Visual studio code and login into the bioinformatics server with your chosen username and password. 
@@ -8,14 +8,14 @@ Open the Terminal and start the exercises.
 #### Initial Setup
 
 Before starting the exercises, we'll set up a Git repository to track our work:
-#####Create and initialize the repository
-```
+*Create and initialize the repository*
+```bash
 git init hpc-exercises
 cd hpc-exercises
 ```
 Create a .gitignore file for HPC-specific files. Type the following at the prompt
 
-```
+```bash
 code .gitignore
 ```
 This opens an empty file called .gitignore in the editor window of VSC. Now add the following lines and save the file.
@@ -26,22 +26,22 @@ This opens an empty file called .gitignore in the editor window of VSC. Now add 
 slurm-*.out
 ```
 Add and commit .gitignore
-```
+```bash
 git add .gitignore
 git commit -m "Initial commit: Add .gitignore for HPC output files"
 ```
 
-##### Exercise 1 
+#### Exercise 1 
 In this exercises we will create a small bash script, run it locally, then submit it as a job to Slurm using sbatch, and compare the results. We will use the cat unix command to create the script  
 
-Create a scripts directory and track it with Git
-```
+*Create a scripts directory and track it with Git*
+```bash
 mkdir scripts 
 cd scripts
 ```
-Create the test script
+*Create the test script*
 
-```
+```bash
 cat >test.sh <<EOL
 #!/bin/bash
 hostname
@@ -50,26 +50,26 @@ sleep 30
 date
 EOL
 ```
-Make the script executable
+*Make the script executable*
 
-```
+```bash
 ls -l test.sh 
 chmod +x test.sh 
 ls -l test.sh 
 ```
-Add and commit the script
+*Add and commit the script*
 
-```
+```bash
 git add test.sh
 git commit -m "Add initial test script"
 ```
 Run locally (for demo purposes only. Real work should be submitted to Slurm to run on computing nodes.)
 
-``` 
+```bash
 ./test.sh 
 ```
 Submit to Slurm
-```
+```bash
 sbatch -p pcourseb test.sh 
 squeue -u $USER
 ```
@@ -85,7 +85,7 @@ Questions:
 ##### Modify test.sh in VSCode. 
 1. open test.sh file with VSC
 2. edit the sleep time. 
-```
+```bash
 #!/bin/bash
 hostname
 date
@@ -95,35 +95,35 @@ date
 3. Save  the test.sh file
 
 4. Now commit the changes:
-```
+```bash
 git add test.sh
 git commit -m "Update test script with shorter sleep time"
 ```
 
 4. Submit the job by typing the following commands in the terminal. 
 
-```
+```bash
 sbatch -p pcourseb test.sh 
 squeue  -u $USER 
 ```
 
-##### Exercise 2: Random Number Generation
+#### Exercise 2: Random Number Generation
 
-Create a new script in VSCode and track it with Git:
-``` 
+Create a new script test2.sh with VSCode and track it with Git:
+```bash
  #!/bin/bash
 for i in {1..1000}; do echo $RANDOM >>randomNumbers.txt; done
 sort -n randomNumbers.txt
 ```
-Track the new script
-```
+*Track the new script*
+```bash
 git add scripts/test2.sh
 git commit -m "Add random number generation script"
 ```
 
-Submit the job using _sbatch_
+*Submit the job using _sbatch_*
 
-```
+```bash
 sbatch -p pcourseb -N 1 -n 1 --mem 100 -t 2:00:00 -o test2.out -e test2.err test2.sh
 ```
 Questions: 
@@ -131,13 +131,13 @@ Questions:
 2. What are the contents ? 
 3. Check git status - which files are untracked? Why?
 
-##### Exercise 3: Resource Allocation in Script
+#### Exercise 3: Resource Allocation in Script
 
 A better approach is defining resource allocation inside the shell script. This way you will not need to remember for the next time and simply re-run the analysis if required.
 *Create a script with embedded SLURM parameters:*
 open a text file in VSC, add the below lines and save as test3.sh
 
-```
+```bash
 #!/bin/bash
 #SBATCH -p pcourseb # partition (queue)
 #SBATCH -N 1 # number of nodes
@@ -153,19 +153,19 @@ sort -n randomIntegers.txt
 
 ```
 Track the new script
-```
+```bash
 git add scripts/test3.sh
 git commit -m "Add script with embedded SLURM parameters"
 ```
 submit the job using _sbatch_
-```
+```bash
 sbatch test3.sh 
 ```
-##### Exercise 4: Job Control
+#### Exercise 4: Job Control
 *Create a long-running script to practice job cancellation:*
 The scancel command can be used to cancel a job after its submitted. Lets go ahead and resubmit the following job. Wait for the  job to start running (status R), then cancel it prematurely using the scancel command.
 
-```
+```bash
 #!/bin/bash
 #SBATCH -p courseb # partition (queue)
 #SBATCH -N 1 # number of nodes
@@ -181,20 +181,20 @@ sleep 600
 date
 ```
 Track the new script
-```
+```bash
 git add scripts/test4.sh
 git commit -m "Add long-running test script"
 ```
 Submit and cancel the job
-```
+```bash
 sbatch test4.sh
 ```
 Wait for job to start, then:
-```
+```bash
 scancel <job_id>  # or scancel -u $USER
 ```
 
-##### Exercise 5: Job Monitoring
+#### Exercise 5: Job Monitoring
 *Use sacct to analyze job performance*
 The sacct command can tell you information about both running jobs and finished jobs. It communicates with SLURM's database of job information and can tell you lots of useful statistics about your jobs, such as how much memory and CPU they used. When you run sacct without any arguments, it will display a summary of all completed jobs in the system. This summary may include information such as job IDs, user names, job status, start and end times, and other job-related details.
 One can use the -j/--jobs flag, where it takes the job ID as the input.
@@ -204,7 +204,7 @@ Trying running sacct without parameters or with -j flag and answer the following
 2. How much of memory did you request and how much was used ? Can we use this to reduce the amount of memory requested next time ? 
 3. Review the Git log - how many commits have you made ? 
 
-```
+```bash
 git log --oneline
 ```
 ##### Best Practices
