@@ -192,7 +192,8 @@ sbatch test3.sh
 ```
 #### Exercise 4: Job Control
 *Create a long-running script to practice job cancellation:*
-The scancel command can be used to cancel a job after its submitted. Lets go ahead and resubmit the following job. Wait for the  job to start running (status R), then cancel it prematurely using the scancel command.
+
+The scancel command can be used to cancel a job after its submitted. Write the following code and save the file as test4.sh. Submit the following job to SLURM. Wait for the  job to start running (status R), then cancel it prematurely using the scancel command.
 
 ```bash
 #!/bin/bash
@@ -211,7 +212,7 @@ date
 ```
 Track the new script
 ```bash
-git add scripts/test4.sh
+git add test4.sh
 git commit -m "Add long-running test script"
 ```
 Submit and cancel the job
@@ -225,7 +226,11 @@ scancel <job_id>  # or scancel -u $USER
 
 #### Exercise 5: Job Monitoring
 *Use sacct to analyze job performance*
-The sacct command can tell you information about both running jobs and finished jobs. It communicates with SLURM's database of job information and can tell you lots of useful statistics about your jobs, such as how much memory and CPU they used. When you run sacct without any arguments, it will display a summary of all completed jobs in the system. This summary may include information such as job IDs, user names, job status, start and end times, and other job-related details.
+
+The sacct command can tell you information about both running jobs and finished jobs. It communicates with SLURM's database of job information and can tell you lots of useful statistics about your jobs, such as how much memory and CPU they used. 
+
+When you run sacct without any arguments, it will display a summary of all completed jobs in the system. This summary may include information such as job IDs, user names, job status, start and end times, and other job-related details.
+
 One can use the -j/--jobs flag, where it takes the job ID as the input.
 
 Trying running sacct without parameters or with -j flag and answer the following questions:  
