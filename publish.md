@@ -16,7 +16,7 @@ This goal of the exercise is to publish your course exercises to GitHub, startin
 4. Name it 'bioinformatics-exercises'
 5. Leave it public
 6. Don't initialize with README
-7. Copy the repository URL (HTTPS or SSH)
+7. Copy the repository SSH URL
 
 ### Configure Git on HPC Cluster (Bioinformatics server)
 Use remote SSH login and connect to the IBU cluster.
@@ -25,6 +25,22 @@ Use remote SSH login and connect to the IBU cluster.
 git config --global user.name "Your GitHub Username"
 git config --global user.email "your.email@example.com"
 ```
+### Set Up Authentication (Important!)
+To push your local repository to GitHub securely, you’ll need to use SSH authentication.SSH uses a special key to verify who you are. This is safer and easier than typing your password every time.
+
+It also makes it easier to update GitHub automatically. This is helpful for scripts and large datasets. 
+
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -C "your.email@example.com"
+
+# Display your public key (copy this output)
+cat ~/.ssh/id_ed25519.pub
+```
+Then:
+1. Go to GitHub.com → Settings → SSH and GPG keys → New SSH key
+2. Paste your public key and save
+3. Use SSH URL when adding remote (git@github.com:username/repository.git)
 
 ## Exercise 2: Connect Local to Remote
 

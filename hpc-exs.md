@@ -8,9 +8,13 @@ Open the Terminal and start the exercises.
 #### Initial Setup
 
 Before starting the exercises, we'll set up a Git repository to track our work:
+
 *Create and initialize the repository*
 ```shell
-git init hpc-exercises
+mkdir course
+cd course 
+git init
+mkdir hpc-exercises
 cd hpc-exercises
 ```
 Create a .gitignore file for HPC-specific files. Type the following at the prompt

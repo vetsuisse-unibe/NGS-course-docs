@@ -1,6 +1,6 @@
-### Explore fastq sequences 
+# Explore fastq sequences 
 
-1. Login to binfservms01 using ssh protocol 
+1. Login to IBU Bioinformatics sever (login8.hpc.binf.unibe.ch) using ssh protocol 
 2. Create a new directory called dataPreprocess in your home directory. 
 3. Change directory to dataPreprocess
 4. Download the following fastq files from NCBI short read archive (http://ncbi.nlm.nih.gov/sra)
