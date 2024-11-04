@@ -21,7 +21,6 @@ code .gitignore
 *.err
 *.txt
 slurm-*.out
-EOL
 ```
 Add and commit .gitignore
 ```
