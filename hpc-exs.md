@@ -138,17 +138,17 @@ A better approach is defining resource allocation inside the shell script. This 
 
 *Create a script with embedded SLURM parameters:*
 
-open a text file in VSC, add the below lines and save as test3.sh
+Open a text file in VSC, add the below lines and save as test3.sh
 
 ```bash
 #!/bin/bash
-#SBATCH -p pcourseb # partition (queue)
-#SBATCH -N 1 # number of nodes
-#SBATCH -n 1 # number of cores
-#SBATCH --mem 8G # memory pool for all cores
-#SBATCH -t 0-2:00 # time (D-HH:MM)
-#SBATCH -o test3.out # STDOUT
-#SBATCH -e test3.err # STDERR
+#SBATCH -p pcourseb 
+#SBATCH -N 1 
+#SBATCH -n 1 
+#SBATCH --mem 8G 
+#SBATCH -t 0-2:00 
+#SBATCH -o test3.out
+#SBATCH -e test3.err
 
 
 for i in {1..100}; do echo $RANDOM >> randomIntegers.txt; done
@@ -158,12 +158,37 @@ sort -n randomIntegers.txt
 *Track the new script*
 
 ```bash
-git add scripts/test3.sh
+git add test3.sh
 git commit -m "Add script with embedded SLURM parameters"
 ```
 submit the job using _sbatch_
 ```bash
 sbatch test3.sh 
+```
+
+```
+#!/bin/bash                     # Shebang line - tells the system this is a bash script
+
+#SBATCH -p pcourseb            # Specifies which partition/queue to run the job on
+                               # In this case, it's using the 'pcourseb' partition
+
+#SBATCH -N 1                   # Requests 1 node for this job
+                               # A node is a complete computer in the cluster
+
+#SBATCH -n 1                   # Requests 1 CPU core/task
+                               # This defines how many parallel processes to run
+
+#SBATCH --mem 8G               # Requests 8 gigabytes of RAM for the job
+                               # This is the total memory allocation
+
+#SBATCH -t 0-2:00             # Sets the time limit for the job
+                               # Format is D-HH:MM (0 days, 2 hours, 0 minutes)
+
+#SBATCH -o test3.out          # Specifies where to write standard output (stdout)
+                               # Will create a file named 'test3.out'
+
+#SBATCH -e test3.err          # Specifies where to write standard error (stderr)
+                               # Will create a file named 'test3.err'
 ```
 #### Exercise 4: Job Control
 *Create a long-running script to practice job cancellation:*
