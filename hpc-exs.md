@@ -82,9 +82,9 @@ Questions:
 3. Check the Git status - are any new files created that aren't tracked? (use git status)
 4. What does the command git log --oneline do ? 
 
-##### Create/modify test.sh in VSCode. 
-1. open a New text file with VSC
-2. add the following lines in the text file 
+##### Modify test.sh in VSCode. 
+1. open test.sh file with VSC
+2. edit the sleep time. 
 ```
 #!/bin/bash
 hostname
@@ -92,16 +92,15 @@ date
 sleep 20
 date
 ```
-3. Save and replace the test.sh file in testDir as shown below (replace the student61 with your login)
-![Image of VSC-6](vsc-7.png)
+3. Save  the test.sh file
 
-4. Save the file and commit changes:
+4. Now commit the changes:
 ```
-git add scripts/test.sh
+git add test.sh
 git commit -m "Update test script with shorter sleep time"
 ```
 
-4. Submit the jo by typing the following commands in the terminal. 
+4. Submit the job by typing the following commands in the terminal. 
 
 ```
 sbatch -p pcourseb test.sh 
