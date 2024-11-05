@@ -13,10 +13,13 @@ This goal of the exercise is to publish your course exercises to GitHub, startin
 1. Visit github.com and log in
 2. Click the '+' icon in the top right
 3. Select 'New repository'
-4. Name it 'bioinformatics-exercises'
+4. Name it 'bioinformatics-exercises' or 'Sequencing-course-exercises' or choose a name repository that clearly reflects its purpose or content.(Bad:my-Project, my-first-repository etc)
 5. Leave it public
 6. Don't initialize with README
 7. Copy the repository SSH URL
+
+You just created your first scientific notebook on GitHub!. Feel free to store all your other code and projects here too - it's like having unlimited digital lab notebooks with automatic backup. Generally, keep one GitHub repository per analysis project.
+
 
 ### Configure Git on HPC Cluster (Bioinformatics server)
 Use remote SSH login and connect to the IBU cluster.
@@ -50,7 +53,7 @@ Then:
 cd hpc-exercises
 
 # Add remote repository (replace with your URL)
-git remote add origin https://github.com/<username>/bioinformatics-exercises.git
+git remote add origin git@github.com:<username>/bioinformatics-exercises.git
 
 # Verify remote was added
 git remote -v
@@ -90,14 +93,18 @@ git commit -m "Add repository documentation"
 ```
 
 ## Exercise 4: Publishing Your Work
+ When you created the repository on GitHub, the default branch is main (after 2020). Look at the branch name displayed on the GitHub page. But in your local repository it is master. So lets rename the local repo branch as main before pushing the contents to github remote repository. 
 
 ### Push to GitHub
 ```bash
-# For main branch
+# To see the default branch name
+git branch 
+# if it is master then change it to main 
+git branch -M main 
+
+# push your local main branch to the remote Github repository
 git push -u origin main
 
-# If your branch is named 'master'
-git push -u origin master
 ```
 
 ### Verify Publication
