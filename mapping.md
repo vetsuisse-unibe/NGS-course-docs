@@ -7,7 +7,7 @@ mkdir variantCalling
 cd variantCalling
 mkdir refIdx
 cd refIdx
-cp /data/courses/courseB/variantCalling/chr14.fa .
+cp /data/courses/pcourseb/variantCalling/chr14.fa .
 ```
 We will use only chr14 of the dog genome as the reference just for short computing run times,so you can finish the exercises faster 
 
@@ -35,10 +35,10 @@ Create a bash script for indexing the genome
 #SBATCH --time=1:00:00
 #SBATCH --mem=5G
 #SBATCH --cpus-per-task=1
-#SBATCH -p courseb
+#SBATCH -p pcourseb
 
-module add vital-it;
-module add UHTS/Aligner/bwa/0.7.17;
+
+module add BWA/0.7.17-GCC-10.3.0
 
 bwa index -a bwtsw -p chr14.fa chr14.fa
 ```
@@ -47,32 +47,37 @@ bwa index -a bwtsw -p chr14.fa chr14.fa
 
 We will use bwa mem algorithm for mapping. This is an algorithm that is most popular mapping but does not have a publication for it !! 
 
-##### genome reads 
-Create and directory called mapping 
+##### Genome reads 
+Create and directory called course/variantCalling/mapping 
 Copy the sample genome illumina reads for two  Bull Terriers dogs to the mapping directory. The Bull Terriers samples are named as: 
 1. BT012 
 2. BT134
 
-```
+```shell
 cd ../
 mkdir mapping 
 cd mapping 
-cp /data/courses/courseB/variantCalling/*.gz .
+cp /data/courses/pcourseb/variantCalling/*.gz .
 ```
+Questions: 
+1. How many files got copied ? 
+2. what is the format of the files ? 
+3. What sequencing type was used: single-end or paired-end ?
+
 
 Mapping involves three steps: 
 **Do not execute the following steps**
 1. Map the reads to the indexed reference genome 
-```
+```shell
 bwa mem -t 8 -M -R '@RG\tID:2019111402\tPL:illumina\tPU:HHV75DSXX.4\tCN:UBern\tLB:BT134-LIB\tSM:BT134'  chr14.fa  BT134_R1.fastq.gz BT134_R2.fastq.gz >BT134.sam
 ```
 2. Convert the sam output of the mapping to a binary bam format using _samtools view_ command
-```
+```shell
 samtools view -@8 -h -Sb -o BT134.bam BT134.sam 
 ```
 3. sort the bam based on chromosome co-ordinates using _samtools sort_ command 
 
-```
+```shell
 samtools sort -@8 BT134.bam BT134.sorted.bam 
 ```
 
@@ -87,17 +92,16 @@ This involves a lot of reading and writing to the hard disk which is highly time
 #SBATCH --time=3:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=8
-#SBATCH -p courseb
+#SBATCH -p pcourseb
 
-module add vital-it;
-module add UHTS/Aligner/bwa/0.7.17;
-module add UHTS/Analysis/samtools/1.8;
+module load BWA/0.7.17-GCC-10.3.0
+module load SAMtools/1.13-GCC-10.3.0
 
 bwa mem -t 8 -M -R '@RG\tID:2019111402\tPL:illumina\tPU:HHV75DSXX.4\tCN:UBern\tLB:BT134-LIB\tSM:BT134'  ../refIdx/chr14.fa  BT134_R1.fastq.gz BT134_R2.fastq.gz | samtools sort -@8 -m 5G  -o BT134.sorted.bam -
 samtools index BT134.sorted.bam
 ```
-Notice the command ends with - which means that the input to the command _samtools sort_ from _\<STDIN>_ and not from a file. 
-The indexing of a bam file is done using _samtool index_. This is required for further visualing and variant calling steps. 
+- The - symbol in the command indicates that samtools sort is taking its input directly from the previous command, not from a separate file. This is called piping.
+- After sorting, use samtools index to create an index for the BAM file. This is essential for subsequent steps like visualization and variant calling.
 
 #### Task 
 
@@ -106,9 +110,9 @@ Repeat the mapping step with the second Bull Terrier sample BT012.
 #### Visualizing the mapping 
 
 Task : 
--  using srun login into the computing node. Will log you into binfservas30 or binfservas31 as the partion courseb runs only on those nodes
-```
-srun --partition=courseb  --time=1:00:00 --mem=10G --pty /bin/bash
+-  using srun login into the computing node. Will log you into binfservas47 as the partion pcourseb runs only on those nodes
+```shell
+srun --partition=pcourseb  --time=1:00:00 --mem=10G --pty /bin/bash
 ```
 Mapping can be visualized using several tools. We will use samtools tview and IGV browser in the exercise. 
 
@@ -117,8 +121,8 @@ Samtools implements a very simple text alignment viewer called tview. It uses di
 
 _samtools tview_ takes as input the bam file and reference file 
 
-```
-module add UHTS/Analysis/samtools/1.8;
+```shell
+module load SAMtools/1.13-GCC-10.3.0
 samtools tview BT134.sorted.bam ../refIdx/chr14.fa
 ```
 tview commands:
@@ -140,10 +144,10 @@ In order to see the mapping in an IGV browser we need  the bam file  and its ind
 Create a directory called _bamFiles_ and download the bam files and index files to this directory from the below links: 
 
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/wBo94eNibfJZ4xL
-https://cloud.bioinformatics.unibe.ch/index.php/s/oi6SdakfrYHonDS
-https://cloud.bioinformatics.unibe.ch/index.php/s/jg6PaBCjcskBoWJ
-https://cloud.bioinformatics.unibe.ch/index.php/s/668Jbk7FnTr6rmj
+https://cloud.bioinformatics.unibe.ch/index.php/s/5XnPbJLnXHay278
+https://cloud.bioinformatics.unibe.ch/index.php/s/TrBtDEQrJ5k92x2
+https://cloud.bioinformatics.unibe.ch/index.php/s/DKQgw29XHSDncrB
+https://cloud.bioinformatics.unibe.ch/index.php/s/LJS5AG2S55P9Roe
 ```
 
 
