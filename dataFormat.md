@@ -1,27 +1,32 @@
-# Explore fastq sequences 
+# Unlocking the Secrets of FASTQ Files
 
 1. Login to IBU Bioinformatics sever (login8.hpc.binf.unibe.ch) using ssh protocol 
-2. Create a new directory called dataPreprocess in your home directory. 
+2. Create a new directory called dataPreprocess in your course directory (mkdir -p course/dataPreProcess). 
 3. Change directory to dataPreprocess
 4. Download the following fastq files from NCBI short read archive (http://ncbi.nlm.nih.gov/sra)
-```
+
+```shell
 wget  ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR102/001/SRR1027171/SRR1027171_1.fastq.gz
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR102/001/SRR1027171/SRR1027171_2.fastq.gz
 ```
 If wget didn't work please copy it from here 
-```
-cp /data/courses/courseB/fastq/SRR1027171_1.fastq.gz .
-cp /data/courses/courseB/fastq/SRR1027171_2.fastq.gz .
+
+```shell
+cp /data/courses/pcourseb/fastq/SRR1027171_1.fastq.gz .
+cp /data/courses/pcourseb/fastq/SRR1027171_2.fastq.gz .
 ```
 -	The above files belong to the study- [GSE52194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194) 
 -	 Click the above link to take you to SRA (Sequence Read Archive) where you can find more information about these two sets.
 
 Questions: 
 1. What is the name and size of the files you downloaded ?
-2. Use unix head command to see how the header line of fastq looks like. Does it look like the example you saw in the lecture ?
+2. Use unix less & head command to see how the header line of fastq looks like. 
+
 ```
 less SRR1027171_1.fastq.gz | head
 ```
+Questions: 
+Does it look like the example you saw in the lecture ?
 
 #### Fastqc 
 
@@ -35,35 +40,46 @@ We use the slurm cluster managment program to run the fastqc job.
 ##### Request resources using the following srun command 
 
 First use the _srun_ command to request for resources like CPU and RAM to run the program 
+
+```shell
+srun --partition=pcourseb --cpus-per-task 4 --time=2:00:00 --mem=1G --pty /bin/bash
 ```
-srun --partition=courseb --cpus-per-task 4 --time=1:00:00 --mem=1G --pty /bin/bash
-```
+
+- srun                         # SLURM command to allocate and execute resources
+- --partition=pcourseb         # Use the 'pcourseb' partition/queue
+- --cpus-per-task 4          # Request 4 CPU cores
+- --time=2:00:00             # Request 1 hour of runtime
+- --mem=4G                   # Request 4 GB of memory
+- --pty /bin/bash            # Start an interactive bash shell
+
 Questions: 
 Do you understand all the arguments passed to _srun_ ? 
 
 ##### running fastqc at the shell prompt interactively 
-Once you are logged into one of the servers, load the software module in the following manner 
+Once you are logged into one of the compute nodes, load the software module in the following manner 
 
-```
- module add vital-it
- module add UHTS/Quality_control/fastqc/0.11.5;
+```shell
+ module load FastQC/0.11.9-Java-11;
  ```
 
  Launch fastqc with the two fastq files in the following manner 
 
- ```
+ ```shell
   fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4
   ```
+Questions: 
+What is the module load command ? 
+
 
 #### Job Script 
 The above job can also be launched using bash script on the head node. In this case _SLURM_ looks for node with required resources and launches it on the cluster. 
 Please exit the interactive session before launching the job. Meaning type exit on the node your are in and get back to the master node.
 
-```
+```shell
 exit
 ```
 
-##### Now create the following script with VSC and save as 'run_fastqc.sh' 
+##### Now create the following script with VS code and save as 'run_fastqc.sh' 
 ``` 
 #!/bin/bash
 #SBATCH --time=1:00:00
@@ -72,7 +88,7 @@ exit
 #SBATCH --error=fastqc.err
 #SBATCH --job-name=fastqc
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
 module add vital-it
 module add UHTS/Quality_control/fastqc/0.11.5;
@@ -81,7 +97,7 @@ fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4
 ```
 Sumbit the job to the cluster 
 
-```
+```shell
 sbatch run_fastqc.sh 
 ```
 Questions: 
@@ -100,8 +116,8 @@ cd fastqc_html
 Windows users create a folder on your local PC using the same names.
 Please downlooad the zip files from the following links to fastqc_html folder. 
 ```
-https://cloud.bioinformatics.unibe.ch/index.php/s/BoCK5wnig9Zq7aT
-https://cloud.bioinformatics.unibe.ch/index.php/s/BiqsiJRZWXAYMy8
+https://cloud.bioinformatics.unibe.ch/index.php/s/rPMRkpdQCT9EMkw
+https://cloud.bioinformatics.unibe.ch/index.php/s/SQzpZbYqWTr2xpi
 ```
 
 Now from the fastqc_html directory:
@@ -119,7 +135,7 @@ Answer the following Questions:
 Several tools exist that can remove the adapters and filter low quality base. Examples include trimmomatic,fastx cutadapt, sickle etc. Here we will use fastp to remove the adapters and low quality bases. The fastp manual is available here 
 https://github.com/OpenGene/fastp
 
-Create the bash script in VSC and save it in the dataPreprocess dir to run fastp with the fastq files in the following manner 
+Create the bash script in VS code and save it in the dataPreprocess dir to run fastp with the fastq files in the following manner 
 
 ``` 
 #!/bin/bash
@@ -129,7 +145,7 @@ Create the bash script in VSC and save it in the dataPreprocess dir to run fastp
 #SBATCH --error=qual.err
 #SBATCH --job-name=fastp
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 module add UHTS/Quality_control/fastp/0.12.5;
 
 fastp -w 4 -q 15 -z 5 -l 50  -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
