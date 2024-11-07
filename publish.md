@@ -27,7 +27,7 @@ Use remote SSH login and connect to the IBU cluster (login8.hpc.binf.unibe.ch).
 ### Set Up Authentication (Important!)
 To push your local repository to GitHub securely, we will use SSH authentication. SSH uses a special key to verify who you are.You generate a key pair on your computer, add the public key to GitHub. GitHub uses this to verify your identity everytime you try to add/update files to the remote  repository.  It also makes it easier to update GitHub automatically. This is helpful for scripts and large datasets. 
 
-```bash
+```shell
 # Generate SSH key
 ssh-keygen -t ed25519 -C "your.email@example.com"
 
@@ -50,7 +50,7 @@ Then:
 ## Exercise 2: Connect Local to Remote
 
 ### Link Your HPC Repository
-```bash
+```shell
 # Navigate to your existing repository
 cd hpc-exercises
 
@@ -95,7 +95,7 @@ This repository contains my work for the Bioinformatics course, including:
 ```
 
 ### Add Documentation to Repository
-```bash
+```shell
 git add README.md
 git commit -m "Add repository documentation"
 ```
@@ -104,7 +104,7 @@ git commit -m "Add repository documentation"
  When you created the repository on GitHub, the default branch is main (after 2020). Look at the branch name displayed on the GitHub page. But in your local repository it is master. So lets rename the local repo branch as main before pushing the contents to github remote repository. 
 
 ### Push to GitHub
-```bash
+```shell
 # To see the default branch name
 git branch 
 # if it is master then change it to main 
@@ -123,15 +123,10 @@ git push -u origin main
 
 ## Exercise 5: Ongoing Workflow
 
-### Before Starting New Work
-```bash
-# Get latest changes
-git pull origin main
-```
-
 ### While Working on New Exercises
-```bash
+```shell
 # Create directory for next exercise set
+cd course
 mkdir mapping-exercises
 cd mapping-exercises
 
@@ -175,14 +170,14 @@ git push origin main
 
 ### Push Rejected
 If your push is rejected due to remote changes:
-```bash
+```shell
 git pull origin main
 git push origin main
 ```
 
 ### Authentication Issues
 Generate and use SSH keys:
-```bash
+```shell
 # Generate SSH key
 ssh-keygen -t ed25519 -C "your.email@example.com"
 
