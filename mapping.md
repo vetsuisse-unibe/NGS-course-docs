@@ -1,7 +1,8 @@
 ###  Map Data 
-Create a folder calling variantCalling on the binformatics server and coping the reference file 
+Create a folder calling course/variantCalling on the IBU binformatics server and copy the reference file 
 
 ```
+cd course
 mkdir variantCalling
 cd variantCalling
 mkdir refIdx
@@ -14,13 +15,17 @@ We will use only chr14 of the dog genome as the reference just for short computi
 We will use bwa mem for mapping the reads to the reference genome. For this we index the reference genome first. 
 Load the bwa module first and by typing bwa on the commmand line you get the help for bwa. The options for bwa are also available at http://bio-bwa.sourceforge.net/bwa.shtml
 
-```
-module add UHTS/Aligner/bwa/0.7.17;
+```shell
+module add BWA/0.7.17-GCC-10.3.0
 bwa 
 ```
-Indexing aids the aligner to find potential alignment sites on the reference faster , which saves time during alignment. Indexing the reference can be run once and stored. The indexes can be reused for all bwa alignments. A new index  has be built if you are working with a different reference genomes. 
+Before aligning your reads, it's crucial to index the reference genome. Here's why:
 
-create a bash script for indexing the genome 
+- **Faster Alignment:** Indexing helps the aligner quickly locate potential alignment sites, saving significant time.
+- **Reusability:** Once created, this index can be used for all bwa alignments to the same reference.
+- **New Reference = New Index:** If you change your reference genome, you'll need to build a new index.
+
+Create a bash script for indexing the genome 
 
 ```
 #!/bin/bash

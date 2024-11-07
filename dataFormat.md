@@ -59,7 +59,7 @@ Do you understand all the arguments passed to _srun_ ?
 Once you are logged into one of the compute nodes, load the software module in the following manner 
 
 ```shell
- module load FastQC/0.11.9-Java-11;
+ module load FastQC/0.11.9-Java-11
  ```
 
  Launch fastqc with the two fastq files in the following manner 
@@ -90,8 +90,8 @@ exit
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=pcourseb
 
-module add vital-it
-module add UHTS/Quality_control/fastqc/0.11.5;
+ module load FastQC/0.11.9-Java-11
+
 fastqc --extract SRR1027171_1.fastq.gz SRR1027171_2.fastq.gz --threads  4 
 
 ```
@@ -146,7 +146,8 @@ n VS Code, create and save a bash script named fastp_clean.sh to clean the fastq
 #SBATCH --job-name=fastp
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=pcourseb
-module add UHTS/Quality_control/fastp/0.12.5;
+
+module add fastp/0.23.4-GCC-10.3.0
 
 fastp -w 4 -q 15 -z 5 -l 50  -i SRR1027171_1.fastq.gz -I SRR1027171_2.fastq.gz -o SRR1027171_1.clean.fq.gz -O SRR1027171_2.clean.fq.gz
 ```
