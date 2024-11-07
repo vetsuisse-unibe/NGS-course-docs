@@ -33,7 +33,6 @@ git config --list --show-origin
 
 #### Create and initialize the repository
 
-
 ```shell
 mkdir course
 cd course 
@@ -41,7 +40,7 @@ git init
 mkdir hpc-exercises
 cd hpc-exercises
 ```
-Create a .gitignore file for HPC-specific files. Type the following at the prompt
+Create a .gitignore file for HPC-specific files which does need to be tracked or backedup. Type the following at the prompt
 
 ```shell
 code .gitignore

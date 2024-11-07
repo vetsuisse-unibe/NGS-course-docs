@@ -5,7 +5,7 @@ This goal of the exercise is to publish your course exercises to GitHub, startin
 
 ## Prerequisites
 * Completed HPC cluster exercises with local Git repository
-* GitHub account (create one at github.com if needed)
+* GitHub account (create one at github.com if needed). *The email id you use to create the account should be the same you used in git config command*
 
 ## Exercise 1: GitHub Setup
 
@@ -22,16 +22,10 @@ You just created your first scientific notebook on GitHub!. Feel free to store a
 
 
 ### Configure Git on HPC Cluster (Bioinformatics server)
-Use remote SSH login and connect to the IBU cluster.
-```bash
-# Set your GitHub username and email
-git config --global user.name "Your GitHub Username"
-git config --global user.email "your.email@example.com"
-```
-### Set Up Authentication (Important!)
-To push your local repository to GitHub securely, you’ll need to use SSH authentication.SSH uses a special key to verify who you are. This is safer and easier than typing your password every time.
+Use remote SSH login and connect to the IBU cluster (login8.hpc.binf.unibe.ch).
 
-It also makes it easier to update GitHub automatically. This is helpful for scripts and large datasets. 
+### Set Up Authentication (Important!)
+To push your local repository to GitHub securely, we will use SSH authentication. SSH uses a special key to verify who you are.You generate a key pair on your computer, add the public key to GitHub. GitHub uses this to verify your identity everytime you try to add/update files to the remote  repository.  It also makes it easier to update GitHub automatically. This is helpful for scripts and large datasets. 
 
 ```bash
 # Generate SSH key
@@ -40,10 +34,18 @@ ssh-keygen -t ed25519 -C "your.email@example.com"
 # Display your public key (copy this output)
 cat ~/.ssh/id_ed25519.pub
 ```
+-t ed25519: Specifies the type of key (Ed25519 is a modern, secure algorithm)
+
+When you run this, it will:
+- Ask where to save the key (default location is good)
+- Ask for a passphrase (optional but recommended for security)
+A passphrase is like a password but typically longer and used to encrypt your SSH private key. If you don't want to set it just type _ENTER_. If you set please make sure you remember it or store it somewhere.
+
 Then:
 1. Go to GitHub.com → Settings → SSH and GPG keys → New SSH key
 2. Paste your public key and save
 3. Use SSH URL when adding remote (git@github.com:username/repository.git)
+
 
 ## Exercise 2: Connect Local to Remote
 
@@ -52,17 +54,23 @@ Then:
 # Navigate to your existing repository
 cd hpc-exercises
 
-# Add remote repository (replace with your URL)
-git remote add origin git@github.com:<username>/bioinformatics-exercises.git
+# Add remote repository (replace with your URL that copy it from your github repository page )
+git remote add origin git@github.com:<username>/sequencencing-exercises.git
 
 # Verify remote was added
 git remote -v
 ```
 
+GT
+git remote -v
+
+
+The `git remote -v` command shows all the remote repositories connected to your local repository, along with their URLs. The -v stands for "verbose", showing both fetch and push URLs.
+
 ## Exercise 3: Document Your Repository
 
 ### Create README.md
-Create a new file called `README.md` in your repository root using Visual Studio Code with the following content:
+Create a new file called `README.md` in your repository root or project folder (hpc-exercises) using Visual Studio Code with the following content:
 
 ```markdown
 # Bioinformatics Exercises
