@@ -5,11 +5,35 @@ Like yesterday use the remote login extension on Visual studio code and login in
 
 Open the Terminal and start the exercises. 
 
-#### Initial Setup
+### Initial Setup
 
-Before starting the exercises, we'll set up a Git repository to track our work:
+#### Configuring Git
+Before starting the exercises, we'll set up a Git repository to track our work. git (version 2.43.5) is already installed on the HPC system. We'll use git command-line tools to create the repository. 
 
-*Create and initialize the repository*
+On the command line, Git commands follow this structure: `git verb options`.  The `verb`  tells Git what action to perform (like `commit` or `push`), while `options` provide extra details to modify the command's behavior.
+
+ Lets configure the git environment on command line. You should have to do configure this only once on any given computer. We will use _git config_ command to set these variables.These configuration variables are put into a .gitconfig file and stored:
+
+- on Mac in /Users/<YourMacusername>/.gitconfig
+- on Windows in C:\Users\<YourWindowsUsername>\AppData\Local\Git\config/.gitconfig
+- on Linux in /home/<yourLoginnam>/.gticonfig
+
+```shell
+# Set your git username and email
+git config --global user.name "Your username"
+git config --global user.email "your.email@example.com"
+```
+ Please use your own name and email address in the place holders. This is crucial because Git permanently embeds this information into each commit you make. In the next lesson, we will be interacting with GitHub and so the email address used should be the same as the one we will use to set up your GitHub account.
+
+You can see where the .gitconfig is stored using the below command 
+
+```shell
+git config --list --show-origin
+```
+
+#### Create and initialize the repository
+
+
 ```shell
 mkdir course
 cd course 
