@@ -37,101 +37,101 @@ Words in italics need to be replaced by the proper parameters (for example, your
 
 ### Try some basic unix commands
 *Display user name*
-```
+```shell
 whoami 
 ```
 *Show the current working directory*
-```
+```shell
 pwd 
 ```
 It should show something like /home/student36. Which is 'home' directory for user student01
 
 *List the files in the directory*	
-```
+```shell
 ls 
 ```
 *Create a empty file*	
-```
+```shell
 touch <filename> 
 ```
 *Print a string to the screen*
-```
+```shell
 echo "Hello world" 
 ```
 *Print the current date*
-```
+```shell
 date
 ```
 *See a history of all the last commands you tried* 
-```
+```shell
 history 
 ```
 *Get local help page of a command* 
-```
+```shell
 man ls
 ```
 *Run the following commands one after another*
-```
+```shell
 touch <exampleFile>
 ls
 ```
 *Print the contents of the file* 
-```
+```shell
 cat <exampleFile>
 ```
 It should show no lines as it is an empty file. 
 
 *Rename a file* 
-```
+```shell
 mv <exampleFile> <exampleFile2>
 ```
 *Delete a file* 
-```
+```shell
 rm <exampleFile2>
 ```
 *Create a new folder/directory* 
-```
+```shell
 mkdir <exampleDirectory> 
 ```
 *Create a file under the new folder/directory*
-```
+```shell
 touch exampleDirectory/exampleFile
 ```
 *Delete the folder/directory* 
-```
+```shell
 rmdir exampleDirectory
 ```
 worked ? No ! 
 
 *Delete the file first* 
-```
+```shell
 rm exampleDirectory/exampleFile
 ```
 *Delete the directory now* 
-```
+```shell
 rmdir exampleDirectory
 ```
 # creating and moving around Directories 
 *Create a directory called 'Documents' and change current directory to Documents* 
-```
+```shell
 mkdir Documents 
 cd Documents 
 pwd
 ```
 *Going up one directory* 
-```
+```shell
 cd ..
 ```
 *and then type to see what has happened*
-```
+```shell
 pwd
 ```
 *Go up by two directories* 
-```
+```shell
 cd ../.. 
 ```
 *Go to home directory* 
-```
+```shell
 cd
 ```
 Always type “pwd” to locate yourself
@@ -140,7 +140,7 @@ Always type “pwd” to locate yourself
 
 Most programs in UNIX accept arguments that modify the program’s behavior. For example 
 List the files in longer format 
-```
+```shell
 ls -l 
 touch exampleFile1
 touch exampleFile2
@@ -149,7 +149,7 @@ ls
 ls -l 
 ```
 Different example parameters used with ls 
-```
+```shell
 ls -a List all files, including hidden ones.
 ls -h List all files, with human-readable sizes (Mb, Gb).
 ls -l List all files, long format.
@@ -159,12 +159,12 @@ ls -1 List all files, one file per line.
 ```
 
 Parameters for remove command 
-```
+```shell
 rm exampleFile1
 rm -i exampleFile2
 ```
 Aliases are short forms used for commands. 
-```
+```shell
 alias rm=”rm -i”
 touch <exampleFile>
 rm <exampleFile>
@@ -175,7 +175,7 @@ So better to alias rm as rm -i to be on the safer side ?.
 # Redirection.
 
 All the above commands sent the output if any to the screen. Instead of outputting on the screen redirection helps you to put into a file 
-```
+```shell
 echo "My first line" >testFile.txt
 cat testFile.txt 
 echo "My second line" >>testFile.txt
@@ -196,23 +196,23 @@ Create a new folder
 mkdir wildCardTesting
 
 Change directory 
-```
+```shell
 cd wildCardTesting
 touch test1.txt 
 touch test2.txt 
 ```
 Create several files with a single command 
-```
+```shell
 touch test3.txt test4.txt test1.csv test2.csv test3.csv test4.csv
 ```
 Count the number of files using the pipes ( | symbol) 
 wc –l counts the number of lines in the input  
-```
+```shell
 ls -l | wc -l 
 ```
 
 Try using the following wild cards 
-```
+```shell
 ls * 
 ls test*
 ls *.txt 
@@ -222,36 +222,39 @@ ls test[!3].*
 ```
 
 # subset a file with grep and awk
-```
+```shell
 mkdir GenomeStats 
 cd GenomeStats
 ```
 Download the text file showing the available refseq genomes for different species at NCBI https://www.ncbi.nlm.nih.gov/genome/browse/
 RefSeq Genomes on NCBI are high-quality reference genome sequences that serve as standard representations for the genetics of specific organisms
-```
+```shell
 wget https://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt
 ```
 Use less to have a quick view of the file 
-```
+```shell
 less assembly_summary_refseq.txt
+#Press q to exit the less interface and come back to prompt.
 ```
 It is a tab delimited text file with several columns. 
 The second line shows the different column headers
-```
+```shell
 head -n 2 assembly_summary_refseq.txt | tail -n 1
 ```
 For further ease of reading the column headers. (Do you understand what we are doing here ?)
-```
+```shell
 head -n 2 assembly_summary_refseq.txt | tail -n 1 | tr '\t' '\n' |less
+#Press q to exit the less interface and come back to prompt
 head -n 2 assembly_summary_refseq.txt | tail -n 1 | tr '\t' '\n' |nl |less
+#Press q to exit the less interface and come back to prompt
 ```
 We want to see how many dog assemblies have been submitted 
-```
+```shell
 awk -F'\t' '$8 == "Canis lupus familiaris" && $6 == "9615"' assembly_summary_refseq.txt
 ```
 
 Want to keep the header line ? 
-```
+```shell
 awk -F'\t' 'NR == 2 || ($1 == "Canis lupus familiaris" && $6 == "9615")' assembly_summary_refseq.txt
 
 ```
@@ -262,16 +265,16 @@ Lets do some statistics on available Genomes
 How many Animal and plant genomes are available 
 cut command in unix can be used to select columns from tab de-limited files 
 Only the column Group can selected using cut 
-```
+```shell
 cut -f25 assembly_summary_refseq.txt | less
 ```
 Now the pipes can be used to see the number of different refseq genomes available at NCBI 
-```
+```shell
 cut -f25 assembly_summary_refseq.txt | sort | uniq -c
 
 ```
 We can skip the header line and before counting the genome groups in the column 25
-```
+```shell
 tail -n +3 assembly_summary_refseq.txt | cut -f25 | sort | uniq -c
 ```
 - tail -n +3 assembly_summary_refseq.txt: Outputs the file starting from the third line, effectively skipping the first two lines.
@@ -282,11 +285,11 @@ tail -n +3 assembly_summary_refseq.txt | cut -f25 | sort | uniq -c
 *So how many mammalian genomes are available ?*
 Now use cut and pipe symbol to find the number of mammalian genomes available at NCBI. (Hint: check column 25 for vertebrate_mammalian) 
 cut can be used to select more columns 
-```
+```shell
 cut -f 8,25,28 assembly_summary_refseq.txt |less
 ```
 which Mammalian genome has the highest GC content 
-```
+```shell
 cut -f 8,25,28 assembly_summary_refseq.txt | grep vertebrate_mammalian |sort -t$'\t' -nrk3 | less 
 cut -f 8,25,28 assembly_summary_refseq.txt | grep vertebrate_mammalian |sort -t$'\t' -nrk3 | head -n 1
 ```
@@ -300,7 +303,7 @@ cut -f 8,25,28 assembly_summary_refseq.txt | grep vertebrate_mammalian |sort -t$
 # Question of the day
 Invertebrates generally have lower GC content compared to vertebrates.
 You can check if this is true in your dataset
-```
+```shell
 awk -F'\t' '$25 ~ /vertebrate_/ { total++; if ($28+0 < 40) count++ } END { print (count/total)*100, count, total }' assembly_summary_refseq.txt
 awk -F'\t' '$25 ~ /invertebrate/ { total++; if ($28+0 < 40) count++ } END { print (count/total)*100, count, total }' assembly_summary_refseq.txt
 ```
@@ -311,31 +314,31 @@ awk -F'\t' '$25 ~ /invertebrate/ { total++; if ($28+0 < 40) count++ } END { prin
 
 # Sequence Content 
 Create a new directory and copy the chromosome  human chromosome 22 from here: /data/courses/courseB/UnixEx
-```
+```shell
 mkdir <directoryname>
 cd <directoryname>
 cp /data/courses/courseB/UnixEx/chr22.fa.gz  .
 ```
 How many nucleotides are found in the entire chromosome? 
-```
+```shell
 less chr22.fa.gz | grep -v ">" | wc | awk '{print $3-$1}'
 ```
 Do you understand the above command. If not try man wc for help.
 
 How many As, Cs, Gs, Ts and Ns are found in the entire chromosome?
-```
+```shell
 less chr22.fa.gz |grep -v ">" | grep -o [actgnACTGN] | sort | uniq -c
 ```
 
 Search for  EcoR1 (GAATTC) site in the chr22 file
-```
+```shell
 less chr22.fa.gz | grep -v ">" | grep --color "GAATTC"
 ```
 Now can you count the number of EcoR1 site in the sequence ? 
 
 **For the brave.** Calculate the %GC content in the entire chromosome.
 
-```
+```shell
 less chr22.fa.gz | awk '!/^>/{gc+=gsub(/[gGcC]/,""); at+=gsub(/[aAtT]/,"");} END{ printf "%.2f%%\n", (gc*100)/(gc+at) }'
 ```
 
