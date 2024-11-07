@@ -1,8 +1,8 @@
 # Unlocking the Secrets of FASTQ Files
 
 1. Login to IBU Bioinformatics sever (login8.hpc.binf.unibe.ch) using ssh protocol 
-2. Create a new directory called dataPreprocess in your course directory (mkdir -p course/dataPreProcess). 
-3. Change directory to dataPreprocess
+2. Create a new directory called dataPreprocess in your course directory (mkdir -p course/dataPreProcess) and a scripts directory mkdir -p course/dataPreProcess/scripts. 
+3. Change the current working directory to dataPreprocess/scripts
 4. Download the following fastq files from NCBI short read archive (http://ncbi.nlm.nih.gov/sra)
 
 ```shell
@@ -16,7 +16,7 @@ cp /data/courses/pcourseb/fastq/SRR1027171_1.fastq.gz .
 cp /data/courses/pcourseb/fastq/SRR1027171_2.fastq.gz .
 ```
 -	The above files belong to the study- [GSE52194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194) 
--	 Click the above link to take you to SRA (Sequence Read Archive) where you can find more information about these two sets.
+-	 Click the above link to take you to SRA (Sequence Read Archive) where you can find more information about the source of the fastq files.
 
 Questions: 
 1. What is the name and size of the files you downloaded ?
@@ -135,7 +135,7 @@ Answer the following Questions:
 Several tools exist that can remove the adapters and filter low quality base. Examples include trimmomatic,fastx cutadapt, sickle etc. Here we will use fastp to remove the adapters and low quality bases. The fastp manual is available here 
 https://github.com/OpenGene/fastp
 
-Create the bash script in VS code and save it in the dataPreprocess dir to run fastp with the fastq files in the following manner 
+n VS Code, create and save a bash script named fastp_clean.sh to clean the fastq files as follows:
 
 ``` 
 #!/bin/bash
@@ -171,5 +171,106 @@ https://cloud.bioinformatics.unibe.ch/index.php/s/Sor65mmETSJXWTe
 ```
 - Record the changes you see in the cleaned and trimmed reads
 
+### Adding Version Control to Your FASTQ Processing Workflow
+1. Change the current working directory to "course"
+2. Edit `.gitignore`  file with VScode 
 
+```shell
+code .gitignore
+```
+Add the following lines to exclude large FASTQ files and temporary data
 
+```
+# FASTQ files (too large for Git)
+*.fastq.gz
+*.fq.gz
+
+# FastQC output
+*_fastqc.html
+*_fastqc.zip
+```
+3. Add and commit your files:
+
+```shell
+# Add your scripts
+git add run_fastqc.sh
+git add fastp_clean.sh
+git add .gitignore
+# commit 
+git commit -m "data processing commit: Add FASTQ processing scripts"
+```
+
+#### Exercise Questions:
+
+1. Check the status of your repository:
+```bash
+git status
+```
+- What files are being tracked?
+- What files are ignored?
+
+2. View the Git history:
+```bash
+git log
+```
+3. Make the following improvements to your scripts:
+- Add a README.md file describing the workflow
+- Add comments explaining each parameter in run_fastqc or fastp_clean.sh
+- Commit these changes separately
+
+```shell
+code README.md
+```
+Add the following lines
+```
+## Scripts for processing FASTQ files from the GSE52194 study:
+- run_fastqc.sh: Quality control analysis using FastQC
+- fastp_clean.sh: Adapter and quality trimming using fastp
+
+## Usage:
+1. Run FastQC on raw data
+2. Clean reads using fastp
+3. Run FastQC on cleaned data
+```
+# Add and commit README
+```shell
+git add README.md
+git commit -m "Add workflow documentation"
+```
+
+```shell
+# Make script improvements and commit
+git add *.sh
+git commit -m "Add detailed parameter documentation to scripts"
+```
+#### FOR the BRAVE 
+4. Practice branching
+Create a new branch for testing different quality parameters. Change directory to the root of the project directory (cd ~/course)
+```shell
+git checkout -b test/quality-params
+#check the branch you are in 
+git branch
+```
+Modify the fastp parameters in your script:
+
+```shell
+code dataPreprocess/scripts/fastp_clean.sh
+#Change -q 15 to -q 20 and -l 50 to -l 60
+#Commit these changes
+git add dataPreprocess/scripts/fastp_clean.sh
+git commit -m "Test stringent quality thresholds"
+# Push the new branch to GitHub
+# Verify your remote 
+git remote -v
+git push -u origin test/quality-params
+```
+Go to your repository page and verify if the branch is upated. 
+
+###Questions
+1. Why do we exclude FASTQ files from Git? What would be a better way to track large scientific datasets?
+2. Look at the difference between your original and modified fastp parameters:
+
+```shell
+git checkout main
+git diff test/quality-params dataPreprocess/scripts/fastp_clean.sh
+```
