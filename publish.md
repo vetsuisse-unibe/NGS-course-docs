@@ -195,8 +195,8 @@ git push origin main
 ## Best Practices 
 
 Before pushing:
-- git status                  # Check what's changed
-- git pull                    # Get latest changes
-- git add .                   # Stage changes
-- git commit -m "message"     # Commit with clear message
-- git push                    # Push changes
+- `git status                  # Check what's changed`
+- `git pull                    # Get latest changes`
+- `git add .                   # Stage changes`
+- `git commit -m "message"     # Commit with clear message`
+- `git push                    # Push changes`
