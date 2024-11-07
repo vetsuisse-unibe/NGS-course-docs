@@ -5,7 +5,7 @@ This goal of the exercise is to publish your course exercises to GitHub, startin
 
 ## Prerequisites
 * Completed HPC cluster exercises with local Git repository
-* GitHub account (create one at github.com if needed). *The email id you use to create the account should be the same you used in git config command*
+* GitHub account (create one at github.com if needed). **The email id you use to create the account should be the same you used in git config command**
 
 ## Exercise 1: GitHub Setup
 
@@ -60,11 +60,6 @@ git remote add origin git@github.com:<username>/sequencencing-exercises.git
 # Verify remote was added
 git remote -v
 ```
-
-GT
-git remote -v
-
-
 The `git remote -v` command shows all the remote repositories connected to your local repository, along with their URLs. The -v stands for "verbose", showing both fetch and push URLs.
 
 ## Exercise 3: Document Your Repository
@@ -175,19 +170,9 @@ git pull origin main
 git push origin main
 ```
 
-### Authentication Issues
-Generate and use SSH keys:
-```shell
-# Generate SSH key
-ssh-keygen -t ed25519 -C "your.email@example.com"
-
-# Display public key to copy to GitHub
-cat ~/.ssh/id_ed25519.pub
-```
-
 ### Common Issues
 1. **Untracked Files Appearing in Git Status**
-   * Check .gitignore file
+   * Add to  .gitignore file if don't want to see that.
    * Use `git status` to verify
    
 2. **Permission Denied**
@@ -197,13 +182,21 @@ cat ~/.ssh/id_ed25519.pub
 ## Assessment Questions
 
 1. What command shows configured remote repositories?
-2. Why should you pull before starting new work?
-3. How do you verify .gitignore is working?
-4. What steps should you take if sensitive information is committed?
-5. What is the recommended frequency for pushing changes?
+2. How do you verify .gitignore is working?
+3. What is the recommended frequency for pushing changes?
 
 ## Additional Resources
 
 * [GitHub Documentation](https://docs.github.com)
 * [Pro Git Book](https://git-scm.com/book/en/v2)
 * [GitHub Guides](https://guides.github.com)
+* [Ten Simple Rules for Taking Advantage of Git and GitHub](https://pmc.ncbi.nlm.nih.gov/articles/PMC4945047/#pcbi.1004947.ref005)
+
+## Best Practices 
+
+Before pushing:
+git status                  # Check what's changed
+git pull                    # Get latest changes
+git add .                   # Stage changes
+git commit -m "message"     # Commit with clear message
+git push                    # Push changes
