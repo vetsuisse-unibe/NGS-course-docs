@@ -22,7 +22,7 @@ Questions:
 1. What is the name and size of the files you downloaded ?
 2. Use unix less & head command to see how the header line of fastq looks like. 
 
-```
+```shell
 less SRR1027171_1.fastq.gz | head
 ```
 Questions: 
@@ -109,7 +109,7 @@ It should take ~5 mins for the job to finish.
 
 First lets create a new directory to store the zip files we will be downloading from the Bioinformatics server. Create a new folder called fastqc_html in your home directory on mac. 
 
-```
+```shell
 mkdir fastqc_html 
 cd fastqc_html 
 ```
@@ -203,14 +203,14 @@ git commit -m "data processing commit: Add FASTQ processing scripts"
 #### Exercise Questions:
 
 1. Check the status of your repository:
-```bash
+```shell
 git status
 ```
 - What files are being tracked?
 - What files are ignored?
 
 2. View the Git history:
-```bash
+```shell
 git log
 ```
 3. Make the following improvements to your scripts:
