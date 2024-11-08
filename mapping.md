@@ -294,7 +294,7 @@ Append the following lines
 - chr14:5731405 - T/G variant
 - chr14:5822263
 ```
-Add and commite the README
+Add and commit the README
 ```shell
 git add variantCalling/README.md
 git commit -m "Add workflow documentation"
