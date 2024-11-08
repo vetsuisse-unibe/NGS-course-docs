@@ -190,12 +190,11 @@ Add the following lines to exclude large FASTQ files and temporary data
 *_fastqc.html
 *_fastqc.zip
 ```
-3. Add and commit your files:
+3. Add and commit your directory/files:
 
 ```shell
-# Add your scripts
-git add run_fastqc.sh
-git add fastp_clean.sh
+# Add your new directory and the scripts
+git add datapreProcess
 git add .gitignore
 # commit 
 git commit -m "data processing commit: Add FASTQ processing scripts"

@@ -105,8 +105,45 @@ samtools index BT134.sorted.bam
 
 #### Task 
 
-Repeat the mapping step with the second Bull Terrier sample BT012. 
+Repeat the mapping step with the second Bull Terrier sample BT012.
 
+#### Mapping statistics 
+_samtools flagstat_ is used primarily for quick quality control (QC) of your sequencing alignment files (SAM/BAM). You should use it:
+
+1. As a first check after alignment to quickly assess:
+
+- How many reads were successfully mapped
+- Quality of paired-end mapping
+- Presence of duplicates
+- Failed QC reads
+
+2. For troubleshooting when:
+
+- Suspecting alignment problems
+- Checking if paired-end data is properly handled
+- Verifying if duplicate marking worked
+
+It won't tell you everything about your data quality, but it's a fast way to spot major issues before proceeding with downstream analysis.
+
+Create a script flagstat.sh  and check for the mapping stats 
+```shell
+code flagstat.sh 
+```
+```
+#!/bin/bash
+# Slurm options
+#SBATCH --mail-type=fail,end
+#SBATCH --job-name="flagstat"
+#SBATCH --chdir=.
+#SBATCH --time=3:00:00
+#SBATCH --mem-per-cpu=2G
+#SBATCH --cpus-per-task=8
+#SBATCH -p pcourseb
+
+module load SAMtools/1.13-GCC-10.3.0
+samtools flagstat -@ 8 BT012.sorted.bam > BT012_mapping_stats.txt
+samtools flagstat -@ 8 BT134.sorted.bam > BT134_mapping_stats.txt
+```
 #### Visualizing the mapping 
 
 Task : 
@@ -175,3 +212,90 @@ if you cannot see the canFam3, click on more and search for canFam3.
  We will continue with the same bam files for Variant calling and see if the variant calling algorithms find the Variants that you visualized. 
 
 
+### Adding Version Control to Your mapping scripts. 
+1. Change the current working directory to "course"
+2. Edit `.gitignore`  file with VScode
+
+```shell
+cd ~/course
+code .gitignore
+```
+Add the following lines 
+```
+#reference files
+*.fa
+*.fasta
+*.fa.fai
+*.dict
+
+# BWA index files
+*.amb
+*.ann
+*.bwt
+*.pac
+*.sa
+
+# Large binary files
+*.bam
+*.bai
+*.sam
+
+# Results and logs
+*.log
+```
+3. Add and commit the .gitignore file
+
+```shell
+git add .gitignore
+git commit -m "Add gitignore for bioinformatics files"
+```
+#### Track Your Mapping Scripts and Directory Structure
+```shell
+git add variantCalling/
+git commit -m "Add variant calling directory structure"
+```
+#### Document Your Workflow
+Edit the README.md file in your course directory 
+
+```shell
+code README.md 
+```
+Append the following lines 
+
+```
+# Variant Calling Workflow
+
+## Directory Structure
+- refIdx/: Reference genome and BWA indices
+- mapping/: Read mapping results and scripts
+
+## Analysis Steps
+1. Reference Indexing
+   - Location: refIdx/
+   - Script: bwaIdx.sh
+   - Dependencies: BWA v0.7.17
+
+2. Read Mapping
+   - Location: mapping/
+   - Script: mapping.sh
+   - Dependencies: BWA v0.7.17, SAMtools v1.13
+
+## Sample Information
+- BT012: Bull Terrier sample 1
+- BT134: Bull Terrier sample 2
+
+## Mapping stats 
+- Location: mapping/
+- Script: flagstat.sh
+- Dependencies: SAMtools v1.13
+
+## Key Locations Visualized in IGV
+- chr14:5408613 - G/CTT insertion
+- chr14:5731405 - T/G variant
+- chr14:5822263
+```
+Add and commite the README
+```shell
+git add variantCalling/README.md
+git commit -m "Add workflow documentation"
+```
