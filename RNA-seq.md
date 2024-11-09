@@ -1,4 +1,4 @@
-#### Differential expression using RNA-seq 
+# Differential expression using RNA-seq 
 For this exercise we will use the datasets from the study [GSE52194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52194)
 
 The results of the analysis of this dataset had been published in the following paper https://www.nature.com/articles/srep01689
@@ -27,13 +27,14 @@ Background:
 In order reduce run times again we have subset of clean reads only for chr22 at _/data/courses/courseB/RNA-seq/reads_
 
 #### Mapping 
-Create a directory called RNA_seq and mapping under it 
+Create the following directory structure: course/RNA_seq/mapping.
 
 ```
 mkdir -p RNA_seq/mapping 
 cd RNA_seq/mapping 
 ```
-Copy any of the two paired-end reads samples from original folder/data/courses/courseB/RNA-seq/reads to your mapping folder in the following manner.
+Due to time constraints, you  will  analyze  only one sample.  Choose one of the paired-end reads samples from the original_folder/data/courses/courseB/RNA-seq/reads directory and copy its files into your course/RNA_seq/mapping directory
+
 
 ```
 cp /data/courses/courseB/RNA-seq/reads/*_R*.fastq.gz  . 
@@ -50,9 +51,9 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 #SBATCH --error=hisat2.err
 #SBATCH --job-name=hisat2
 #SBATCH --cpus-per-task=4
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
-module add UHTS/Aligner/hisat/2.1.0;
+module load HISAT2/2.2.1-gompi-2021a
 hisat2 -x /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
 ```
 The output from hisat2 is a sam file which needs to be converted to a bam file and sorted by chromosome co-ordinates for all downstream analysis
@@ -68,7 +69,7 @@ Write a job script to convert the sam to bam file using _samtools view_ and _sam
 #SBATCH --error=bam.err
 #SBATCH --job-name=view2bam
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
 module add vital-it;
 module add UHTS/Analysis/samtools/1.8;
@@ -100,7 +101,7 @@ For this feature count exercise we have made the sorted bam files already availa
 #SBATCH --error=featureCounts.err
 #SBATCH --job-name=featureCounts
 #SBATCH --cpus-per-task=8
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
 module add vital-it;
 module add UHTS/Analysis/subread/1.6.0;
