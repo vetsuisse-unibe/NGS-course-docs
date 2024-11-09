@@ -240,3 +240,6 @@ cp /data/courses/courseB/variantCalling/BT.ann.vcf .
 ```
 ##### Question 
 In which genome is the variant found and what is the effect prediction for the variant. 
+
+
+#### Add the folders/script files to git repository and push it to your remote rep. (Think of the files you want to add to .gitignore before pushing to the remote repo.). Also update your README.md file accordingly. 
