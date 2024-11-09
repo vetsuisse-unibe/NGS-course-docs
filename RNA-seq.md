@@ -45,6 +45,8 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 
 ```
 #!/bin/bash
+#SBATCH --mail-user=<your.email@example.com>
+#SBATCH --mail-type=fail,end
 #SBATCH --time=3:00:00
 #SBATCH --mem=16G
 #SBATCH --output=hisat2.out
@@ -52,6 +54,8 @@ Write a job script and submit the mapping job tot he cluster using sbatch.
 #SBATCH --job-name=hisat2
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=pcourseb
+#SBATCH --output=RNAseq_map_%j.out
+#SBATCH --error=RNAseq_map_%j.err
 
 module load HISAT2/2.2.1-gompi-2021a
 hisat2 -x /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.dna.chromosome.22  -1 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R1.fastq.gz -2 /data/courses/courseB/RNA-seq/reads/HER21_chr22_R2.fastq.gz -S HER21.sam -p 4
@@ -63,6 +67,8 @@ Write a job script to convert the sam to bam file using _samtools view_ and _sam
 
 ```
 #!/bin/bash
+#SBATCH --mail-user=<your.email@example.com>
+#SBATCH --mail-type=fail,end
 #SBATCH --time=3:00:00
 #SBATCH --mem=16G
 #SBATCH --output=bam.out
@@ -70,9 +76,11 @@ Write a job script to convert the sam to bam file using _samtools view_ and _sam
 #SBATCH --job-name=view2bam
 #SBATCH --cpus-per-task=8
 #SBATCH --partition=pcourseb
+#SBATCH --output=idx_map_%j.out
+#SBATCH --error=idx_map_%j.err
 
-module add vital-it;
-module add UHTS/Analysis/samtools/1.8;
+module load SAMtools/1.13-GCC-10.3.0
+
 
 samtools view -@8 -h -Sb -o HER21.bam HER21.sam 
 samtools sort -@8 HER21.bam -o HER21.sorted.bam
@@ -95,6 +103,8 @@ For this feature count exercise we have made the sorted bam files already availa
 
 ```
 #!/bin/bash
+#SBATCH --mail-user=<your.email@example.com>
+#SBATCH --mail-type=fail,end
 #SBATCH --time=10:00:00
 #SBATCH --mem=16G
 #SBATCH --output=featureCounts.out
@@ -102,9 +112,10 @@ For this feature count exercise we have made the sorted bam files already availa
 #SBATCH --job-name=featureCounts
 #SBATCH --cpus-per-task=8
 #SBATCH --partition=pcourseb
+#SBATCH --output=countRNA_%j.out
+#SBATCH --error=countRNA_%j.err
 
-module add vital-it;
-module add UHTS/Analysis/subread/1.6.0;
+module load Subread/2.0.3-GCC-10.3.0
 
 featureCounts -p -C -s 0 -T 8 -Q 10 --tmpDir .  -a  /data/courses/courseB/RNA-seq/reference/Homo_sapiens.GRCh38.98.gtf -t exon -g gene_id  -o output.txt  /data/courses/courseB/RNA-seq/mapping/HER21.sorted.bam /data/courses/courseB/RNA-seq/mapping/HER22.sorted.bam /data/courses/courseB/RNA-seq/mapping/HER23.sorted.bam /data/courses/courseB/RNA-seq/mapping/NonTNBC1.sorted.bam /data/courses/courseB/RNA-seq/mapping/NonTNBC2.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC3.sorted.bam /data/courses/courseB/RNA-seq/mapping/Normal1.sorted.bam /data/courses/courseB/RNA-seq/mapping/Normal2.sorted.bam /data/courses/courseB/RNA-seq/mapping/Normal3.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC1.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC2.sorted.bam /data/courses/courseB/RNA-seq/mapping/TNBC3.sorted.bam
 ```
