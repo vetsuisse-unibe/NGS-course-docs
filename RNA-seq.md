@@ -163,45 +163,145 @@ library(DESeq2)
 
 Note: the first command in R **setwd** should be given the full path to your _diffExp_ folder.  
 
-```
+```r
 setwd("diffExp")
-countData<-read.table('https://campuscloud.unibe.ch/filr/public-link/file-download/02dc8052759dcb3e0175be7dd6c33bfb/40219/-283556994276692082/breastCancer.counts.forDESeq.txt', header=TRUE)
+#The file contains gene expression counts from the three breast tissues 
+countData<-read.table('https://github.com/vetsuisse-unibe/NGS-course-docs/raw/refs/heads/master/breastCancer.counts.forDESeq.txt', header=TRUE)
+# Set the row names of the data frame to be the gene IDs
+# This assumes there's a column named 'Geneid' in the input file
 rownames(countData)<-countData$Geneid
+# Remove the Geneid column since it's now used as row names
+# This keeps only the count data columns
 countData<-countData[, -1]
+# Clean up the column names using regular expression
+# Extracts only the sample names from complex BAM file names
+# Pattern explanation:
+#   .*\.bamfiles\. : matches any text followed by '.bamfiles.'
+#   ([A-Za-z1-3]*) : captures letters and numbers 1-3
+#   \.coordSorted\.bam : matches '.coordSorted.bam'
+# The \\1 replacement keeps only the captured group
 colnames(countData)<-sub(".*\\.bamfiles\\.([A-Za-z1-3]*)\\.coordSorted\\.bam", "\\1", colnames(countData))
 
-sampleGroup<-sub(".$", "", colnames(countData)) # remove the last character (= replicate number) from the sample name to end up with subtype
+# Create sample groups by removing the last character from each sample name
+# This removes the replicate number, leaving only the cancer subtype
+sampleGroup<-sub(".$", "", colnames(countData)) 
+
+# Create a data frame with sample information (metadata)
+# 'condition' column contains the cancer subtypes as factors
 colData<-data.frame(condition=factor(sampleGroup))
 
+# Create a DESeq2 dataset object
+# Parameters:
+#   countData: matrix of count data
+#   colData: sample metadata
+#   formula(~condition): specifies that we want to test for differences between conditions
 dds<-DESeqDataSetFromMatrix(countData, colData, formula(~condition))
 ```
 ##### Perform the differential expression analysis
 
-```
+```r
+# Parameters:
+#   dds: the DESeqDataSet object created earlier
+#   betaPrior=TRUE: uses a beta prior distribution for fold changes,
+#                   which helps moderate extreme fold changes when sample size is small
 dds<-DESeq(dds, betaPrior = TRUE)
+# Extract the results from the DESeq analysis
+# This creates a results table containing:
+#   - log2 fold changes
+#   - p-values
+#   - adjusted p-values
+#   - base means
 res <-results(dds)
+# Display the first few lines of the results
+
 head(res)
 ```
+The output will show:
+- baseMean: average expression level across all samples
+- log2FoldChange: log2 of the fold change between conditions
+- lfcSE: standard error of the log2 fold change
+- stat: the test statistic used
+- pvalue: raw p-value
+- padj: p-value adjusted for multiple testing
+
 #### Visualize results
 Plot 1: PCA using the 500 most variably expressed genes
-```
+```r
+# Apply regularized log transformation to the count data
+# Parameters:
+#   dds: DESeqDataSet object containing count data
+#   blind=TRUE: transformation is blind to the experimental design
+#              (recommended for quality assessment)
+# This transformation:
+#   - Minimizes differences between samples for rows with small counts
+#   - Normalizes for library size
+#   - Makes data more homoskedastic (similar variance across mean)
 rld <-rlog(dds, blind=TRUE) # apply a regularized log transformation, ignoring information about experimental groups
+# Create a PCA plot of the samples
+# Parameters:
+#   rld: transformed data from rlog()
+#   intgroup="condition": tells the function to color points by condition/group
+# PCA helps visualize:
+#   - Sample clustering
+#   - Batch effects
+#   - Outliers
 p<-plotPCA(rld, intgroup=c("condition"))
+# Display the PCA plot
+# Parameters:
+#   ntop=500: uses only the top 500 most variable genes for the PCA
+# This helps focus on genes that show the most variation across samples
 print(p, ntop=500)
 ```
 ![PCAplot](PCAplot.png)
 Plot 2: Mean expression against log-fold change. Genes with p-adjusted below alpha will be shown in red, all others in grey
 
-```
+```r
+# Create an MA plot to visualize the relationship between mean expression and log2 fold changes
+# Parameters:
+#   res: DESeq2 results object containing differential expression statistics
+#   alpha=0.05: significance level for highlighting differentially expressed genes
+# Plot interpretation:
+#   - X-axis: mean expression across all samples (baseMean)
+#   - Y-axis: log2 fold change
+#   - Red dots: significantly differentially expressed genes (padj < 0.05)
+#   - Black dots: genes not significantly differentially expressed
+#   - Points above 0 on Y-axis: upregulated genes
+#   - Points below 0 on Y-axis: downregulated genes
 plotMA(res, alpha=0.05)
 ```
 ![MAplot](MAplot.png)
 Plot 3: Heatmap using the 50 most highly expressed genes
-```
+```r
+# Load required libraries for plotting
+# For color palettes
 library("RColorBrewer")
+# For enhanced heatmap functionality
 library("gplots")
+# Select the top 50 highest expressed genes
+# Steps:
+#   1. Get normalized counts using counts(dds, normalized=TRUE)
+#   2. Calculate mean expression for each gene using rowMeans()
+#   3. Order genes by decreasing mean expression using order()
+#   4. Select top 50 genes using [1:50]
 select <- order(rowMeans(counts(dds,normalized=TRUE)),decreasing=TRUE)[1:50]
+# Create a blue-green color gradient for the heatmap
+# Parameters:
+#   brewer.pal(9, "GnBu"): Get 9 colors from the Green-Blue palette
+#   colorRampPalette(...)(100): Interpolate to create 100 colors
 hmcol <- colorRampPalette(brewer.pal(9, "GnBu"))(100)
+# Generate heatmap of gene expression
+# Parameters:
+#   assay(rld)[select,]: Get normalized expression values for selected genes
+#   col = hmcol: Use the created color palette
+#   trace="none": Remove trace lines from heatmap
+#   margin=c(10,6): Set margins for row and column labels
+#   labCol=colnames(dds): Use sample names as column labels
+#   cexRow = 1/log10(length(select)): Scale row labels based on number of genes
+# This heatmap shows:
+#   - Expression patterns across samples
+#   - Sample clustering (dendrogram on top)
+#   - Gene clustering (dendrogram on side)
+#   - Relative expression levels (color intensity)
 heatmap.2(assay(rld)[select,], col = hmcol, trace="none", margin=c(10,6),labCol=colnames(dds), cexRow = 1/log10(length(select)))
 ```
 ![heatmap](heatmap.png)
@@ -212,7 +312,7 @@ heatmap.2(assay(rld)[select,], col = hmcol, trace="none", margin=c(10,6),labCol=
 #### Pairwise contrasts 
 Now take a closer look at the results and the normalised count data:
 
-```
+```r
 head(res)
 head(counts(dds, normalized=TRUE))
 ```
@@ -222,13 +322,13 @@ In our dataset, we have more than 2 groups, i.e. our factor “condition” has 
 
 We can explicitly specify which levels we want to compare, as follows:
 
-```
+```r
 TNBC_HER2 <-results(dds, contrast=c('condition', 'TNBC', 'HER2' ))
 ```
 
 Let’s double-check that this really produces exactly the same results as before by comparing the log2 fold changes:
 
-```
+```r
 plot(res$log2FoldChange, TNBC_HER2$log2FoldChange, xlab='first analysis', ylab='second analysis')
 ```
 
