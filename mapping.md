@@ -7,7 +7,7 @@ mkdir variantCalling
 cd variantCalling
 mkdir refIdx
 cd refIdx
-cp /data/courses/pcourseb/variantCalling/chr14.fa .
+cp /data/courses/courseB/variantCalling/chr14.fa .
 ```
 We will use only chr14 of the dog genome as the reference just for short computing run times,so you can finish the exercises faster 
 
@@ -25,23 +25,35 @@ Before aligning your reads, it's crucial to index the reference genome. Here's w
 - **Reusability:** Once created, this index can be used for all bwa alignments to the same reference.
 - **New Reference = New Index:** If you change your reference genome, you'll need to build a new index.
 
-Create a bash script for indexing the genome 
-
+The below bash script streamlines the process of indexing a reference genome for use with various bioinformatics tools. 
+It indexes your reference genome using multiple tools (bwa, samtools, and gatk), generating index files that accelerate read alignment, facilitate random access to sequences, and ensure data consistency through validation checks. The resulting indexes (.bwt, .pac, .fai, .dict) are crucial for optimizing tools like BWA and GATK (used for variant calling later).
+Replace the email id with your own email id. If you don't want to be emailed about the process, you can remove it. 
 ```
 #!/bin/bash
 # Slurm options
-#SBATCH --job-name="bwaIdx"
+#SBATCH --mail-user=<your.email@example.com>
+#SBATCH --mail-type=fail,end
+#SBATCH --job-name="idxRef"
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=5G
 #SBATCH --cpus-per-task=1
 #SBATCH -p pcourseb
+#SBATCH --output=idxRef_%j.out
+#SBATCH --error=idxRef_%j.err
 
 
 module add BWA/0.7.17-GCC-10.3.0
+module load SAMtools/1.13-GCC-10.3.0
+module load GATK/4.2.6.1-GCCcore-10.3.0-Java-11
+module load Java/17.0.6
 
 bwa index -a bwtsw -p chr14.fa chr14.fa
+samtools faidx chr14.fa 
+gatk CreateSequenceDictionary R=chr14.fa O=chr14.dict
 ```
+Questions: 
+1. What does the %j variable represent in this script ?
 
 #### Mapping 
 
@@ -57,7 +69,7 @@ Copy the sample genome illumina reads for two  Bull Terriers dogs to the mapping
 cd ../
 mkdir mapping 
 cd mapping 
-cp /data/courses/pcourseb/variantCalling/*.gz .
+cp /data/courses/courseB/variantCalling/*.gz .
 ```
 Questions: 
 1. How many files got copied ? 
@@ -82,10 +94,12 @@ samtools sort -@8 BT134.bam BT134.sorted.bam
 ```
 
 This involves a lot of reading and writing to the hard disk which is highly time consuming hence using the _piping_ power of unix we will reduce these steps to single command in the following fashion
+Replace the email id with your own email id. If you don't want to be emailed about the process, you can remove it. 
 
 ```
 #!/bin/bash
 # Slurm options
+#SBATCH --mail-user=<your.email@example.com>
 #SBATCH --mail-type=fail,end
 #SBATCH --job-name="mapping"
 #SBATCH --chdir=.
@@ -93,15 +107,30 @@ This involves a lot of reading and writing to the hard disk which is highly time
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=8
 #SBATCH -p pcourseb
+#SBATCH --output=mapping_%j.out
+#SBATCH --error=mapping_%j.err
 
 module load BWA/0.7.17-GCC-10.3.0
 module load SAMtools/1.13-GCC-10.3.0
 
-bwa mem -t 8 -M -R '@RG\tID:2019111402\tPL:illumina\tPU:HHV75DSXX.4\tCN:UBern\tLB:BT134-LIB\tSM:BT134'  ../refIdx/chr14.fa  BT134_R1.fastq.gz BT134_R2.fastq.gz | samtools sort -@8 -m 5G  -o BT134.sorted.bam -
+bwa mem -t 8 -M -R '@RG\tID:2024111301\tPL:illumina\tPU:HHV75DSXX.4\tCN:UBern\tLB:BT134-LIB\tSM:BT134'  ../refIdx/chr14.fa  BT134_R1.fastq.gz BT134_R2.fastq.gz | samtools sort -@8 -m 5G  -o BT134.sorted.bam -
 samtools index BT134.sorted.bam
 ```
 - The - symbol in the command indicates that samtools sort is taking its input directly from the previous command, not from a separate file. This is called piping.
 - After sorting, use samtools index to create an index for the BAM file. This is essential for subsequent steps like visualization and variant calling.
+
+###### ReadGroup 
+- -R option is used to add read group information to the alignment output.i.e Adds RG tag to each read in SAM/BAM output
+- Every aligned read gets tagged with the RG:Z:ID value
+
+Below is the breakdown to the tag used in the script 
+- @RG: This indicates a Read Group header line. Read groups are used to separate different sets of reads, typically from the same sample but perhaps from different lanes or libraries.
+- ID:2024111301 : Unique identifier for this read group. I usally use the date format 2024-11-13 with suffix 01. The Suffix if the number of sample mapped within the script. I usally map 50-100 samples per script or at one time.
+- PL:illumina : Platform used for sequencing. In this case, Illumina sequencing technology
+- PU:HHV75DSXX.4 :Platform Unit (typically flowcell + lane)  HHV75DSXX is the flowcell ID and .4 indicates lane 4
+- CN:UBern : Sequencing Center that produced the data. In this case, University of Bern
+- LB:BT134-LIB :Library identifier
+- SM:BT134 Sample identifier. The dog id  BT134
 
 #### Task 
 
@@ -125,7 +154,8 @@ _samtools flagstat_ is used primarily for quick quality control (QC) of your seq
 
 It won't tell you everything about your data quality, but it's a fast way to spot major issues before proceeding with downstream analysis.
 
-Create a script flagstat.sh  and check for the mapping stats 
+Create a script flagstat.sh  and check for the mapping stats. Add lines that instructs Slurm to send you an email notification when the job fails or finishes. and also add lines to to redirect the standard output (stdout) of your job to a file named mapStats_%j.out and redirects the standard error (stderr) of your job to a file named mapStats_%j.err
+
 ```shell
 code flagstat.sh 
 ```

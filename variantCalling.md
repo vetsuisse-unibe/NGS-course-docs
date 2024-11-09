@@ -7,37 +7,43 @@ Lethal acrodermatitis is a autosomal recessive hereditary disease in dogs. It is
 The causative mutation findings have been published in [PLOS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007264)
 ![Bull Terrier Paper](BT.png)
 
-We will use the mapped bam files of two Bull terrier dogs to repeat the same findings of this paper. 
+We will use the mapped bam files (from the mapping exercise) of two Bull terrier dogs to repeat the same findings of this paper. 
 
 #### Duplicate Marking 
 Commonly seen issue with resequencing genomes is sequence duplication i.e. over representation of certain reads, which could be an read artifacts sampled from the exact template of DNA. This need to be identified and marked/removed as they could be overrepresented evidence for false variants. 
 
-In the following exercise we will use the [_picard tools_](https://broadinstitute.github.io/picard/) to mark the duplicates, rather than remove them. Once they are marked the downstream  tools downweight them while looking for variants. 
- 
- Change to directory mapping directory (_cd mapping_) and create the following script 
+In the following exercise we will use the [_picard tools_](https://broadinstitute.github.io/picard/). PICARD tools have been fully integrated into the GATK package. Our goal is to identify and mark duplicate reads in the BAM file. We will  mark the duplicates, rather than remove them from the bam files. This allows downstream variant calling tools to downweight these duplicates, improving accuracy.
+
+```shell
+cd variantCalling 
+mkdir markduplicates && cd markduplicates
+code markduplicates.sh
+```
+Add the following lines to the script. Replace the email parameter with your own parameter. 
+
  ```
  #!/bin/bash
 # Slurm options
+#SBATCH --mail-user=<your.email@example.com>
 #SBATCH --mail-type=fail,end
 #SBATCH --job-name="markDuplicates"
 #SBATCH --chdir=.
 #SBATCH --time=3:00:00
-#SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --mem=4G
+#SBATCH --partition=pcourseb
+#SBATCH --output=markDuplicates_%j.out
+#SBATCH --error=markDuplicates_%j.err
 
-module add vital-it;
-module add UHTS/Analysis/picard-tools/2.9.0;
-picard-tools MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICATES=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
-```
-#### deduplication file 
-If the deduplication step is taking two long, you can copy the dedup bam and index files from the courseB dir to your dir and you can go on to the  _HaplotypeCaller_ step. 
 
+module load GATK/4.2.6.1-GCCcore-10.3.0-Java-11
+module load Java/17.0.6
+
+gatk MarkDuplicates INPUT=BT134.sorted.bam OUTPUT=BT134.dedup.bam REMOVE_DUPLICATES=FALSE METRICS_FILE=BT134.marked_dup_metrics.txt
 ```
-cp /data/courses/courseB/variantCalling/BT012.dedup.bam .
-cp /data/courses/courseB/variantCalling/BT012.dedup.bam.bai .
-cp /data/courses/courseB/variantCalling/BT134.dedup.bam .
-cp /data/courses/courseB/variantCalling/BT134.dedup.bam.bai .
-```
+Question: 
+1. Why are we marking the duplicates rather than removing them ? 
+2. What info does the Metrics file contain ? 
+
 
 #### Task 
 Repeat the same duplication marking with the BT012 genome bam file. 
@@ -47,17 +53,29 @@ Repeat the same duplication marking with the BT012 genome bam file.
 ```
 #!/bin/bash
 # Slurm options
+#SBATCH --mail-user=<your.email@example.com>
 #SBATCH --mail-type=fail,end
-#SBATCH --job-name="markDuplicates"
+#SBATCH --job-name="idxDedup"
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
+#SBATCH --output=idxDedup_%j.out
+#SBATCH --error=idxDedup_%j.err
 
-module add vital-it;
-module add UHTS/Analysis/samtools/1.8;
+module load SAMtools/1.13-GCC-10.3.0
+
 samtools index BT134.dedup.bam
 samtools index BT012.dedup.bam
+```
+#### deduplication file 
+If the deduplication step is taking two long, you can copy the dedup bam and index files from the courseb dir to your dir and you can go on to the  _HaplotypeCaller_ step. 
+
+```shell
+cp /data/courses/courseB/variantCalling/BT012.dedup.bam .
+cp /data/courses/courseB/variantCalling/BT012.dedup.bam.bai .
+cp /data/courses/courseB/variantCalling/BT134.dedup.bam .
+cp /data/courses/courseB/variantCalling/BT134.dedup.bam.bai .
 ```
 
 #### Recalibration 
@@ -69,14 +87,13 @@ As this step takes too long to finish we will skip this step for this exercises 
 #### HaplotypeCaller 
 [_GATK HaplotypeCaller_](https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.8.0/org_broadinstitute_hellbender_tools_walkers_haplotypecaller_HaplotypeCaller.php) calls both SNP and indel variants simultaneously via local de-novo assembly of haplotypes. Essentially, when this variant caller finds a region with signs of variation, it tosses out the old alignment information (from BWA MEM) and performs a local realignment of reads in that region. 
 
-We will first creare variants directory and create job script in the variant directory 
-```
-cd ../
-mkdir variants
-cd variants
-```
-In order to run the haplotypeCaller we need to create a index and dictionary file for the the reference using _samtools faidx_ and _picard-tools CreateSequenceDictionary_ respectively 
+Create variants directory and create job script in the variant directory 
 
+```shell
+cd ../
+mkdir variants && cd variants
+```
+Create the below script with VScode, save and launch the job.
 ```
  #!/bin/bash
 # Slurm options
@@ -85,16 +102,14 @@ In order to run the haplotypeCaller we need to create a index and dictionary fil
 #SBATCH --chdir=.
 #SBATCH --time=3:00:00
 #SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
-module add vital-it;
-module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
-module add UHTS/Analysis/picard-tools/2.9.0;
-module add UHTS/Analysis/samtools/1.8;
 
-samtools faidx ../refIdx/chr14.fa 
-picard-tools CreateSequenceDictionary R=../refIdx/chr14.fa O=../refIdx/chr14.dict
-GenomeAnalysisTK HaplotypeCaller -R  ../refIdx/chr14.fa -I ../mapping/BT012.dedup.bam -I ../mapping/BT134.dedup.bam  -O BT.vcf
+module load GATK/4.2.6.1-GCCcore-10.3.0-Java-11
+module load Java/17.0.6
+
+
+gatk HaplotypeCaller -R  ../refIdx/chr14.fa -I ../mapping/BT012.dedup.bam -I ../mapping/BT134.dedup.bam  -O BT.vcf
 ```
 The output is _variant call format_ or VCF file which is a tab delimited text file containing informations for the all the variants the tool found. 
 
@@ -107,7 +122,7 @@ In the next we will do hard filtering of variants using the statistical annotati
 - etc
 In the hard filtering we set threshold for several of these annotations, and filter the variants that have values below this threshold or above the set thresholds. 
 
-More information can be obtained on the [GATK hard filtering tutorial page](https://gatkforums.broadinstitute.org/gatk/discussion/6925/understanding-and-adapting-the-generic-hard-filtering-recommendations)
+More information can be obtained on the [GATK hard filtering tutorial page](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants)
 
 ##### SelectVariants
 Hard filtering is done for SNPs and Indels separately. So from the haplotypeCaller output VCF file first we will subset the SNPs and Indels using GATK's _SelectVariants_ tool. 
@@ -123,15 +138,13 @@ In the variants folder create the following script.
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
-module add vital-it;
-module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
-module add UHTS/Analysis/picard-tools/2.9.0;
-module add UHTS/Analysis/samtools/1.8;
+module load GATK/4.2.6.1-GCCcore-10.3.0-Java-11
+module load Java/17.0.6
 
-GenomeAnalysisTK SelectVariants -V BT.vcf -select-type INDEL -O BT.indels.vcf
-GenomeAnalysisTK SelectVariants -V BT.vcf -select-type SNP -O BT.snps.vcf
+gatk SelectVariants -V BT.vcf -select-type INDEL -O BT.indels.vcf
+gatk SelectVariants -V BT.vcf -select-type SNP -O BT.snps.vcf
 
 ```
 
@@ -147,15 +160,13 @@ Create the following script for filtering of Variants
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
-module add vital-it;
-module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
-module add UHTS/Analysis/picard-tools/2.9.0;
-module add UHTS/Analysis/samtools/1.8;
+module load GATK/4.2.6.1-GCCcore-10.3.0-Java-11
+module load Java/17.0.6
 
-java -jar /software/UHTS/Analysis/GenomeAnalysisTK/4.0.4.0/bin/GenomeAnalysisTK.jar VariantFiltration -V BT.snps.vcf -O BT.flt.snps.vcf -filter "QD < 2.0" --filter-name "QD2" -filter "QUAL < 30.0" --filter-name "QUAL30" -filter "SOR > 3.0" --filter-name "SOR3" -filter "FS > 60.0" --filter-name "FS60" -filter "MQ < 40.0" --filter-name "MQ40" -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8"
-java -jar /software/UHTS/Analysis/GenomeAnalysisTK/4.0.4.0/bin/GenomeAnalysisTK.jar VariantFiltration -V BT.indels.vcf -O BT.flt.indels.vcf -filter "QD < 2.0" --filter-name "QD2" -filter "QUAL < 30.0" --filter-name "QUAL30" -filter "FS > 200.0" --filter-name "FS200" -filter "ReadPosRankSum < -20.0" --filter-name "ReadPosRankSum-20"
+gatk VariantFiltration -V BT.snps.vcf -O BT.flt.snps.vcf -filter "QD < 2.0" --filter-name "QD2" -filter "QUAL < 30.0" --filter-name "QUAL30" -filter "SOR > 3.0" --filter-name "SOR3" -filter "FS > 60.0" --filter-name "FS60" -filter "MQ < 40.0" --filter-name "MQ40" -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8"
+gatk VariantFiltration -V BT.indels.vcf -O BT.flt.indels.vcf -filter "QD < 2.0" --filter-name "QD2" -filter "QUAL < 30.0" --filter-name "QUAL30" -filter "FS > 200.0" --filter-name "FS200" -filter "ReadPosRankSum < -20.0" --filter-name "ReadPosRankSum-20"
 ```
 
 Once the variants have been filtered we merge them to one single file for annotations. The vcfs are merged using GATK's _MergeVCFs_ tool 
@@ -169,13 +180,12 @@ Once the variants have been filtered we merge them to one single file for annota
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
-module add vital-it;
-module add UHTS/Analysis/GenomeAnalysisTK/4.0.4.0;
-module add UHTS/Analysis/picard-tools/2.9.0;
-module add UHTS/Analysis/samtools/1.8;
-GenomeAnalysisTK MergeVcfs -I BT.flt.snps.vcf -I BT.flt.indels.vcf -O BT.flt.var.vcf
+module load GATK/4.2.6.1-GCCcore-10.3.0-Java-11
+module load Java/17.0.6
+
+gatk MergeVcfs -I BT.flt.snps.vcf -I BT.flt.indels.vcf -O BT.flt.var.vcf
 ```
 ##### Task 
 Use a Unix command to check: 
@@ -186,7 +196,11 @@ Use a Unix command to check:
  We will be using a software called [‘snpeff’](http://snpeff.sourceforge.net/) to annotate and predict the effect of the variants. 
  We will build an effect prediction database using our reference and annotation and then use that database to run effect prediction. This will give us a VCF file with an extra “ANN” field per variant, which will give us the effect of that variant.
 
-The following script downloads the Effect database which we will use for for annotation and effect Prediction and also adds the annotation to the vcf file.  
+The following script accomplishes two main tasks:
+
+- Downloads the Effect database: This database will be used for both annotating genetic variants and predicting their effects.
+- Annotates the VCF file: It adds information from the Effect database to the variants in your VCF file, providing valuable context and insights.
+
 ```
 #!/bin/bash
 # Slurm options
@@ -196,16 +210,24 @@ The following script downloads the Effect database which we will use for for ann
 #SBATCH --chdir=.
 #SBATCH --time=1:00:00
 #SBATCH --mem=2G
-#SBATCH --partition=courseb
+#SBATCH --partition=pcourseb
 
-module add vital-it;
-module add UHTS/Analysis/snpEff/4.3t;
-snpEff  download -dataDir /home/<student>/variantCalling/variant -v CanFam3.1.86
-snpEff eff -dataDir /home/<student>/variantCalling/variant CanFam3.1.86 BT.flt.var.vcf >BT.ann.vcf
+# This line creates a shortcut called 'snpEff' for running the SnpEff program
+snpEff="apptainer exec -B $TMPDIR:/tmp /mnt/containers/apptainer/snpeff:5.2--hdfd78af_1 snpEff"
+
+#  Download the dog genome database (CanFam3.1.99)
+$snpEff download \
+    -dataDir /home/<student>/variantCalling/variant \
+    -v CanFam3.1.99
+
+#Annotate your variants using the downloaded database
+$snpEff eff \
+    -dataDir /home/<student>/variantCalling/variant \
+    CanFam3.1.86 BT.flt.var.vcf > BT.ann.vcf
 ```
 The output VCF file has an extra field "ANN"
 
-Unfortunately the snpEff database seems to be down too load the CanFam3.1.86 database. So please copy the file from courseB dir to do the below task. 
+If the snpEff database fails to load the CanFam3.1.99 database. A copy the annotated VCF file  is available in /data/courses/courseB/variantCalling dir to do the below task. 
 
 ```
 cp /data/courses/courseB/variantCalling/BT.ann.vcf .
