@@ -79,7 +79,7 @@ Please exit the interactive session before launching the job. Meaning type exit 
 exit
 ```
 
-##### Now create the following script with VS code and save as 'run_fastqc.sh' 
+##### Now create the following script with VScode and save as 'run_fastqc.sh' 
 ``` 
 #!/bin/bash
 #SBATCH --time=1:00:00
@@ -176,9 +176,7 @@ https://cloud.bioinformatics.unibe.ch/index.php/s/Sor65mmETSJXWTe
 1. Change the current working directory to "course"
 2. Edit `.gitignore`  file with VScode 
 
-```shell
-code .gitignore
-```
+
 Add the following lines to exclude large FASTQ files and temporary data
 
 ```
@@ -218,10 +216,8 @@ git log
 - Add comments explaining each parameter in run_fastqc or fastp_clean.sh
 - Commit these changes separately
 
-```shell
-code README.md
-```
-Add the following lines
+
+Open a file with VScode, add the following lines and save it as README.md
 ```
 ## Scripts for processing FASTQ files from the GSE52194 study:
 - run_fastqc.sh: Quality control analysis using FastQC
@@ -252,10 +248,11 @@ git checkout -b test/quality-params
 git branch
 ```
 Modify the fastp parameters in your script:
+Open the file dataPreprocess/scripts/fastp_clean.sh with VScode.
+- Change -q 15 to -q 20 and -l 50 to -l 60
+- save the file and take a snapshot with git.
 
 ```shell
-code dataPreprocess/scripts/fastp_clean.sh
-#Change -q 15 to -q 20 and -l 50 to -l 60
 #Commit these changes
 git add dataPreprocess/scripts/fastp_clean.sh
 git commit -m "Test stringent quality thresholds"
