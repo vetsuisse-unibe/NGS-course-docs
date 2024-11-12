@@ -1,7 +1,7 @@
 # HPC cluster exercises 
 
 #### Login into the Bioinformatics server (login8.hpc.binf.unibe.ch)
-Like yesterday use the remote login extension on Visual studio code and login into the bioinformatics server with your chosen username and password. 
+ Use the remote login extension on Visual studio code and login into the bioinformatics server with your chosen username and password. 
 
 Open the Terminal and start the exercises. 
 
@@ -40,9 +40,9 @@ git init
 mkdir hpc-exercises
 cd hpc-exercises
 ```
-Create a .gitignore file for HPC-specific files which does need to be tracked or backedup. Open a new file with VSCode  
+Create a .gitignore file for HPC-specific files which does need to be tracked or backedup. 
 
- Now add the following lines and save the file as .gitignore.
+Open a new file with VSCode. Now add the following lines and save the file as .gitignore.
 ```
 *.out
 *.err
