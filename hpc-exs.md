@@ -40,12 +40,9 @@ git init
 mkdir hpc-exercises
 cd hpc-exercises
 ```
-Create a .gitignore file for HPC-specific files which does need to be tracked or backedup. Type the following at the prompt
+Create a .gitignore file for HPC-specific files which does need to be tracked or backedup. Open a new file with VSCode  
 
-```shell
-code .gitignore
-```
-This opens an empty file called .gitignore in the editor window of VSC. Now add the following lines and save the file.
+ Now add the following lines and save the file as .gitignore.
 ```
 *.out
 *.err
