@@ -55,6 +55,13 @@ gatk CreateSequenceDictionary R=chr14.fa O=chr14.dict
 Questions: 
 1. What does the %j variable represent in this script ?
 
+With the above script you are producing index files for mapping and variant calling. Check if the following files are produced. 
+- bwa index will produce the following files with the extensions 
+- *.amb  *.ann  *.bwt  *.pac  *.sa
+- samtools faidx will produce an index file *fai. 
+- gatk will produce the *.dict file. 
+
+
 #### Mapping 
 
 We will use bwa mem algorithm for mapping. This is an algorithm that is most popular mapping but does not have a publication for it !! 
